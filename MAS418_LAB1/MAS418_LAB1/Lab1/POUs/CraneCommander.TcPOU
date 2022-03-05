@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="CraneCommander" Id="{c255987f-7a58-4573-9ac9-545c12e8d4a5}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM CraneCommander
+VAR
+	fTime : LREAL; 	
+	bStarted : BOOL;
+	fPosition : LREAL; 
+	fInitialPosition : LREAL; 
+	fInitialVelocity : LREAL; 
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF Inputs.bStart THEN
+	fTime := fTime + Parameters.fCyclicTime;
+ELSE
+	fTime := 0; 	
+END_IF
+
+IF fTime > 0 THEN 
+	bStarted := TRUE;
+ELSE
+	bStarted := FALSE;
+END_IF
+
+fPosition := Inputs.fVelocityReference * (fTime * fTime)/2 + fInitialVelocity * fTime + fInitialPosition;
+
+Outputs.bSimulationStarted := bStarted;  
+Outputs.fSimulationTime := fTime; 
+Outputs.fCylinderVelocity := Inputs.fVelocityReference;]]></ST>
+    </Implementation>
+    <LineIds Name="CraneCommander">
+      <LineId Id="5" Count="1" />
+      <LineId Id="20" Count="1" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="22" Count="1" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="28" Count="1" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="35" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
