@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="CraneSimulation" Id="{c255987f-7a58-4573-9ac9-545c12e8d4a5}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM CraneSimulation
+VAR
+	fTime : LREAL; 	
+	bRunning : BOOL;
+	fPosition : LREAL; 
+	fInitialPosition : LREAL; 
+	fInitialVelocity : LREAL; 
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF Inputs.bStartSimulation THEN
+	fTime := fTime + Parameters.fCyclicTime;
+ELSE
+	fTime := 0; 	
+END_IF
+
+IF fTime > 0 THEN 
+	bRunning := TRUE;
+ELSE
+	bRunning := FALSE;
+END_IF
+
+fPosition := Inputs.fCylinderVelocityReference * (fTime * fTime)/2 + fInitialVelocity * fTime + fInitialPosition;
+
+IF fPosition >= 1 THEN
+	Outputs.fCylinderPosition := 1;	
+ELSIF fPosition <= 0 THEN
+	Outputs.fCylinderPosition := 0; 
+ELSE	
+	Outputs.fCylinderPosition := fPosition;
+END_IF
+
+Outputs.bSimulationRunning := bRunning;  
+Outputs.fSimulationTime := fTime; 
+Outputs.fCylinderVelocity := Inputs.fCylinderVelocityReference;
+Outputs.pt1_y := LREAL_TO_INT(Outputs.fCylinderPosition * Parameters.fPistonScale);]]></ST>
+    </Implementation>
+    <LineIds Name="CraneSimulation">
+      <LineId Id="5" Count="1" />
+      <LineId Id="20" Count="1" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="22" Count="1" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="28" Count="1" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="52" Count="1" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="57" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

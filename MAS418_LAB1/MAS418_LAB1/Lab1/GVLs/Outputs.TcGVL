@@ -4,9 +4,13 @@
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
 	fSimulationTime : LREAL; 
-	bSimulationStarted : BOOL;
+	bSimulationRunning : BOOL;
 	fCylinderVelocity : LREAL;
 	fCylinderPosition : LREAL;
+	pt0_x : INT;
+	pt0_y : INT;
+	pt1_x : INT;
+	pt1_y : INT; 
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

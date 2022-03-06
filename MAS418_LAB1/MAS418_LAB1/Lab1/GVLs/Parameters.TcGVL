@@ -4,6 +4,7 @@
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
 	fCyclicTime : LREAL := 0.01; 
+	fPistonScale : LREAL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

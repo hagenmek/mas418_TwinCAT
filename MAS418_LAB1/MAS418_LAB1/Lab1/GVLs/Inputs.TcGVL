@@ -3,9 +3,9 @@
   <GVL Name="Inputs" Id="{566405ba-476e-4000-8931-6791d6e2fe7f}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	bEnable : BOOL; 
-	bStart : BOOL; 
-	fVelocityReference : LREAL; 
+	bEnableSimulation : BOOL; 
+	bStartSimulation : BOOL; 
+	fCylinderVelocityReference : LREAL; 
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

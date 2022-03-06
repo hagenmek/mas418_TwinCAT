@@ -6,8 +6,8 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF Inputs.bEnable THEN
-	CraneCommander();
+      <ST><![CDATA[IF Inputs.bEnableSimulation THEN
+	CraneSimulation();
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
