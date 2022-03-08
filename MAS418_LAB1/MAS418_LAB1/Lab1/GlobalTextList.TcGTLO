@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <GlobalTextList Name="GlobalTextList" Id="{1a3d149f-cafb-488a-986c-27bd1f022b46}">
     <XmlArchive>
       <Data>
@@ -26,8 +26,18 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"175"</v>
+              <v n="TextDefault">"AUTO"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"236"</v>
               <v n="TextDefault">"Clock: %s [s]"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"995"</v>
+              <v n="TextDefault">"Cylinder Position Reference: %f [m]"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -56,6 +66,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"308"</v>
+              <v n="TextDefault">"Cylinder Velocity Reference: %f [m]"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"30"</v>
               <v n="TextDefault">"Cylinder Velocity Reference: %i"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -78,6 +93,21 @@
             <o>
               <v n="TextID">"409"</v>
               <v n="TextDefault">"ENABLE"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"660"</v>
+              <v n="TextDefault">"MANUAL"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"8"</v>
+              <v n="TextDefault">"Manual Cylinder Position   Reference [m]"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"157"</v>
+              <v n="TextDefault">"Manual Cylinder Position Reference"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>

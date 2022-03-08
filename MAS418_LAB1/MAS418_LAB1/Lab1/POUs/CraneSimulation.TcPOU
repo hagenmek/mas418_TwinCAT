@@ -1,36 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="CraneSimulation" Id="{c255987f-7a58-4573-9ac9-545c12e8d4a5}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM CraneSimulation
 VAR
 	fTime : LREAL; 	
 	bRunning : BOOL;
-	fPosition : LREAL; 
+	fPositionAutoMode : LREAL; 
 	fInitialPosition : LREAL; 
 	fInitialVelocity : LREAL; 
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF Inputs.bStartSimulation THEN
+      <ST><![CDATA[IF Inputs.bStartSimulation AND Inputs.bAutoMode  THEN
 	fTime := fTime + Parameters.fCyclicTime;
 ELSE
 	fTime := 0; 	
 END_IF
 
-IF fTime > 0 THEN 
+IF fTime > 0 AND Inputs.bAutoMode THEN 
 	bRunning := TRUE;
 ELSE
 	bRunning := FALSE;
 END_IF
 
-fPosition := Inputs.fCylinderVelocityReference * (fTime * fTime)/2 + fInitialVelocity * fTime + fInitialPosition;
+fPositionAutoMode := Inputs.fCylinderVelocityReference * (fTime * fTime)/2 + fInitialVelocity * fTime + fInitialPosition;
 
-IF fPosition >= 1 THEN
-	Outputs.fCylinderPosition := 1;	
-ELSIF fPosition <= 0 THEN
-	Outputs.fCylinderPosition := 0; 
-ELSE	
-	Outputs.fCylinderPosition := fPosition;
+//IF fPositionAutoMode >= 1 THEN
+//	Outputs.fCylinderPosition := 1;	
+//ELSIF fPosition <= 0 THEN
+//	Outputs.fCylinderPosition := 0; 
+//ELSE	
+//	Outputs.fCylinderPosition := fPositionAutoMode;
+//END_IF
+
+IF Inputs.bAutoMode THEN
+	Outputs.fCylinderPosition := fPositionAutoMode;
+ELSE
+	Outputs.fCylinderPosition := Inputs.fManualCylinderPositionReference;	
 END_IF
 
 Outputs.bSimulationRunning := bRunning;  
@@ -49,12 +55,12 @@ Outputs.pt1_y := LREAL_TO_INT(Outputs.fCylinderPosition * Parameters.fPistonScal
       <LineId Id="37" Count="0" />
       <LineId Id="31" Count="0" />
       <LineId Id="46" Count="0" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="47" Count="0" />
-      <LineId Id="50" Count="0" />
-      <LineId Id="52" Count="1" />
-      <LineId Id="56" Count="0" />
-      <LineId Id="48" Count="0" />
+      <LineId Id="66" Count="6" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="77" Count="1" />
+      <LineId Id="76" Count="0" />
       <LineId Id="24" Count="0" />
       <LineId Id="18" Count="0" />
       <LineId Id="17" Count="0" />
