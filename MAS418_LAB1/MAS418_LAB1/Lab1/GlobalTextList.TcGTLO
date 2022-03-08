@@ -155,6 +155,11 @@
               <v n="TextDefault">"Time: %s [s]"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
+            <o>
+              <v n="TextID">"444"</v>
+              <v n="TextDefault">"x0"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
           </l>
           <l n="Languages" t="ArrayList" />
           <v n="GuidInit">{e5853d35-514e-45d9-92a7-b6556fdca7c7}</v>

@@ -23,15 +23,16 @@ ELSE
 	bRunning := FALSE;
 END_IF
 
-fPositionAutoMode := Inputs.fCylinderVelocityReference * (fTime * fTime)/2 + fInitialVelocity * fTime + fInitialPosition;
+fPositionAutoMode := Inputs.fCylinderVelocityReference * 1/2*(fTime*fTime) + fInitialVelocity * fTime + fInitialPosition;
 
-//IF fPositionAutoMode >= 1 THEN
-//	Outputs.fCylinderPosition := 1;	
-//ELSIF fPosition <= 0 THEN
-//	Outputs.fCylinderPosition := 0; 
-//ELSE	
-//	Outputs.fCylinderPosition := fPositionAutoMode;
-//END_IF
+// added max/min outout value to avoid to large output for visualization
+IF fPositionAutoMode >= Parameters.fPistonPosMax THEN
+	fPositionAutoMode := Parameters.fPistonPosMax;	
+ELSIF fPositionAutoMode <= Parameters.fPistonPosMin  THEN
+	fPositionAutoMode := Parameters.fPistonPosMin; 
+ELSE	
+	fPositionAutoMode := fPositionAutoMode;
+END_IF
 
 IF Inputs.bAutoMode THEN
 	Outputs.fCylinderPosition := fPositionAutoMode;
@@ -54,8 +55,8 @@ Outputs.pt1_y := LREAL_TO_INT(Outputs.fCylinderPosition * Parameters.fPistonScal
       <LineId Id="26" Count="0" />
       <LineId Id="37" Count="0" />
       <LineId Id="31" Count="0" />
-      <LineId Id="46" Count="0" />
-      <LineId Id="66" Count="6" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="87" Count="7" />
       <LineId Id="74" Count="0" />
       <LineId Id="73" Count="0" />
       <LineId Id="75" Count="0" />
