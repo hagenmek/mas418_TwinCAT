@@ -47,6 +47,9 @@
     <Compile Include="POUs\CraneSimulation.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\F_UpdateParametersByReference.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>

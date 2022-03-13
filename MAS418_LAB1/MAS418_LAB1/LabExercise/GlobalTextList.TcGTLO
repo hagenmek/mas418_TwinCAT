@@ -26,6 +26,21 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"892"</v>
+              <v n="TextDefault">"0m"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"807"</v>
+              <v n="TextDefault">"1m"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"948"</v>
+              <v n="TextDefault">"1mx0"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"175"</v>
               <v n="TextDefault">"AUTO"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -33,6 +48,11 @@
             <o>
               <v n="TextID">"236"</v>
               <v n="TextDefault">"Clock: %s [s]"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"58"</v>
+              <v n="TextDefault">"Current Max Piston Stroke: %0.1f [m] "</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -131,8 +151,18 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"646"</v>
+              <v n="TextDefault">"New Max Piston Stroke: %0.1f [m] "</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"310"</v>
               <v n="TextDefault">"RUNNING"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"695"</v>
+              <v n="TextDefault">"Set New Value"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
