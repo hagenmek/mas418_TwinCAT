@@ -8,6 +8,10 @@ VAR
 	fPositionAutoMode : LREAL; 
 	fInitialPosition : LREAL; 
 	fInitialVelocity : LREAL; 
+	eStatus : E_Status; 
+	eMode : E_Mode; 
+	paramCylinderPiston : REFERENCE TO ST_pCylinderPiston;
+	fMaxPistonStroke : LREAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -26,10 +30,10 @@ END_IF
 fPositionAutoMode := Inputs.fCylinderVelocityReference * 1/2*(fTime*fTime) + fInitialVelocity * fTime + fInitialPosition;
 
 // added max/min outout value to avoid to large output for visualization
-IF fPositionAutoMode >= Parameters.fPistonPosMax THEN
-	fPositionAutoMode := Parameters.fPistonPosMax;	
-ELSIF fPositionAutoMode <= Parameters.fPistonPosMin  THEN
-	fPositionAutoMode := Parameters.fPistonPosMin; 
+IF fPositionAutoMode >= Parameters.pCylinderPiston.fPistonPosMax THEN
+	fPositionAutoMode := Parameters.pCylinderPiston.fPistonPosMax;	
+ELSIF fPositionAutoMode <= Parameters.pCylinderPiston.fPistonPosMin  THEN
+	fPositionAutoMode := Parameters.pCylinderPiston.fPistonPosMin; 
 ELSE	
 	fPositionAutoMode := fPositionAutoMode;
 END_IF
@@ -43,7 +47,34 @@ END_IF
 Outputs.bSimulationRunning := bRunning;  
 Outputs.fSimulationTime := fTime; 
 Outputs.fCylinderVelocity := Inputs.fCylinderVelocityReference;
-Outputs.pt1_y := LREAL_TO_INT(Outputs.fCylinderPosition * Parameters.fPistonScale);]]></ST>
+Outputs.pt1_y := LREAL_TO_INT(Outputs.fCylinderPosition * Parameters.pCylinderPiston.fPistonScale);
+
+
+
+// Status
+
+IF Inputs.bEnableSimulation THEN
+	eStatus := E_Status.Ready;
+ELSE 
+	eStatus := E_Status.Fault;	
+END_IF
+
+IF Inputs.bStartSimulation THEN
+	eStatus := E_Status.Starting;
+END_IF
+
+IF bRunning THEN
+	eStatus := E_Status.Running;
+END_IF
+
+// Mode
+IF Inputs.bAutoMode THEN
+	eMode := E_Mode.Auto;
+ELSE 
+	eMode := E_Mode.Manual;	
+END_IF
+
+paramCylinderPiston.fPistonPosMax := fMaxPistonStroke;]]></ST>
     </Implementation>
     <LineIds Name="CraneSimulation">
       <LineId Id="5" Count="1" />
@@ -67,6 +98,20 @@ Outputs.pt1_y := LREAL_TO_INT(Outputs.fCylinderPosition * Parameters.fPistonScal
       <LineId Id="17" Count="0" />
       <LineId Id="35" Count="0" />
       <LineId Id="57" Count="0" />
+      <LineId Id="125" Count="1" />
+      <LineId Id="114" Count="1" />
+      <LineId Id="128" Count="2" />
+      <LineId Id="177" Count="1" />
+      <LineId Id="127" Count="0" />
+      <LineId Id="138" Count="6" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="160" Count="0" />
+      <LineId Id="104" Count="0" />
+      <LineId Id="161" Count="1" />
+      <LineId Id="173" Count="1" />
+      <LineId Id="163" Count="0" />
+      <LineId Id="180" Count="0" />
+      <LineId Id="167" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
