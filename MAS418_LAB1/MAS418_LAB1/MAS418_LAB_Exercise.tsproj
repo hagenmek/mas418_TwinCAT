@@ -9,9 +9,9 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project GUID="{E0934695-7C3D-4F8B-B148-FD256502155A}" Name="Lab1" PrjFilePath="Lab1\Lab1.plcproj" TmcFilePath="Lab1\Lab1.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Lab1\Lab1.tmc">
-					<Name>Lab1 Instance</Name>
+			<Project GUID="{E0934695-7C3D-4F8B-B148-FD256502155A}" Name="LabExercise" PrjFilePath="LabExercise\LabExercise.plcproj" TmcFilePath="LabExercise\LabExercise.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="LabExercise\LabExercise.tmc">
+					<Name>LabExercise Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
 						<Context>
