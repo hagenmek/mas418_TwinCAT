@@ -13,6 +13,7 @@ VAR
 	fMaxPistonPosition : LREAL;
 	bPistonMaxNewValue : BOOL;
 	//stpCylinderPiston : ST_pCylinderPiston;
+	aPistonEndStopMessages : ARRAY [0..2] OF STRING := ['End Stop not active','Piston has reached upper end stop','Piston has reached lower end stop'];
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -31,10 +32,10 @@ END_IF
 fPositionAutoMode := Inputs.fCylinderVelocityReference * 1/2*(fTime*fTime) + fInitialVelocity * fTime + fInitialPosition;
 
 // added max/min outout value to avoid to large output for visualization
-IF fPositionAutoMode >= Parameters.pCylinderPiston.fPistonPosMax THEN
-	fPositionAutoMode := Parameters.pCylinderPiston.fPistonPosMax;	
-ELSIF fPositionAutoMode <= Parameters.pCylinderPiston.fPistonPosMin  THEN
-	fPositionAutoMode := Parameters.pCylinderPiston.fPistonPosMin; 
+IF fPositionAutoMode >= Parameters.pPistonRange.fPistonPosMax THEN
+	fPositionAutoMode := Parameters.pPistonRange.fPistonPosMax;	
+ELSIF fPositionAutoMode <= Parameters.pPistonRange.fPistonPosMin  THEN
+	fPositionAutoMode := Parameters.pPistonRange.fPistonPosMin; 
 ELSE	
 	fPositionAutoMode := fPositionAutoMode;
 END_IF
@@ -48,7 +49,7 @@ END_IF
 Outputs.bSimulationRunning := bRunning;  
 Outputs.fSimulationTime := fTime; 
 Outputs.fCylinderVelocity := Inputs.fCylinderVelocityReference;
-Outputs.pt1_y := LREAL_TO_INT(Outputs.fCylinderPosition * Parameters.pCylinderPiston.fPistonScale);
+Outputs.pt1_y := LREAL_TO_INT(Outputs.fCylinderPosition * Parameters.fPistonScale);
 
 
 
@@ -75,10 +76,24 @@ ELSE
 	eMode := E_Mode.Manual;	
 END_IF
 
+IF Outputs.fCylinderPosition <= Parameters.pPistonRange.fPistonPosMin THEN 
+	Outputs.bPistonLowerEndStop := TRUE; 
+	Outputs.bPistonUpperEndStop := FALSE; 
+	HMI.sPistonEndStopMessages := aPistonEndStopMessages[2];
+ELSIF Outputs.fCylinderPosition >= Parameters.pPistonRange.fPistonPosMax THEN 
+	Outputs.bPistonLowerEndStop := FALSE; 
+	Outputs.bPistonUpperEndStop := TRUE; 
+	HMI.sPistonEndStopMessages := aPistonEndStopMessages[1];
+ELSE 
+	Outputs.bPistonLowerEndStop := FALSE; 	
+	Outputs.bPistonUpperEndStop := FALSE; 	
+	HMI.sPistonEndStopMessages := aPistonEndStopMessages[0];
+END_IF
+
 F_UpdateParametersByReference( 
 	bSetNewValue := bPistonMaxNewValue,
 	fMaxPistonStroke := fMaxPistonPosition,
-	paramCylinderPiston := Parameters.pCylinderPiston
+	paramCylinderPiston := Parameters.pPistonRange
 );
 
 ]]></ST>
@@ -117,6 +132,17 @@ F_UpdateParametersByReference(
       <LineId Id="161" Count="1" />
       <LineId Id="173" Count="1" />
       <LineId Id="163" Count="0" />
+      <LineId Id="228" Count="1" />
+      <LineId Id="243" Count="0" />
+      <LineId Id="252" Count="0" />
+      <LineId Id="255" Count="0" />
+      <LineId Id="250" Count="1" />
+      <LineId Id="253" Count="0" />
+      <LineId Id="258" Count="0" />
+      <LineId Id="246" Count="1" />
+      <LineId Id="254" Count="0" />
+      <LineId Id="259" Count="0" />
+      <LineId Id="244" Count="0" />
       <LineId Id="193" Count="1" />
       <LineId Id="213" Count="0" />
       <LineId Id="199" Count="1" />

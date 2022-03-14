@@ -26,6 +26,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"850"</v>
+              <v n="TextDefault">"%s "</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"892"</v>
               <v n="TextDefault">"0m"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -53,6 +58,11 @@
             <o>
               <v n="TextID">"58"</v>
               <v n="TextDefault">"Current Max Piston Stroke: %0.1f [m] "</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"471"</v>
+              <v n="TextDefault">"Cylinder Position Reference: %0.1f [m]"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -113,6 +123,11 @@
             <o>
               <v n="TextID">"409"</v>
               <v n="TextDefault">"ENABLE"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"527"</v>
+              <v n="TextDefault">"End Stop Status: %s "</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
