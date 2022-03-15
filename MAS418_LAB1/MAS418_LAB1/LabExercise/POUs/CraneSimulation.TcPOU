@@ -14,7 +14,10 @@ VAR
 	bPistonMaxNewValue : BOOL;
 	//stpCylinderPiston : ST_pCylinderPiston;
 	aPistonEndStopMessages : ARRAY [0..2] OF STRING := ['End Stop not active','Piston has reached upper end stop','Piston has reached lower end stop'];
-	fMatTest : LREAL;
+	fPressureEng : REAL;
+	fFlowEng : REAL;
+	fPressureBar : LREAL := 60;
+	fFlowLmin : LREAL := 20;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -90,7 +93,8 @@ ELSE
 	HMI.sPistonEndStopMessages := aPistonEndStopMessages[0];
 END_IF
 
-fMatTest := F_MathTest(fA := 2, fB := 3);
+fPressureEng := LREAL_TO_REAL(F_BarToEng(fBar := fPressureBar));
+fFlowEng := LREAL_TO_REAL(F_LminToEng(fLmin := fFlowLmin));
 
 F_UpdateParametersByReference( 
 	bSetNewValue := bPistonMaxNewValue,
@@ -101,56 +105,9 @@ F_UpdateParametersByReference(
 ]]></ST>
     </Implementation>
     <LineIds Name="CraneSimulation">
-      <LineId Id="5" Count="1" />
-      <LineId Id="20" Count="1" />
-      <LineId Id="7" Count="0" />
-      <LineId Id="22" Count="1" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="28" Count="1" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="31" Count="0" />
-      <LineId Id="95" Count="0" />
-      <LineId Id="87" Count="7" />
-      <LineId Id="74" Count="0" />
-      <LineId Id="73" Count="0" />
-      <LineId Id="75" Count="0" />
-      <LineId Id="77" Count="1" />
-      <LineId Id="76" Count="0" />
-      <LineId Id="24" Count="0" />
-      <LineId Id="18" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="35" Count="0" />
-      <LineId Id="57" Count="0" />
-      <LineId Id="125" Count="1" />
-      <LineId Id="114" Count="1" />
-      <LineId Id="129" Count="1" />
-      <LineId Id="177" Count="1" />
-      <LineId Id="127" Count="0" />
-      <LineId Id="138" Count="6" />
-      <LineId Id="108" Count="0" />
-      <LineId Id="160" Count="0" />
-      <LineId Id="104" Count="0" />
-      <LineId Id="161" Count="1" />
-      <LineId Id="173" Count="1" />
-      <LineId Id="163" Count="0" />
-      <LineId Id="228" Count="1" />
-      <LineId Id="243" Count="0" />
-      <LineId Id="252" Count="0" />
-      <LineId Id="255" Count="0" />
-      <LineId Id="250" Count="1" />
-      <LineId Id="253" Count="0" />
-      <LineId Id="258" Count="0" />
-      <LineId Id="246" Count="1" />
-      <LineId Id="254" Count="0" />
-      <LineId Id="259" Count="0" />
-      <LineId Id="244" Count="0" />
-      <LineId Id="274" Count="1" />
-      <LineId Id="193" Count="1" />
-      <LineId Id="213" Count="0" />
-      <LineId Id="199" Count="1" />
-      <LineId Id="197" Count="0" />
-      <LineId Id="180" Count="0" />
+      <LineId Id="277" Count="72" />
+      <LineId Id="360" Count="0" />
+      <LineId Id="350" Count="6" />
       <LineId Id="167" Count="0" />
     </LineIds>
   </POU>
