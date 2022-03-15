@@ -66,6 +66,9 @@
     <Compile Include="POUs\F_PistonDisplacementToBoomAngle.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\F_RadToDeg.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\F_UpdateParametersByReference.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -128,6 +131,10 @@
       <Namespace>VisuNativeControl</Namespace>
       <SystemLibrary>true</SystemLibrary>
       <ResolverGuid>2717eb6a-dd07-4c66-8d8d-cacebd7b18ae</ResolverGuid>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_NCI">
+      <DefaultResolution>Tc2_NCI, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_NCI</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>

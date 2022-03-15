@@ -4,7 +4,7 @@
     <Declaration><![CDATA[TYPE ST_pPistonRange :
 STRUCT
 	fPistonPosMin : LREAL :=0;
-	fPistonPosMax : LREAL :=1;
+	fPistonPosMax : LREAL :=0.5;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

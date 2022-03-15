@@ -51,6 +51,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"104"</v>
+              <v n="TextDefault">"Boom Angle: %0.1f [deg]"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"236"</v>
               <v n="TextDefault">"Clock: %s [s]"</v>
               <l n="LanguageTexts" t="ArrayList" />

@@ -13,6 +13,7 @@ VAR_GLOBAL
 	pt1_y : INT; 
 	bPistonUpperEndStop : BOOL; 
 	bPistonLowerEndStop : BOOL; 
+	fBoomAngleDeg : LREAL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

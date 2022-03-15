@@ -6,10 +6,12 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[CraneSimulation();]]></ST>
+      <ST><![CDATA[CraneSimulation();
+]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="7" Count="0" />
+      <LineId Id="11" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

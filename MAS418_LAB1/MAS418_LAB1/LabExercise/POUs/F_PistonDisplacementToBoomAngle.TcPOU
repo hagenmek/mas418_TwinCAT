@@ -12,6 +12,9 @@ VAR
 	alpha1 : LREAL;
 	alpha2 : LREAL;
 	theta1 : LREAL;
+	AB2 : LREAL;
+	AC2 : LREAL;
+	BC2 : LREAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -23,14 +26,21 @@ BC := 0.77222 + xCyl;
 alpha1 := ATAN(ABS(Parameters.stCraneKinematics.ACy)/ ABS(Parameters.stCraneKinematics.ACx));
 alpha2 := ATAN(ABS(Parameters.stCraneKinematics.ABy)/ ABS(Parameters.stCraneKinematics.ABx));
 
-theta1 := ACOS( (ABS(AB)*ABS(AB) + ABS(AC)*ABS(AC) - (ABS(BC))*(ABS(AB)*ABS(AB) + ABS(AC)*ABS(AC) - (ABS(BC))) / (2 * ABS(AB) * ABS(AC)) ) - alpha2 + alpha1);
+AB2 := ABS(AB)*ABS(AB);
+AC2 := ABS(AC)*ABS(AC);
+BC2 := ABS(BC)*ABS(BC);
+
+theta1 := ACOS( (AB2 + AC2 - BC2) / (2 * ABS(AB) * ABS(AC)) ) - alpha2 + alpha1;
 
 F_PistonDisplacementToBoomAngle := theta1;]]></ST>
     </Implementation>
     <LineIds Name="F_PistonDisplacementToBoomAngle">
       <LineId Id="8" Count="2" />
       <LineId Id="26" Count="0" />
-      <LineId Id="12" Count="4" />
+      <LineId Id="12" Count="2" />
+      <LineId Id="39" Count="2" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="15" Count="1" />
       <LineId Id="25" Count="0" />
       <LineId Id="7" Count="0" />
     </LineIds>

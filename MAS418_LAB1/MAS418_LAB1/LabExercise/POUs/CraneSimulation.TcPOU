@@ -18,7 +18,7 @@ VAR
 	fFlowEng : REAL;
 	fPressureBar : LREAL := 60;
 	fFlowLmin : LREAL := 20;
-	fBoomAngle : LREAL;
+	fBoomAngleRad : LREAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -103,13 +103,17 @@ F_UpdateParametersByReference(
 	paramCylinderPiston := Parameters.stPistonRange
 );
 
-fBoomAngle := F_PistonDisplacementToBoomAngle(xCyl := Outputs.fCylinderPosition);]]></ST>
+fBoomAngleRad := F_PistonDisplacementToBoomAngle(xCyl := Outputs.fCylinderPosition);
+Outputs.fBoomAngleDeg := F_RadToDeg(fRad := fBoomAngleRad);
+]]></ST>
     </Implementation>
     <LineIds Name="CraneSimulation">
       <LineId Id="277" Count="72" />
       <LineId Id="360" Count="0" />
       <LineId Id="350" Count="6" />
       <LineId Id="167" Count="0" />
+      <LineId Id="382" Count="0" />
+      <LineId Id="381" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
