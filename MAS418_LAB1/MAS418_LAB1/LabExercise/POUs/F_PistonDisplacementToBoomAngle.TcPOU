@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="F_PistonDisplacementToBoomAngle" Id="{a235119c-45d2-4f49-b730-4da55738c20e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_PistonDisplacementToBoomAngle : LREAL
+VAR_INPUT
+	xCyl : LREAL;
+END_VAR
+VAR
+	AB : LREAL;
+	AC : LREAL;
+	BC : LREAL;
+	alpha1 : LREAL;
+	alpha2 : LREAL;
+	theta1 : LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[AB := SQRT(ABS(Parameters.stCraneKinematics.ABx)*ABS(Parameters.stCraneKinematics.ABx) + ABS(Parameters.stCraneKinematics.ABy)*ABS(Parameters.stCraneKinematics.ABy));
+AC := SQRT(ABS(Parameters.stCraneKinematics.ACx)*ABS(Parameters.stCraneKinematics.ACx) + ABS(Parameters.stCraneKinematics.ACy)*ABS(Parameters.stCraneKinematics.ACy));
+
+BC := 0.77222 + xCyl;
+
+alpha1 := ATAN(ABS(Parameters.stCraneKinematics.ACy)/ ABS(Parameters.stCraneKinematics.ACx));
+alpha2 := ATAN(ABS(Parameters.stCraneKinematics.ABy)/ ABS(Parameters.stCraneKinematics.ABx));
+
+theta1 := ACOS( (ABS(AB)*ABS(AB) + ABS(AC)*ABS(AC) - (ABS(BC))*(ABS(AB)*ABS(AB) + ABS(AC)*ABS(AC) - (ABS(BC))) / (2 * ABS(AB) * ABS(AC)) ) - alpha2 + alpha1);
+
+F_PistonDisplacementToBoomAngle := theta1;]]></ST>
+    </Implementation>
+    <LineIds Name="F_PistonDisplacementToBoomAngle">
+      <LineId Id="8" Count="2" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="12" Count="4" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -5,7 +5,8 @@
 VAR_GLOBAL
 	fCyclicTime : LREAL := 0.01; 
 	fPistonScale : LREAL :=100;
-	pPistonRange : ST_pPistonRange; 
+	stPistonRange : ST_pPistonRange; 
+	stCraneKinematics : ST_CraneKinematics;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

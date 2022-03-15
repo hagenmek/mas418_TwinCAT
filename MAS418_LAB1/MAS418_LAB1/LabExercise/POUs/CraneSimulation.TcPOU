@@ -18,6 +18,7 @@ VAR
 	fFlowEng : REAL;
 	fPressureBar : LREAL := 60;
 	fFlowLmin : LREAL := 20;
+	fBoomAngle : LREAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -36,10 +37,10 @@ END_IF
 fPositionAutoMode := Inputs.fCylinderVelocityReference * 1/2*(fTime*fTime) + fInitialVelocity * fTime + fInitialPosition;
 
 // added max/min outout value to avoid to large output for visualization
-IF fPositionAutoMode >= Parameters.pPistonRange.fPistonPosMax THEN
-	fPositionAutoMode := Parameters.pPistonRange.fPistonPosMax;	
-ELSIF fPositionAutoMode <= Parameters.pPistonRange.fPistonPosMin  THEN
-	fPositionAutoMode := Parameters.pPistonRange.fPistonPosMin; 
+IF fPositionAutoMode >= Parameters.stPistonRange.fPistonPosMax THEN
+	fPositionAutoMode := Parameters.stPistonRange.fPistonPosMax;	
+ELSIF fPositionAutoMode <= Parameters.stPistonRange.fPistonPosMin  THEN
+	fPositionAutoMode := Parameters.stPistonRange.fPistonPosMin; 
 ELSE	
 	fPositionAutoMode := fPositionAutoMode;
 END_IF
@@ -79,11 +80,11 @@ ELSE
 	eMode := E_Mode.Manual;	
 END_IF
 
-IF Outputs.fCylinderPosition <= Parameters.pPistonRange.fPistonPosMin THEN 
+IF Outputs.fCylinderPosition <= Parameters.stPistonRange.fPistonPosMin THEN 
 	Outputs.bPistonLowerEndStop := TRUE; 
 	Outputs.bPistonUpperEndStop := FALSE; 
 	HMI.sPistonEndStopMessages := aPistonEndStopMessages[2];
-ELSIF Outputs.fCylinderPosition >= Parameters.pPistonRange.fPistonPosMax THEN 
+ELSIF Outputs.fCylinderPosition >= Parameters.stPistonRange.fPistonPosMax THEN 
 	Outputs.bPistonLowerEndStop := FALSE; 
 	Outputs.bPistonUpperEndStop := TRUE; 
 	HMI.sPistonEndStopMessages := aPistonEndStopMessages[1];
@@ -99,10 +100,10 @@ fFlowEng := LREAL_TO_REAL(F_LminToEng(fLmin := fFlowLmin));
 F_UpdateParametersByReference( 
 	bSetNewValue := bPistonMaxNewValue,
 	fMaxPistonStroke := fMaxPistonPosition,
-	paramCylinderPiston := Parameters.pPistonRange
+	paramCylinderPiston := Parameters.stPistonRange
 );
 
-]]></ST>
+fBoomAngle := F_PistonDisplacementToBoomAngle(xCyl := Outputs.fCylinderPosition);]]></ST>
     </Implementation>
     <LineIds Name="CraneSimulation">
       <LineId Id="277" Count="72" />
