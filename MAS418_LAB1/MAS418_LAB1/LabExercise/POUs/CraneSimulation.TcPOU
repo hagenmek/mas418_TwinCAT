@@ -14,6 +14,7 @@ VAR
 	bPistonMaxNewValue : BOOL;
 	//stpCylinderPiston : ST_pCylinderPiston;
 	aPistonEndStopMessages : ARRAY [0..2] OF STRING := ['End Stop not active','Piston has reached upper end stop','Piston has reached lower end stop'];
+	fMatTest : LREAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -54,7 +55,6 @@ Outputs.pt1_y := LREAL_TO_INT(Outputs.fCylinderPosition * Parameters.fPistonScal
 
 
 // Status
-
 IF Inputs.bEnableSimulation THEN
 	eStatus := E_Status.Ready;
 ELSE 
@@ -90,6 +90,8 @@ ELSE
 	HMI.sPistonEndStopMessages := aPistonEndStopMessages[0];
 END_IF
 
+fMatTest := F_MathTest(fA := 2, fB := 3);
+
 F_UpdateParametersByReference( 
 	bSetNewValue := bPistonMaxNewValue,
 	fMaxPistonStroke := fMaxPistonPosition,
@@ -122,7 +124,7 @@ F_UpdateParametersByReference(
       <LineId Id="57" Count="0" />
       <LineId Id="125" Count="1" />
       <LineId Id="114" Count="1" />
-      <LineId Id="128" Count="2" />
+      <LineId Id="129" Count="1" />
       <LineId Id="177" Count="1" />
       <LineId Id="127" Count="0" />
       <LineId Id="138" Count="6" />
@@ -143,6 +145,7 @@ F_UpdateParametersByReference(
       <LineId Id="254" Count="0" />
       <LineId Id="259" Count="0" />
       <LineId Id="244" Count="0" />
+      <LineId Id="274" Count="1" />
       <LineId Id="193" Count="1" />
       <LineId Id="213" Count="0" />
       <LineId Id="199" Count="1" />

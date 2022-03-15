@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="F_UpdateParametersByReference" Id="{4beb6302-9d61-4873-b93a-92b401a4fe4c}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION F_UpdateParametersByReference : LREAL
+    <Declaration><![CDATA[FUNCTION F_UpdateParametersByReference 
 VAR_INPUT
 	bSetNewValue : BOOL;
 	fMaxPistonStroke : LREAL;

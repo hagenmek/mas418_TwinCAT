@@ -11,8 +11,8 @@ VAR_GLOBAL
 	pt0_y : INT := 0;
 	pt1_x : INT := 0;
 	pt1_y : INT; 
-	bPistonUpperEndStop :BOOL; 
-	bPistonLowerEndStop :BOOL; 
+	bPistonUpperEndStop : BOOL; 
+	bPistonLowerEndStop : BOOL; 
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
