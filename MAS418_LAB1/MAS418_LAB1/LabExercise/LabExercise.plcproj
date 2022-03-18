@@ -17,6 +17,9 @@
     <LibraryReferences>{67e94ca3-5c16-4854-82e9-3284bacb8f35}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\ST_AnimationScaling.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\ST_CraneKinematics.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -30,6 +33,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\ST_pPistonRange.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\ST_RelativeMovement.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GlobalTextList.TcGTLO">
@@ -58,6 +64,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\F_BarToEng.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\F_BoomAnimation.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\F_LminToEng.TcPOU">

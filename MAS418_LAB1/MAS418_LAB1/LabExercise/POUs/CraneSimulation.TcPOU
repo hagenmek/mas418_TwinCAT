@@ -19,6 +19,7 @@ VAR
 	fPressureBar : LREAL := 60;
 	fFlowLmin : LREAL := 20;
 	fBoomAngleRad : LREAL;
+	fBoomAnimation : LREAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -45,19 +46,16 @@ ELSE
 	fPositionAutoMode := fPositionAutoMode;
 END_IF
 
-IF Inputs.bAutoMode THEN
-	Outputs.fCylinderPosition := fPositionAutoMode;
+IF Inputs.bEnableSimulation THEN 
+	IF Inputs.bAutoMode THEN
+		Outputs.fCylinderPosition := fPositionAutoMode;
+	ELSE
+		Outputs.fCylinderPosition := Inputs.fManualCylinderPositionReference;	
+	END_IF
 ELSE
-	Outputs.fCylinderPosition := Inputs.fManualCylinderPositionReference;	
+	Outputs.fCylinderPosition := 0;
 END_IF
-
-Outputs.bSimulationRunning := bRunning;  
-Outputs.fSimulationTime := fTime; 
-Outputs.fCylinderVelocity := Inputs.fCylinderVelocityReference;
-Outputs.pt1_y := LREAL_TO_INT(Outputs.fCylinderPosition * Parameters.fPistonScale);
-
-
-
+	
 // Status
 IF Inputs.bEnableSimulation THEN
 	eStatus := E_Status.Ready;
@@ -103,15 +101,45 @@ F_UpdateParametersByReference(
 	paramCylinderPiston := Parameters.stPistonRange
 );
 
+// Piston Animation
+Outputs.stPistonAnimation.pt1_y := LREAL_TO_INT(Outputs.fCylinderPosition * Parameters.stAnimationScaling.fPistonScale);
+// Boom Animation
 fBoomAngleRad := F_PistonDisplacementToBoomAngle(xCyl := Outputs.fCylinderPosition);
+fBoomAnimation := F_BoomAnimation(
+	fScale := Parameters.stAnimationScaling.fBoomScale,
+	fBoomAngle := fBoomAngleRad,
+	fBoomLength := Parameters.stCraneKinematics.fBoomLength,
+	fBoomTipX => Outputs.stBoomAnimation.pt1_x,
+	fBoomTipY => Outputs.stBoomAnimation.pt1_y
+);
+
+Outputs.bSimulationRunning := bRunning;  
+Outputs.fSimulationTime := fTime; 
+Outputs.fCylinderVelocity := Inputs.fCylinderVelocityReference;
+
 Outputs.fBoomAngleDeg := F_RadToDeg(fRad := fBoomAngleRad);
 ]]></ST>
     </Implementation>
     <LineIds Name="CraneSimulation">
-      <LineId Id="277" Count="72" />
+      <LineId Id="277" Count="21" />
+      <LineId Id="415" Count="1" />
+      <LineId Id="300" Count="4" />
+      <LineId Id="417" Count="0" />
+      <LineId Id="419" Count="1" />
+      <LineId Id="312" Count="37" />
       <LineId Id="360" Count="0" />
-      <LineId Id="350" Count="6" />
-      <LineId Id="167" Count="0" />
+      <LineId Id="350" Count="5" />
+      <LineId Id="423" Count="0" />
+      <LineId Id="421" Count="1" />
+      <LineId Id="424" Count="0" />
+      <LineId Id="414" Count="0" />
+      <LineId Id="425" Count="0" />
+      <LineId Id="433" Count="0" />
+      <LineId Id="428" Count="1" />
+      <LineId Id="431" Count="1" />
+      <LineId Id="427" Count="0" />
+      <LineId Id="406" Count="0" />
+      <LineId Id="408" Count="3" />
       <LineId Id="382" Count="0" />
       <LineId Id="381" Count="0" />
     </LineIds>

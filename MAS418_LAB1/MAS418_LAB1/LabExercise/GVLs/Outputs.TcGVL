@@ -7,13 +7,11 @@ VAR_GLOBAL
 	bSimulationRunning : BOOL;
 	fCylinderVelocity : LREAL;
 	fCylinderPosition : LREAL;
-	pt0_x : INT := 0;
-	pt0_y : INT := 0;
-	pt1_x : INT := 0;
-	pt1_y : INT; 
+	stPistonAnimation : ST_RelativeMovement;
 	bPistonUpperEndStop : BOOL; 
 	bPistonLowerEndStop : BOOL; 
 	fBoomAngleDeg : LREAL;
+	stBoomAnimation : ST_RelativeMovement;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
