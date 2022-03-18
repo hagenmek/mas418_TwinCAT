@@ -18,13 +18,13 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[AB := SQRT(ABS(Parameters.stCraneKinematics.ABx)*ABS(Parameters.stCraneKinematics.ABx) + ABS(Parameters.stCraneKinematics.ABy)*ABS(Parameters.stCraneKinematics.ABy));
-AC := SQRT(ABS(Parameters.stCraneKinematics.ACx)*ABS(Parameters.stCraneKinematics.ACx) + ABS(Parameters.stCraneKinematics.ACy)*ABS(Parameters.stCraneKinematics.ACy));
+      <ST><![CDATA[AB := SQRT(ABS(Parameters.stParam.stCraneKinematics.ABx)*ABS(Parameters.stParam.stCraneKinematics.ABx) + ABS(Parameters.stParam.stCraneKinematics.ABy)*ABS(Parameters.stParam.stCraneKinematics.ABy));
+AC := SQRT(ABS(Parameters.stParam.stCraneKinematics.ACx)*ABS(Parameters.stParam.stCraneKinematics.ACx) + ABS(Parameters.stParam.stCraneKinematics.ACy)*ABS(Parameters.stParam.stCraneKinematics.ACy));
 
 BC := 0.77222 + xCyl;
 
-alpha1 := ATAN(ABS(Parameters.stCraneKinematics.ACy)/ ABS(Parameters.stCraneKinematics.ACx));
-alpha2 := ATAN(ABS(Parameters.stCraneKinematics.ABy)/ ABS(Parameters.stCraneKinematics.ABx));
+alpha1 := ATAN(ABS(Parameters.stParam.stCraneKinematics.ACy)/ ABS(Parameters.stParam.stCraneKinematics.ACx));
+alpha2 := ATAN(ABS(Parameters.stParam.stCraneKinematics.ABy)/ ABS(Parameters.stParam.stCraneKinematics.ABx));
 
 AB2 := ABS(AB)*ABS(AB);
 AC2 := ABS(AC)*ABS(AC);

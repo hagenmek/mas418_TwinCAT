@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="FB_Softstop" Id="{bd63d182-9bcb-4e35-9559-4dcdb92fec52}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Softstop
+VAR_INPUT
+	fInputValue : LREAL;
+	fNegDirLimit : LREAL;
+	fPosDirLimit : LREAL;
+END_VAR
+VAR_OUTPUT
+	bEndStopNegDir : BOOL;
+	bEndStopPosDir : BOOL;
+	sEndStopMessage : STRING;
+	fOutputValue : LREAL;
+END_VAR
+VAR
+	aEndStopMessages : ARRAY [0..2] OF STRING := ['EndStop not active','EndStop Negative Direction Active','EndStop Positive Direction Active'];
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF fInputValue <= fNegDirLimit THEN 
+	bEndStopNegDir := TRUE; 
+	bEndStopPosDir := FALSE; 
+	sEndStopMessage := aEndStopMessages[1];
+	fOutputValue := fNegDirLimit;
+ELSIF fInputValue >= fPosDirLimit THEN 
+	bEndStopNegDir := FALSE; 
+	bEndStopPosDir := TRUE; 
+	sEndStopMessage := aEndStopMessages[2];
+	fOutputValue := fPosDirLimit;
+ELSE 
+	bEndStopNegDir := FALSE; 	
+	bEndStopPosDir := FALSE; 	
+	sEndStopMessage := aEndStopMessages[0];
+	fOutputValue := fInputValue;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="FB_Softstop">
+      <LineId Id="10" Count="3" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="14" Count="3" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="18" Count="3" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

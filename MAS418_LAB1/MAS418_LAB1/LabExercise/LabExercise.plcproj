@@ -32,6 +32,9 @@
     <Compile Include="DUTs\ST_EndStops.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\ST_Parameters.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\ST_pPistonRange.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -63,22 +66,25 @@
     <Compile Include="POUs\CraneSimulation.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\F_BarToEng.TcPOU">
+    <Compile Include="POUs\Function blocks\FB_Softstop.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\F_BoomAnimation.TcPOU">
+    <Compile Include="POUs\Functions\F_BarToEng.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\F_LminToEng.TcPOU">
+    <Compile Include="POUs\Functions\F_BoomAnimation.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\F_PistonDisplacementToBoomAngle.TcPOU">
+    <Compile Include="POUs\Functions\F_LminToEng.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\F_RadToDeg.TcPOU">
+    <Compile Include="POUs\Functions\F_PistonDisplacementToBoomAngle.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\F_UpdateParametersByReference.TcPOU">
+    <Compile Include="POUs\Functions\F_RadToDeg.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Functions\F_UpdateParametersByReference.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
@@ -95,6 +101,8 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
+    <Folder Include="POUs\Functions" />
+    <Folder Include="POUs\Function blocks" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
