@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="CraneSimulation" Id="{c255987f-7a58-4573-9ac9-545c12e8d4a5}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM CraneSimulation
 VAR
@@ -23,6 +23,10 @@ VAR
 	
 	fCylinderPosition : LREAL;
 	fbPistonEndStop : FB_Softstop; 
+	
+	fbCraneModeVisualization : FB_CraneModeVisualization;
+	fbCraneModeControlBox : FB_CraneModeControlBox;
+	fbCraneMode : I_Mode := fbCraneModeVisualization;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -77,6 +81,9 @@ IF bRunning THEN
 END_IF
 
 // Mode
+fbCraneMode := fbCraneModeVisualization;
+
+
 IF Inputs.bAutoMode THEN
 	eMode := E_Mode.Auto;
 ELSE 
@@ -122,7 +129,10 @@ Outputs.fBoomAngleDeg := F_RadToDeg(fRad := fBoomAngleRad);
       <LineId Id="469" Count="0" />
       <LineId Id="468" Count="0" />
       <LineId Id="464" Count="0" />
-      <LineId Id="312" Count="21" />
+      <LineId Id="312" Count="16" />
+      <LineId Id="504" Count="1" />
+      <LineId Id="503" Count="0" />
+      <LineId Id="329" Count="4" />
       <LineId Id="348" Count="1" />
       <LineId Id="360" Count="0" />
       <LineId Id="350" Count="3" />

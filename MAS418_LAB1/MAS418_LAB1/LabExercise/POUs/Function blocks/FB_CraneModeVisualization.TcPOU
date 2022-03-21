@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
-  <POU Name="FB_CraneMode" Id="{30b52a46-ba12-4583-8360-a68c61cb71fc}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_CraneMode IMPLEMENTS I_Mode
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FB_CraneModeVisualization" Id="{30b52a46-ba12-4583-8360-a68c61cb71fc}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_CraneModeVisualization IMPLEMENTS I_Mode
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
+	eMode : E_Mode;
 END_VAR
 VAR
 END_VAR
@@ -16,45 +17,54 @@ END_VAR
       <Declaration><![CDATA[{warning 'add method implementation '}
 METHOD Auto
 VAR_INPUT
-	bAuto	: BOOL;
+	bAuto : BOOL := 0;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[IF bAuto THEN
+	eMode := E_Mode.Auto;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="Manual" Id="{dc17129a-752d-4321-a6cb-b0b225d58bd7}">
       <Declaration><![CDATA[{warning 'add method implementation '}
 METHOD Manual
 VAR_INPUT
-	bManual	: BOOL;
+	bManual : BOOL := 0;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[IF bManual THEN
+	eMode := E_Mode.Manual;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="Off" Id="{2ba5f905-47e5-4122-bb35-5ac365838738}">
       <Declaration><![CDATA[{warning 'add method implementation '}
 METHOD Off
 VAR_INPUT
-	bEnabled	: BOOL;
+	bOff : BOOL := 1;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[IF bOff THEN
+	eMode := E_Mode.Off;
+END_IF]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="FB_CraneMode">
+    <LineIds Name="FB_CraneModeVisualization">
       <LineId Id="9" Count="0" />
     </LineIds>
-    <LineIds Name="FB_CraneMode.Auto">
+    <LineIds Name="FB_CraneModeVisualization.Auto">
+      <LineId Id="7" Count="0" />
+      <LineId Id="13" Count="1" />
+    </LineIds>
+    <LineIds Name="FB_CraneModeVisualization.Manual">
+      <LineId Id="13" Count="1" />
       <LineId Id="7" Count="0" />
     </LineIds>
-    <LineIds Name="FB_CraneMode.Manual">
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CraneMode.Off">
+    <LineIds Name="FB_CraneModeVisualization.Off">
+      <LineId Id="13" Count="1" />
       <LineId Id="7" Count="0" />
     </LineIds>
   </POU>

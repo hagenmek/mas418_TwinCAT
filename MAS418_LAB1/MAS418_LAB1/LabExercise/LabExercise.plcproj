@@ -69,7 +69,10 @@
     <Compile Include="POUs\CraneSimulation.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Function blocks\FB_CraneMode.TcPOU">
+    <Compile Include="POUs\Function blocks\FB_CraneModeVisualization.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Function blocks\FB_CraneModeControlBox.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Function blocks\FB_Softstop.TcPOU">
