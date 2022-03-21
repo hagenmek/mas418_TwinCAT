@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="FB_CraneMode" Id="{30b52a46-ba12-4583-8360-a68c61cb71fc}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_CraneMode IMPLEMENTS I_Mode
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Auto" Id="{29d0580a-68c4-4a88-9fa9-cc59658d15a2}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD Auto
+VAR_INPUT
+	bAuto	: BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Manual" Id="{dc17129a-752d-4321-a6cb-b0b225d58bd7}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD Manual
+VAR_INPUT
+	bManual	: BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Off" Id="{2ba5f905-47e5-4122-bb35-5ac365838738}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD Off
+VAR_INPUT
+	bEnabled	: BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_CraneMode">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CraneMode.Auto">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CraneMode.Manual">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CraneMode.Off">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

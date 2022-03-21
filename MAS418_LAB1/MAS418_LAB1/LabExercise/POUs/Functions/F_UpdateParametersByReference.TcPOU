@@ -5,7 +5,7 @@
 VAR_INPUT
 	bSetNewValue : BOOL;
 	fMaxPistonStroke : LREAL;
-	paramCylinderPiston : REFERENCE TO ST_pPistonRange;
+	paramCylinderPiston : REFERENCE TO ST_PistonRange;
 END_VAR
 VAR
 

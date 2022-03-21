@@ -35,7 +35,7 @@
     <Compile Include="DUTs\ST_Parameters.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\ST_pPistonRange.TcDUT">
+    <Compile Include="DUTs\ST_PistonRange.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\ST_RelativeMovement.TcDUT">
@@ -60,13 +60,22 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
+    <Compile Include="Interface\I_Mode.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\CraneSimulation.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Function blocks\FB_CraneMode.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Function blocks\FB_Softstop.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Function blocks\FB_StateMachine.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Functions\F_BarToEng.TcPOU">
@@ -101,6 +110,7 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
+    <Folder Include="Interface" />
     <Folder Include="POUs\Functions" />
     <Folder Include="POUs\Function blocks" />
     <Folder Include="VISUs" />

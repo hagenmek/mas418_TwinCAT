@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="FB_StateMachine" Id="{e7bd9ab3-42c4-4fd9-89cc-8e485c18b9aa}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_StateMachine
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Fault" Id="{5403c10c-9f27-4105-9929-b3fdaebab555}">
+      <Declaration><![CDATA[METHOD PROTECTED Fault
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="None" Id="{c26a898b-4759-4bf0-9a7e-4fbed4a3aa71}">
+      <Declaration><![CDATA[METHOD PROTECTED None
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Ready" Id="{733a1433-3fcd-405d-ae59-5126c28fe665}">
+      <Declaration><![CDATA[METHOD PROTECTED Ready
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Running" Id="{19f67fcc-a3e9-4f75-a7ef-2c803bfa74f5}">
+      <Declaration><![CDATA[METHOD PROTECTED Running
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Starting" Id="{18f478f5-7418-40e6-8d07-83064c9734d7}">
+      <Declaration><![CDATA[METHOD PROTECTED Starting
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Stopping" Id="{5a0ad9fe-8672-4d85-b78b-f34822a45ee6}">
+      <Declaration><![CDATA[METHOD PROTECTED Stopping
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_StateMachine">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.Fault">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.None">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.Ready">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.Running">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.Starting">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.Stopping">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
