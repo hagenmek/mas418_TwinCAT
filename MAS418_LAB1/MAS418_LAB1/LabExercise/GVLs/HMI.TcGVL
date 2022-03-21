@@ -8,6 +8,7 @@ VAR_GLOBAL
 	bAuto : BOOL;
 	bStart : BOOL;
 	bStop : BOOL;
+	eMode : E_Mode;
 END_VAR
 
 ]]></Declaration>

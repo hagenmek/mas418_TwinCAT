@@ -1,13 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <DUT Name="E_Mode" Id="{16394d50-8d60-4125-b4f7-3915c90f53a5}">
+  <DUT Name="E_Joystick" Id="{376804ef-6514-4794-bc9c-72fa8cecea07}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE E_Mode :
+TYPE E_Joystick :
 (
-	Off,
-	Manual,
-	Auto
+	JoyX,
+	JoyY
 );
 END_TYPE
 ]]></Declaration>

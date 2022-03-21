@@ -1,13 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <DUT Name="E_Mode" Id="{16394d50-8d60-4125-b4f7-3915c90f53a5}">
+  <DUT Name="E_Light" Id="{9a6de14f-db84-47f0-b62e-e52227db1606}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE E_Mode :
+TYPE E_Light :
 (
-	Off,
-	Manual,
-	Auto
+	green,
+	Red
 );
 END_TYPE
 ]]></Declaration>

@@ -17,6 +17,15 @@
     <LibraryReferences>{67e94ca3-5c16-4854-82e9-3284bacb8f35}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\E_Buttons.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\E_Joystick.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\E_Light.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\ST_AnimationScaling.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -60,19 +69,13 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="Interface\I_Mode.TcIO">
+    <Compile Include="Interface\I_HMI.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\CraneSimulation.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Function blocks\FB_CraneModeVisualization.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Function blocks\FB_CraneModeControlBox.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Function blocks\FB_Softstop.TcPOU">

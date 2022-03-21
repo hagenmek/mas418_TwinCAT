@@ -24,9 +24,10 @@ VAR
 	fCylinderPosition : LREAL;
 	fbPistonEndStop : FB_Softstop; 
 	
-	fbCraneModeVisualization : FB_CraneModeVisualization;
-	fbCraneModeControlBox : FB_CraneModeControlBox;
-	fbCraneMode : I_Mode := fbCraneModeVisualization;
+	//fbCraneModeVisualization : FB_CraneModeVisualization;
+	//fbCraneModeControlBox : FB_CraneModeControlBox;
+	//fbCraneMode : I_HMI := fbCraneModeVisualization;
+	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -80,8 +81,17 @@ IF bRunning THEN
 	eStatus := E_Status.Running;
 END_IF
 
-// Mode
-fbCraneMode := fbCraneModeVisualization;
+// Mode Selector
+
+CASE eMode OF
+	E_Mode.Off:
+	
+	E_Mode.Manual:
+	
+	E_Mode.Auto:
+			
+END_CASE
+
 
 
 IF Inputs.bAutoMode THEN
@@ -130,7 +140,17 @@ Outputs.fBoomAngleDeg := F_RadToDeg(fRad := fBoomAngleRad);
       <LineId Id="468" Count="0" />
       <LineId Id="464" Count="0" />
       <LineId Id="312" Count="16" />
-      <LineId Id="504" Count="1" />
+      <LineId Id="537" Count="0" />
+      <LineId Id="542" Count="0" />
+      <LineId Id="544" Count="0" />
+      <LineId Id="549" Count="0" />
+      <LineId Id="547" Count="0" />
+      <LineId Id="550" Count="0" />
+      <LineId Id="548" Count="0" />
+      <LineId Id="546" Count="0" />
+      <LineId Id="545" Count="0" />
+      <LineId Id="543" Count="0" />
+      <LineId Id="505" Count="0" />
       <LineId Id="503" Count="0" />
       <LineId Id="329" Count="4" />
       <LineId Id="348" Count="1" />
