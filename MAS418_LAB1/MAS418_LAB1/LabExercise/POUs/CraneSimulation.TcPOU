@@ -83,9 +83,6 @@ ELSE
 	eMode := E_Mode.Manual;	
 END_IF
 
-
-
-
 fPressureEng := LREAL_TO_REAL(F_BarToEng(fBar := fPressureBar));
 fFlowEng := LREAL_TO_REAL(F_LminToEng(fLmin := fFlowLmin));
 
@@ -126,9 +123,7 @@ Outputs.fBoomAngleDeg := F_RadToDeg(fRad := fBoomAngleRad);
       <LineId Id="468" Count="0" />
       <LineId Id="464" Count="0" />
       <LineId Id="312" Count="21" />
-      <LineId Id="454" Count="0" />
-      <LineId Id="334" Count="0" />
-      <LineId Id="347" Count="2" />
+      <LineId Id="348" Count="1" />
       <LineId Id="360" Count="0" />
       <LineId Id="350" Count="3" />
       <LineId Id="455" Count="0" />
