@@ -1,14 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <GVL Name="HMI" Id="{515f7d22-94cb-4f67-80c3-c968411175ad}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
+	bEnableSimulation : BOOL; 
+	bStartSimulation : BOOL; 
+	bSimulationRunning : BOOL;
+	fSimulationTime : LREAL; 
+	fCylinderVelocityReference : LREAL; 
+	fBoomAngleDeg : LREAL;
+	fMaxPistonPosition : LREAL;
 	sPistonEndStopMessages : STRING;
 	bOn : BOOL;
 	bAuto : BOOL;
 	bStart : BOOL;
 	bStop : BOOL;
 	eMode : E_Mode;
+	fManualCylinderPositionReference : LREAL; 
+	fCylinderPosition : LREAL; 
+	fCylinderPositionRestricted : LREAL; 
+	stPistonAnimation : ST_RelativeMovement;
+	stBoomAnimation : ST_RelativeMovement;
+	eStatus : E_Status;
 END_VAR
 
 ]]></Declaration>

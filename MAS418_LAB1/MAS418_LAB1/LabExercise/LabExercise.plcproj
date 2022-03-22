@@ -72,16 +72,28 @@
     <Compile Include="Interface\I_HMI.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interface\I_Mode.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\CraneSimulation.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Function blocks\FB_ModeControlBox.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Function blocks\FB_ModeVisualization.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Function blocks\FB_ModeSelector.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Function blocks\FB_Softstop.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Function blocks\FB_StateMachine.TcPOU">
+    <Compile Include="POUs\Function blocks\FB_Status.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Functions\F_BarToEng.TcPOU">

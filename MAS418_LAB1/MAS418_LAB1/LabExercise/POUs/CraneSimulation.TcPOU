@@ -1,16 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="CraneSimulation" Id="{c255987f-7a58-4573-9ac9-545c12e8d4a5}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM CraneSimulation
 VAR
 	fTime : LREAL; 	
-	bRunning : BOOL;
 	fPositionAutoMode : LREAL; 
 	fInitialPosition : LREAL; 
-	fInitialVelocity : LREAL; 
-	eStatus : E_Status; 
-	eMode : E_Mode; 
-	fMaxPistonPosition : LREAL;
+	fInitialVelocity : LREAL;  
 	bPistonMaxNewValue : BOOL;
 	//stpCylinderPiston : ST_pCylinderPiston;
 
@@ -21,138 +17,100 @@ VAR
 	fBoomAngleRad : LREAL;
 	fBoomAnimation : LREAL;
 	
-	fCylinderPosition : LREAL;
 	fbPistonEndStop : FB_Softstop; 
 	
 	//fbCraneModeVisualization : FB_CraneModeVisualization;
 	//fbCraneModeControlBox : FB_CraneModeControlBox;
 	//fbCraneMode : I_HMI := fbCraneModeVisualization;
+	fbModeSelector : FB_ModeSelector;
+	fbStatus : FB_Status;
 	
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF Inputs.bStartSimulation AND Inputs.bAutoMode  THEN
+      <ST><![CDATA[IF HMI.bStartSimulation AND HMI.bAuto  THEN
 	fTime := fTime + Parameters.stParam.fCyclicTime;
 ELSE
 	fTime := 0; 	
 END_IF
 
-IF fTime > 0 AND Inputs.bAutoMode THEN 
-	bRunning := TRUE;
+IF fTime > 0 AND HMI.bAuto  THEN 
+	HMI.bSimulationRunning := TRUE;
 ELSE
-	bRunning := FALSE;
+	HMI.bSimulationRunning := FALSE;
 END_IF
 
-fPositionAutoMode := Inputs.fCylinderVelocityReference * 1/2*(fTime*fTime) + fInitialVelocity * fTime + fInitialPosition;
+fPositionAutoMode := HMI.fCylinderVelocityReference * 1/2*(fTime*fTime) + fInitialVelocity * fTime + fInitialPosition;
 
-IF Inputs.bEnableSimulation THEN 
-	IF Inputs.bAutoMode THEN
-		fCylinderPosition := fPositionAutoMode;
-	ELSE
-		fCylinderPosition := Inputs.fManualCylinderPositionReference;	
-	END_IF
-ELSE
-	fCylinderPosition := 0;
-END_IF
+
+// Mode Selector
+fbModeSelector(bControlBox := FALSE);
 
 fbPistonEndStop(
-	fInputValue := fCylinderPosition,
+	fInputValue := HMI.fCylinderPosition,
 	fNegDirLimit := Parameters.stParam.stPistonRange.fPistonPosMin,
 	fPosDirLimit := Parameters.stParam.stPistonRange.fPistonPosMax,
 	bEndStopNegDir => Outputs.bPistonLowerEndStop,
 	bEndStopPosDir => Outputs.bPistonUpperEndStop,
 	sEndStopMessage => HMI.sPistonEndStopMessages,
-	fOutputValue => Outputs.fCylinderPosition
+	fOutputValue => HMI.fCylinderPositionRestricted
 );
 
 	
 // Status
-IF Inputs.bEnableSimulation THEN
-	eStatus := E_Status.Ready;
-ELSE 
-	eStatus := E_Status.Fault;	
-END_IF
+fbStatus(
+bPowerOn := HMI.bEnableSimulation,
+bFault := FALSE,
+bStart:= HMI.bStartSimulation,
+bStop := FALSE,
+bRunning := HMI.bSimulationRunning,
+eStatus => HMI.eStatus
+);
 
-IF Inputs.bStartSimulation THEN
-	eStatus := E_Status.Starting;
-END_IF
-
-IF bRunning THEN
-	eStatus := E_Status.Running;
-END_IF
-
-// Mode Selector
-
-CASE eMode OF
-	E_Mode.Off:
-	
-	E_Mode.Manual:
-	
-	E_Mode.Auto:
-			
-END_CASE
-
-
-
-IF Inputs.bAutoMode THEN
-	eMode := E_Mode.Auto;
-ELSE 
-	eMode := E_Mode.Manual;	
-END_IF
 
 fPressureEng := LREAL_TO_REAL(F_BarToEng(fBar := fPressureBar));
 fFlowEng := LREAL_TO_REAL(F_LminToEng(fLmin := fFlowLmin));
 
 F_UpdateParametersByReference( 
 	bSetNewValue := bPistonMaxNewValue,
-	fMaxPistonStroke := fMaxPistonPosition,
+	fMaxPistonStroke := HMI.fMaxPistonPosition,
 	paramCylinderPiston := Parameters.stParam.stPistonRange
 );
 
 // Piston Animation
-Outputs.stPistonAnimation.pt1_y := LREAL_TO_INT(Outputs.fCylinderPosition * Parameters.stParam.stAnimationScaling.fPistonScale);
+HMI.stPistonAnimation.pt1_y := LREAL_TO_INT(HMI.fCylinderPositionRestricted * Parameters.stParam.stAnimationScaling.fPistonScale);
 // Boom Animation
-fBoomAngleRad := F_PistonDisplacementToBoomAngle(xCyl := Outputs.fCylinderPosition);
+fBoomAngleRad := F_PistonDisplacementToBoomAngle(xCyl := HMI.fCylinderPositionRestricted);
 fBoomAnimation := F_BoomAnimation(
 	fScale := Parameters.stParam.stAnimationScaling.fBoomScale,
 	fBoomAngle := fBoomAngleRad,
 	fBoomLength := Parameters.stParam.stCraneKinematics.fBoomLength,
-	fBoomTipX => Outputs.stBoomAnimation.pt1_x,
-	fBoomTipY => Outputs.stBoomAnimation.pt1_y
+	fBoomTipX => HMI.stBoomAnimation.pt1_x,
+	fBoomTipY => HMI.stBoomAnimation.pt1_y
 );
 
-Outputs.bSimulationRunning := bRunning;  
-Outputs.fSimulationTime := fTime; 
-Outputs.fCylinderVelocity := Inputs.fCylinderVelocityReference;
+HMI.fSimulationTime := fTime; 
+Outputs.fCylinderVelocity := HMI.fCylinderVelocityReference;
 
-Outputs.fBoomAngleDeg := F_RadToDeg(fRad := fBoomAngleRad);
+HMI.fBoomAngleDeg := F_RadToDeg(fRad := fBoomAngleRad);
 ]]></ST>
     </Implementation>
     <LineIds Name="CraneSimulation">
       <LineId Id="277" Count="12" />
-      <LineId Id="415" Count="1" />
-      <LineId Id="300" Count="4" />
-      <LineId Id="417" Count="0" />
-      <LineId Id="419" Count="1" />
+      <LineId Id="584" Count="1" />
+      <LineId Id="588" Count="0" />
+      <LineId Id="617" Count="0" />
       <LineId Id="465" Count="2" />
       <LineId Id="471" Count="4" />
       <LineId Id="469" Count="0" />
       <LineId Id="468" Count="0" />
       <LineId Id="464" Count="0" />
-      <LineId Id="312" Count="16" />
-      <LineId Id="537" Count="0" />
-      <LineId Id="542" Count="0" />
-      <LineId Id="544" Count="0" />
-      <LineId Id="549" Count="0" />
-      <LineId Id="547" Count="0" />
-      <LineId Id="550" Count="0" />
-      <LineId Id="548" Count="0" />
-      <LineId Id="546" Count="0" />
-      <LineId Id="545" Count="0" />
-      <LineId Id="543" Count="0" />
-      <LineId Id="505" Count="0" />
-      <LineId Id="503" Count="0" />
-      <LineId Id="329" Count="4" />
+      <LineId Id="312" Count="1" />
+      <LineId Id="651" Count="0" />
+      <LineId Id="655" Count="0" />
+      <LineId Id="658" Count="4" />
+      <LineId Id="654" Count="0" />
+      <LineId Id="327" Count="0" />
       <LineId Id="348" Count="1" />
       <LineId Id="360" Count="0" />
       <LineId Id="350" Count="3" />
@@ -167,7 +125,6 @@ Outputs.fBoomAngleDeg := F_RadToDeg(fRad := fBoomAngleRad);
       <LineId Id="428" Count="1" />
       <LineId Id="431" Count="1" />
       <LineId Id="427" Count="0" />
-      <LineId Id="406" Count="0" />
       <LineId Id="408" Count="3" />
       <LineId Id="382" Count="0" />
       <LineId Id="381" Count="0" />

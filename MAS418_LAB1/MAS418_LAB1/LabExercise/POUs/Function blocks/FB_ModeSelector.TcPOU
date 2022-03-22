@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="FB_ModeSelector" Id="{e22295b4-f0de-4c1e-b830-372a1bffee19}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ModeSelector
+VAR_INPUT
+	bControlBox : BOOL;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	fbModeVisualization : FB_ModeVisualization;
+	fbModeControlBox : FB_ModeControlBox;
+	fbMode : I_Mode := fbModeVisualization;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT(bControlBox) THEN 
+	fbMode := fbModeVisualization;
+	IF NOT(HMI.bOn) THEN
+			fbMode.Off(TRUE); 
+			fbMode.Manual(FALSE); 
+			fbMode.Auto(FALSE); 
+	ELSIF HMI.bOn AND NOT(HMI.bAuto) THEN
+			fbMode.Off(FALSE); 
+			fbMode.Manual(TRUE); 
+			fbMode.Auto(FALSE); 
+	ELSIF HMI.bOn AND HMI.bAuto THEN	
+			fbMode.Off(FALSE); 
+			fbMode.Manual(FALSE); 
+			fbMode.Auto(TRUE); 
+	ELSE	
+			fbMode.Off(FALSE); 
+			fbMode.Manual(FALSE); 
+			fbMode.Auto(FALSE); 	
+	END_IF
+	
+	
+ELSE	  
+	fbMode := fbModeControlBox;
+	IF NOT(Inputs.bManualMode) AND NOT(Inputs.bAutoMode) THEN
+			fbMode.Off(TRUE); 
+			fbMode.Manual(FALSE); 
+			fbMode.Auto(FALSE); 
+	ELSIF Inputs.bManualMode AND NOT(Inputs.bAutoMode) THEN
+			fbMode.Off(FALSE); 
+			fbMode.Manual(TRUE); 
+			fbMode.Auto(FALSE); 
+	ELSIF NOT(Inputs.bManualMode) AND Inputs.bAutoMode THEN	
+			fbMode.Off(FALSE); 
+			fbMode.Manual(FALSE); 
+			fbMode.Auto(TRUE); 
+	ELSE	
+			fbMode.Off(FALSE); 
+			fbMode.Manual(FALSE); 
+			fbMode.Auto(FALSE); 	
+	END_IF
+	
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="FB_ModeSelector">
+      <LineId Id="56" Count="0" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="11" Count="1" />
+      <LineId Id="24" Count="1" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="27" Count="1" />
+      <LineId Id="15" Count="1" />
+      <LineId Id="29" Count="1" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="41" Count="1" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="89" Count="19" />
+      <LineId Id="57" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

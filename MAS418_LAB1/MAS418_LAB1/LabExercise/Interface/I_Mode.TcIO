@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <Itf Name="I_Mode" Id="{8cbb066e-df4b-4dc1-bdb7-87eb5200fda7}">
+    <Declaration><![CDATA[INTERFACE I_Mode
+]]></Declaration>
+    <Method Name="Auto" Id="{0f9cd9fa-898f-45f9-84b0-e5fe12c05d03}">
+      <Declaration><![CDATA[METHOD Auto
+VAR_INPUT
+	bEnable : BOOL;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Manual" Id="{cb2e5dfc-81ea-417d-b724-a61cde2b1319}">
+      <Declaration><![CDATA[METHOD Manual
+VAR_INPUT
+	bEnable : BOOL;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Off" Id="{d23f8b33-20b2-48cc-b0ee-a97946b7d659}">
+      <Declaration><![CDATA[METHOD Off
+VAR_INPUT
+	bEnable : BOOL;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

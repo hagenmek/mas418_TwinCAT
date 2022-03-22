@@ -5,12 +5,13 @@
 {attribute 'strict'}
 TYPE E_Status :
 (
-	None,
+	PowerOff,
 	Fault,
 	Ready,
 	Starting,
 	Running,
-	Stopping
+	Stopping,
+	Checking
 );
 END_TYPE
 ]]></Declaration>
