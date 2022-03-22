@@ -8,126 +8,92 @@ VAR
 	fInitialPosition : LREAL; 
 	fInitialVelocity : LREAL;  
 	bPistonMaxNewValue : BOOL;
-	//stpCylinderPiston : ST_pCylinderPiston;
-
 	fPressureEng : REAL;
 	fFlowEng : REAL;
 	fPressureBar : LREAL := 60;
 	fFlowLmin : LREAL := 20;
 	fBoomAngleRad : LREAL;
 	fBoomAnimation : LREAL;
-	
-	fbPistonEndStop : FB_Softstop; 
-	
-	//fbCraneModeVisualization : FB_CraneModeVisualization;
-	//fbCraneModeControlBox : FB_CraneModeControlBox;
-	//fbCraneMode : I_HMI := fbCraneModeVisualization;
 	fbModeSelector : FB_ModeSelector;
 	fbStatus : FB_Status;
-	
+	fbSimulationTime : FB_SimulationTime;
+	fbPositionSimulator : FB_PositionSimulator;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF HMI.bStartSimulation AND HMI.bAuto  THEN
-	fTime := fTime + Parameters.stParam.fCyclicTime;
-ELSE
-	fTime := 0; 	
-END_IF
-
-IF fTime > 0 AND HMI.bAuto  THEN 
-	HMI.bSimulationRunning := TRUE;
-ELSE
-	HMI.bSimulationRunning := FALSE;
-END_IF
-
-fPositionAutoMode := HMI.fCylinderVelocityReference * 1/2*(fTime*fTime) + fInitialVelocity * fTime + fInitialPosition;
-
+      <ST><![CDATA[// Status
+fbStatus(
+bPowerOn := HMI.bPowerOn,
+bFault := FALSE,
+bStart:= HMI.bStart,
+bStop := HMI.bStop,
+bRunning := HMI.bRunning,
+eStatus => HMI.eStatus
+);
 
 // Mode Selector
 fbModeSelector(bControlBox := FALSE);
 
-fbPistonEndStop(
-	fInputValue := HMI.fCylinderPosition,
-	fNegDirLimit := Parameters.stParam.stPistonRange.fPistonPosMin,
-	fPosDirLimit := Parameters.stParam.stPistonRange.fPistonPosMax,
-	bEndStopNegDir => Outputs.bPistonLowerEndStop,
-	bEndStopPosDir => Outputs.bPistonUpperEndStop,
-	sEndStopMessage => HMI.sPistonEndStopMessages,
-	fOutputValue => HMI.fCylinderPositionRestricted
+// Simulation Time
+fbSimulationTime(
+eMode := HMI.eMode,
+eStatus := HMI.eStatus,
+stParam := Parameters.stParam,
+fTime => HMI.fSimulationTime
 );
 
-	
-// Status
-fbStatus(
-bPowerOn := HMI.bEnableSimulation,
-bFault := FALSE,
-bStart:= HMI.bStartSimulation,
-bStop := FALSE,
-bRunning := HMI.bSimulationRunning,
-eStatus => HMI.eStatus
-);
-
-
-fPressureEng := LREAL_TO_REAL(F_BarToEng(fBar := fPressureBar));
-fFlowEng := LREAL_TO_REAL(F_LminToEng(fLmin := fFlowLmin));
+// Position Simulation and Animation
+IF  HMI.eStatus = E_Status.Ready OR HMI.eStatus = E_Status.Starting OR HMI.eStatus = E_Status.Running THEN
+	fbPositionSimulator(
+		eMode := HMI.eMode,
+		stParam := Parameters.stParam,
+		fTime := HMI.fSimulationTime,
+		fPositionReference := HMI.fManualCylinderPositionReference,
+		fVelocityReference := HMI.fCylinderVelocityReference,
+		fInitialVelocity := 0.0,
+		fInitialPosition := 0.0,
+		bRunning => HMI.bRunning,
+		sPistonEndStopMessages => HMI.sPistonEndStopMessages,
+		fPositionRestricted => HMI.fCylinderPosition,
+		stBoomAnimation => HMI.stBoomAnimation,
+		stPistonAnimation => HMI.stPistonAnimation,
+		fBoomAngleDeg =>  HMI.fBoomAngleDeg
+	);
+END_IF
 
 F_UpdateParametersByReference( 
 	bSetNewValue := bPistonMaxNewValue,
 	fMaxPistonStroke := HMI.fMaxPistonPosition,
 	paramCylinderPiston := Parameters.stParam.stPistonRange
-);
-
-// Piston Animation
-HMI.stPistonAnimation.pt1_y := LREAL_TO_INT(HMI.fCylinderPositionRestricted * Parameters.stParam.stAnimationScaling.fPistonScale);
-// Boom Animation
-fBoomAngleRad := F_PistonDisplacementToBoomAngle(xCyl := HMI.fCylinderPositionRestricted);
-fBoomAnimation := F_BoomAnimation(
-	fScale := Parameters.stParam.stAnimationScaling.fBoomScale,
-	fBoomAngle := fBoomAngleRad,
-	fBoomLength := Parameters.stParam.stCraneKinematics.fBoomLength,
-	fBoomTipX => HMI.stBoomAnimation.pt1_x,
-	fBoomTipY => HMI.stBoomAnimation.pt1_y
-);
-
-HMI.fSimulationTime := fTime; 
-Outputs.fCylinderVelocity := HMI.fCylinderVelocityReference;
-
-HMI.fBoomAngleDeg := F_RadToDeg(fRad := fBoomAngleRad);
-]]></ST>
+);]]></ST>
     </Implementation>
     <LineIds Name="CraneSimulation">
-      <LineId Id="277" Count="12" />
+      <LineId Id="690" Count="7" />
       <LineId Id="584" Count="1" />
       <LineId Id="588" Count="0" />
       <LineId Id="617" Count="0" />
-      <LineId Id="465" Count="2" />
-      <LineId Id="471" Count="4" />
-      <LineId Id="469" Count="0" />
-      <LineId Id="468" Count="0" />
-      <LineId Id="464" Count="0" />
-      <LineId Id="312" Count="1" />
-      <LineId Id="651" Count="0" />
-      <LineId Id="655" Count="0" />
-      <LineId Id="658" Count="4" />
-      <LineId Id="654" Count="0" />
-      <LineId Id="327" Count="0" />
-      <LineId Id="348" Count="1" />
-      <LineId Id="360" Count="0" />
+      <LineId Id="719" Count="0" />
+      <LineId Id="699" Count="0" />
+      <LineId Id="704" Count="0" />
+      <LineId Id="715" Count="3" />
+      <LineId Id="714" Count="0" />
+      <LineId Id="720" Count="1" />
+      <LineId Id="747" Count="0" />
+      <LineId Id="705" Count="0" />
+      <LineId Id="728" Count="2" />
+      <LineId Id="743" Count="0" />
+      <LineId Id="731" Count="1" />
+      <LineId Id="727" Count="0" />
+      <LineId Id="735" Count="0" />
+      <LineId Id="738" Count="0" />
+      <LineId Id="734" Count="0" />
+      <LineId Id="741" Count="1" />
+      <LineId Id="739" Count="0" />
+      <LineId Id="722" Count="0" />
+      <LineId Id="748" Count="0" />
       <LineId Id="350" Count="3" />
       <LineId Id="455" Count="0" />
       <LineId Id="355" Count="0" />
-      <LineId Id="423" Count="0" />
-      <LineId Id="421" Count="1" />
-      <LineId Id="424" Count="0" />
-      <LineId Id="414" Count="0" />
-      <LineId Id="425" Count="0" />
-      <LineId Id="433" Count="0" />
-      <LineId Id="428" Count="1" />
-      <LineId Id="431" Count="1" />
-      <LineId Id="427" Count="0" />
-      <LineId Id="408" Count="3" />
-      <LineId Id="382" Count="0" />
-      <LineId Id="381" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

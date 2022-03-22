@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="FB_SimulationTime" Id="{0142bc96-265d-4191-9085-79f87b6d3f8d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SimulationTime
+VAR_INPUT
+	eStatus : E_Status;
+	eMode : E_Mode;
+	stParam : ST_Parameters;
+END_VAR
+VAR_OUTPUT
+	fTime : LREAL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF (eStatus = E_Status.Starting OR eStatus = E_Status.Running) AND eMode = E_Mode.Auto  THEN
+	fTime := fTime + stParam.fCyclicTime;
+ELSE
+	fTime := 0; 	
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="FB_SimulationTime">
+      <LineId Id="10" Count="3" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

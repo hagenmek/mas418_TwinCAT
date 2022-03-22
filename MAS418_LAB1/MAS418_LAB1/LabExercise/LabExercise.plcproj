@@ -69,10 +69,7 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="Interface\I_HMI.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Interface\I_Mode.TcIO">
+    <Compile Include="Interfaces\I_Mode.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PlcTask.TcTTO">
@@ -88,6 +85,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Function blocks\FB_ModeSelector.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Function blocks\FB_PositionSimulator.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Function blocks\FB_SimulationTime.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Function blocks\FB_Softstop.TcPOU">
@@ -128,7 +131,7 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
-    <Folder Include="Interface" />
+    <Folder Include="Interfaces" />
     <Folder Include="POUs\Functions" />
     <Folder Include="POUs\Function blocks" />
     <Folder Include="VISUs" />
