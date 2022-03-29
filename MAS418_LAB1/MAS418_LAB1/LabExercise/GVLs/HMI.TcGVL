@@ -21,6 +21,7 @@ VAR_GLOBAL
 	stPistonAnimation : ST_RelativeMovement;
 	stBoomAnimation : ST_RelativeMovement;
 	eStatus : E_Status;
+	bPistonMaxNewValue : BOOL;
 END_VAR
 
 ]]></Declaration>

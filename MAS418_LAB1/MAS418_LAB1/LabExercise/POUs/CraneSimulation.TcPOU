@@ -5,15 +5,10 @@
 VAR
 	fTime : LREAL; 	
 	fPositionAutoMode : LREAL; 
-	fInitialPosition : LREAL; 
-	fInitialVelocity : LREAL;  
-	bPistonMaxNewValue : BOOL;
-	fPressureEng : REAL;
-	fFlowEng : REAL;
-	fPressureBar : LREAL := 60;
-	fFlowLmin : LREAL := 20;
-	fBoomAngleRad : LREAL;
-	fBoomAnimation : LREAL;
+
+
+
+
 	fbModeSelector : FB_ModeSelector;
 	fbStatus : FB_Status;
 	fbSimulationTime : FB_SimulationTime;
@@ -62,7 +57,7 @@ IF  HMI.eStatus = E_Status.Ready OR HMI.eStatus = E_Status.Starting OR HMI.eStat
 END_IF
 
 F_UpdateParametersByReference( 
-	bSetNewValue := bPistonMaxNewValue,
+	bSetNewValue := HMI.bPistonMaxNewValue,
 	fMaxPistonStroke := HMI.fMaxPistonPosition,
 	paramCylinderPiston := Parameters.stParam.stPistonRange
 );]]></ST>

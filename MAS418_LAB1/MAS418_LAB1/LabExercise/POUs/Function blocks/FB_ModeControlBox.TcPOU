@@ -32,7 +32,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF bEnable THEN
-Outputs.fCylinderPosition := HMI.fManualCylinderPositionReference;
+Outputs.fCylinderPosition := Inputs.fJoyY;
 Outputs.eMode := E_Mode.Manual;
 END_IF ]]></ST>
       </Implementation>
