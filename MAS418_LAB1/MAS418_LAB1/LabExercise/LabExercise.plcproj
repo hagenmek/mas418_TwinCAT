@@ -87,6 +87,9 @@
     <Compile Include="POUs\Function blocks\FB_ModeSelector.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Function blocks\FB_MotionReferenceGenerator.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Function blocks\FB_PositionSimulator.TcPOU">
       <SubType>Code</SubType>
     </Compile>

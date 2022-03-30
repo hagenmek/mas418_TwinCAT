@@ -5,14 +5,13 @@
 VAR
 	fTime : LREAL; 	
 	fPositionAutoMode : LREAL; 
-
-
-
-
 	fbModeSelector : FB_ModeSelector;
 	fbStatus : FB_Status;
 	fbSimulationTime : FB_SimulationTime;
 	fbPositionSimulator : FB_PositionSimulator;
+	fbMotionReferenceGenerator : FB_MotionReferenceGenerator;
+	fVelRef : LREAL; 
+	fPosRef : LREAL; 
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -60,6 +59,20 @@ F_UpdateParametersByReference(
 	bSetNewValue := HMI.bPistonMaxNewValue,
 	fMaxPistonStroke := HMI.fMaxPistonPosition,
 	paramCylinderPiston := Parameters.stParam.stPistonRange
+);
+
+fbMotionReferenceGenerator(
+	bEnable := TRUE,
+	fStartPosition_m := 0.0,
+	fStartVelocity_m := 0.0,
+	fPositionSetpoint_m := 0.4,
+	fVelocitySetpoint_m := 0.05,
+	fTimeBeforeStarting_s := 2,
+	fRampTime_s := 1,
+	fHoldPositionTime_s := 3,
+	fClock_s := fbSimulationTime.fTime, 
+	fVelocityReference_m => fVelRef,
+	fPositionReference_m => fPosRef
 );]]></ST>
     </Implementation>
     <LineIds Name="CraneSimulation">
@@ -89,6 +102,13 @@ F_UpdateParametersByReference(
       <LineId Id="350" Count="3" />
       <LineId Id="455" Count="0" />
       <LineId Id="355" Count="0" />
+      <LineId Id="764" Count="0" />
+      <LineId Id="763" Count="0" />
+      <LineId Id="767" Count="7" />
+      <LineId Id="766" Count="0" />
+      <LineId Id="775" Count="0" />
+      <LineId Id="779" Count="0" />
+      <LineId Id="765" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
