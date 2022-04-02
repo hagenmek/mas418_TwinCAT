@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
-  <DUT Name="ST_Parameters" Id="{0acdc32a-38d7-42ed-a023-5b5f43624fa6}">
-    <Declaration><![CDATA[TYPE ST_Parameters :
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_Parameters_1" Id="{327f9d83-5c16-4c45-a49f-a5c776ff898b}">
+    <Declaration><![CDATA[TYPE ST_Parameters_1 :
 STRUCT
 	fCyclicTime : LREAL := 0.01; 
 	stAnimationScaling : ST_AnimationScaling;

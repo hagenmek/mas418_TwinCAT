@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_VirtualOutputs" Id="{986916b0-1c61-4257-a033-7e8e96041982}">
+    <Declaration><![CDATA[TYPE ST_VirtualOutputs :
+STRUCT
+	bStartLight : BOOL;
+	bStopLight : BOOL;
+	eMode : E_Mode;
+	eStatus : E_Status;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

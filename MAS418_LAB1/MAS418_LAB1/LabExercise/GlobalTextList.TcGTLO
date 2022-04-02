@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <GlobalTextList Name="GlobalTextList" Id="{1a3d149f-cafb-488a-986c-27bd1f022b46}">
     <XmlArchive>
       <Data>
@@ -141,6 +141,16 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"90"</v>
+              <v n="TextDefault">"FAULT"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"961"</v>
+              <v n="TextDefault">"JOYSTICK Y"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"660"</v>
               <v n="TextDefault">"MANUAL"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -233,6 +243,11 @@
             <o>
               <v n="TextID">"978"</v>
               <v n="TextDefault">"Started"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"795"</v>
+              <v n="TextDefault">"Status"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>

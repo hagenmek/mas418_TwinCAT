@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="CraneControl" Id="{c8d14843-0c4e-4243-a583-0726f2828bd5}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM CraneControl
+VAR
+	fbManualControl : FB_ManualControl; 
+	fOutTest : LREAL; 
+	bEnableManualControl : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF VirtualControlBox.stVirtualInputs.bOnSelector AND NOT(VirtualControlBox.stVirtualInputs.bAutoSelector) THEN
+	bEnableManualControl := TRUE;	
+ELSE
+	bEnableManualControl := FALSE;
+END_IF
+
+fbManualControl(
+	bEnable := bEnableManualControl,
+	stParam := Parameters.stParam, 
+	fVelocityFeedForwardControlOutput => fOutTest
+);
+]]></ST>
+    </Implementation>
+    <LineIds Name="CraneControl">
+      <LineId Id="26" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="30" Count="1" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="32" Count="1" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="19" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
