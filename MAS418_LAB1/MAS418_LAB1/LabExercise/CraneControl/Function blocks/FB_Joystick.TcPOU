@@ -5,7 +5,7 @@
 VAR_INPUT
 	bEnable : BOOL;
 	fNormalizedInput : LREAL;
-	fMaxLimit : LREAL;
+	stParam : ST_Parameters;
 END_VAR
 VAR_OUTPUT
 	fOuput : LREAL;
@@ -15,7 +15,7 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF bEnable THEN
-	fOuput := fNormalizedInput*fMaxLimit;
+	fOuput := fNormalizedInput*Parameters.stParam.fMaxVelocityLimit;
 ELSE
 	fOuput := 0.0;
 END_IF

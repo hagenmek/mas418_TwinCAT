@@ -20,16 +20,29 @@
     <Compile Include="CraneControl\CraneControl.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CraneControl\Function blocks\FB_Clock.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Function blocks\FB_MotionReferenceGenerator_limit.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Function blocks\FB_AutomaticControl.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CraneControl\Function blocks\FB_Joystick.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CraneControl\Function blocks\FB_ManualControl.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CraneControl\Function blocks\FB_MotionReferenceGenerator.TcPOU">
+    <Compile Include="CraneControl\Function blocks\FB_OpenLoopControl.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CraneControl\Function blocks\FB_OpenLoopControl.TcPOU">
+    <Compile Include="CraneControl\GVLs\Parameters.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="CraneControl\Struct\ST_MotionReferenceGeneratorSettings.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CraneControl\Struct\ST_Parameters.TcDUT">
@@ -71,10 +84,6 @@
     <Compile Include="GlobalTextList.TcGTLO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GVLs\VirtualControlBox.TcGVL">
-      <SubType>Code</SubType>
-      <LinkAlways>true</LinkAlways>
-    </Compile>
     <Compile Include="GVLs\HMI.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
@@ -84,10 +93,6 @@
       <LinkAlways>true</LinkAlways>
     </Compile>
     <Compile Include="GVLs\Outputs.TcGVL">
-      <SubType>Code</SubType>
-      <LinkAlways>true</LinkAlways>
-    </Compile>
-    <Compile Include="GVLs\Parameters.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
@@ -142,6 +147,10 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="VirtualControlBox\GVLs\VirtualControlBox.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
     <Compile Include="VirtualControlBox\Struct\ST_VirtualInputs.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -162,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CraneControl\Function blocks" />
+    <Folder Include="CraneControl\GVLs" />
     <Folder Include="CraneControl\Struct" />
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
@@ -170,6 +180,7 @@
     <Folder Include="POUs\Functions" />
     <Folder Include="POUs\Function blocks" />
     <Folder Include="VirtualControlBox" />
+    <Folder Include="VirtualControlBox\GVLs" />
     <Folder Include="VirtualControlBox\Struct" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />

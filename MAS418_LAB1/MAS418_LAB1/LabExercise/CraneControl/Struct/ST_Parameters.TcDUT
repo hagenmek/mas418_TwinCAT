@@ -8,6 +8,7 @@ STRUCT
 	fBoreArea : LREAL := 0.0033183;
 	fAnnulusArea : LREAL := 0.0023562;
 	fMaxFlowCapacity : LREAL := 30; //[l/min]
+	stMotionReferenceGeneratorSettings : ST_MotionReferenceGeneratorSettings;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

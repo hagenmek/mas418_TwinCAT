@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FB_AutomaticControl" Id="{b543be1d-46f1-4ea5-ae35-9d7ea7728984}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_AutomaticControl
+VAR_INPUT
+	bEnable : BOOL;
+	bActivateMotion : BOOL;
+	bStopMotion : BOOL;
+	stMotionReferenceGeneratorSettings : ST_MotionReferenceGeneratorSettings;
+	stParam : ST_Parameters; 
+END_VAR
+VAR_OUTPUT
+	fOutAutoTestPos : LREAL; 
+	fOutAutoTestVel : LREAL; 
+END_VAR
+VAR
+	fbClock : FB_Clock;	
+	fbMotionReferenceGenerator : FB_MotionReferenceGenerator_limit;	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbClock(
+	bStart := bActivateMotion,
+	bStop := bStopMotion,
+	fCycleTime := stParam.fCyclicTime
+);
+
+fbMotionReferenceGenerator(
+	bEnable := bEnable,
+	stMotionReferenceGeneratorSettings := stMotionReferenceGeneratorSettings,
+	fClock_s := fbClock.fTime
+);
+
+fOutAutoTestPos := fbMotionReferenceGenerator.fPositionReference_m;
+fOutAutoTestVel := fbMotionReferenceGenerator.fVelocityReference_ms;]]></ST>
+    </Implementation>
+    <LineIds Name="FB_AutomaticControl">
+      <LineId Id="21" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="35" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

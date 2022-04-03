@@ -17,16 +17,16 @@ END_VAR
     <Implementation>
       <ST><![CDATA[fbJoystick(
 	bEnable := bEnable,
-	fMaxLimit := Parameters.stParam.fMaxVelocityLimit,
+	stParam := stParam,
 	fNormalizedInput := VirtualControlBox.stVirtualInputs.fJoystickY,
 );
 
 fbOpenLoopControl(
-bEnable := bEnable,
-stParam := stParam,
-fInput_ms := fbJoystick.fOuput,
-fMaxValveFlow_lmin := Parameters.stParam.fMaxFlowCapacity,
-fNormalizedOutput => fVelocityFeedForwardControlOutput
+	bEnable := bEnable,
+	stParam := stParam,
+	fInput_ms := fbJoystick.fOuput,
+	fMaxValveFlow_lmin := Parameters.stParam.fMaxFlowCapacity,
+	fNormalizedOutput => fVelocityFeedForwardControlOutput
 );
 ]]></ST>
     </Implementation>
