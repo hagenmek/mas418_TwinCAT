@@ -17,6 +17,18 @@
     <LibraryReferences>{67e94ca3-5c16-4854-82e9-3284bacb8f35}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ControlBox\ControlBox.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ControlBox\Function blocks\FB_ControlBox.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ControlBox\Function blocks\FB_RealControlBox.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ControlBox\Function blocks\FB_VirtualControlBox.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CraneControl\CraneControl.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -41,9 +53,6 @@
     <Compile Include="CraneControl\Function blocks\Sub blocks\FB_ClosedLoopControl.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CraneControl\Function blocks\Sub blocks\FB_ControlBox.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="CraneControl\Function blocks\Sub blocks\FB_Joystick.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -53,16 +62,10 @@
     <Compile Include="CraneControl\Function blocks\Sub blocks\FB_OpenLoopControl.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CraneControl\Function blocks\Sub blocks\FB_RealControlBox.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="CraneControl\Function blocks\Sub blocks\FB_ResetIntegralController.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CraneControl\Function blocks\Sub blocks\FB_Status.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CraneControl\Function blocks\Sub blocks\FB_VirtualControlBox.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CraneControl\GVLs\Parameters.TcGVL">
@@ -178,17 +181,11 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="VirtualControlBox\GVLs\VirtualControlBox.TcGVL">
+    <Compile Include="ControlBox\GVLs\VirtualControlBox.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="VirtualControlBox\Struct\ST_VirtualInputs.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="VirtualControlBox\Struct\ST_VirtualOutputs.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="VirtualControlBox\VirtualControlBox.TcVIS">
+    <Compile Include="ControlBox\VirtualControlBox.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
     </Compile>
@@ -201,6 +198,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ControlBox\Function blocks" />
     <Folder Include="CraneControl\Function blocks" />
     <Folder Include="CraneControl\Function blocks\Main blocks" />
     <Folder Include="CraneControl\Function blocks\Sub blocks" />
@@ -213,9 +211,9 @@
     <Folder Include="Interfaces" />
     <Folder Include="POUs\Functions" />
     <Folder Include="POUs\Function blocks" />
-    <Folder Include="VirtualControlBox" />
-    <Folder Include="VirtualControlBox\GVLs" />
-    <Folder Include="VirtualControlBox\Struct" />
+    <Folder Include="ControlBox" />
+    <Folder Include="ControlBox\GVLs" />
+    <Folder Include="ControlBox\Struct" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>

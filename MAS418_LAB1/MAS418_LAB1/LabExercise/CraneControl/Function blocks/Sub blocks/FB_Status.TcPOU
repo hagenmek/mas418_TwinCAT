@@ -1,12 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="FB_Status" Id="{26df518e-7453-4e6d-ac16-889885b93dbd}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Status
 VAR_INPUT
-	bOff : BOOL;
 	bFault : BOOL;
-	bStart : BOOL;
-	bStop : BOOL;
 	bRunning : BOOL;
 END_VAR
 VAR_OUTPUT
@@ -18,20 +15,20 @@ END_VAR
     <Implementation>
       <ST><![CDATA[CASE eStatus OF 
 	E_Status.Checking:
-		IF NOT(bFault) THEN
-			eStatus := E_Status.Ready;
-		ELSE
+		IF bFault THEN
 			eStatus := E_Status.Fault;
 		END_IF
 		
-		IF bOff THEN	
+		IF VirtualControlBox.bOnSelector AND NOT(bFault)THEN	
 			eStatus := E_Status.Ready;
-		ELSE
+		END_IF
+		
+		IF NOT(VirtualControlBox.bOnSelector) THEN	
 			eStatus := E_Status.Off;
 		END_IF
 		
 	E_Status.Off:	
-		IF bOff THEN	
+		IF VirtualControlBox.bOnSelector THEN	
 			eStatus := E_Status.Checking;
 		END_IF
 
@@ -41,11 +38,11 @@ END_VAR
 		END_IF
 	
 	E_Status.Ready:
-		IF bStart AND bOff AND NOT(bFault) THEN
+		IF VirtualControlBox.bStartButton AND VirtualControlBox.bOnSelector AND NOT(bFault) THEN
 			eStatus := E_Status.Starting;
 		END_IF	
 		
-		IF  NOT(bOff) OR bFault THEN
+		IF  NOT(VirtualControlBox.bOnSelector) OR bFault THEN
 			eStatus := E_Status.Checking;
 		END_IF	
 
@@ -58,11 +55,11 @@ END_VAR
 	
 	E_Status.Running:
 	
-		IF bStop THEN
+		IF VirtualControlBox.bStopButton THEN
 			eStatus := E_Status.Stopping;
 		END_IF
 		
-		IF NOT(bRunning) OR NOT(bOff) OR bFault THEN
+		IF NOT(bRunning) OR NOT(VirtualControlBox.bOnSelector) OR bFault THEN
 			eStatus := E_Status.Checking;
 		END_IF
 	
@@ -71,7 +68,7 @@ END_VAR
 			eStatus := E_Status.Checking;
 		END_IF
 	
-		IF bOff OR bFault THEN
+		IF NOT(VirtualControlBox.bOnSelector) OR bFault THEN
 		eStatus := E_Status.Checking;
 		END_IF	
 	
@@ -81,46 +78,10 @@ END_CASE
 ]]></ST>
     </Implementation>
     <LineIds Name="FB_Status">
-      <LineId Id="24" Count="0" />
-      <LineId Id="94" Count="2" />
-      <LineId Id="110" Count="1" />
-      <LineId Id="97" Count="3" />
-      <LineId Id="107" Count="1" />
-      <LineId Id="101" Count="0" />
-      <LineId Id="126" Count="1" />
-      <LineId Id="129" Count="1" />
-      <LineId Id="128" Count="0" />
-      <LineId Id="40" Count="1" />
-      <LineId Id="81" Count="1" />
-      <LineId Id="79" Count="0" />
-      <LineId Id="42" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="52" Count="1" />
-      <LineId Id="131" Count="1" />
-      <LineId Id="134" Count="1" />
-      <LineId Id="133" Count="0" />
-      <LineId Id="69" Count="0" />
-      <LineId Id="35" Count="0" />
-      <LineId Id="84" Count="1" />
-      <LineId Id="114" Count="1" />
-      <LineId Id="83" Count="0" />
-      <LineId Id="39" Count="0" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="86" Count="0" />
-      <LineId Id="88" Count="1" />
-      <LineId Id="87" Count="0" />
-      <LineId Id="118" Count="3" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="90" Count="0" />
-      <LineId Id="103" Count="1" />
-      <LineId Id="102" Count="0" />
-      <LineId Id="122" Count="0" />
-      <LineId Id="124" Count="1" />
-      <LineId Id="123" Count="0" />
-      <LineId Id="91" Count="0" />
-      <LineId Id="44" Count="0" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="28" Count="0" />
+      <LineId Id="149" Count="34" />
+      <LineId Id="215" Count="1" />
+      <LineId Id="213" Count="0" />
+      <LineId Id="187" Count="23" />
       <LineId Id="23" Count="0" />
     </LineIds>
   </POU>

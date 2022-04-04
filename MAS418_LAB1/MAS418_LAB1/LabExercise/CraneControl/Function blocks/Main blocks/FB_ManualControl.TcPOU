@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="FB_ManualControl" Id="{1cb952f3-59ec-4dc1-98d9-dc6242ed003b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_ManualControl
 VAR_INPUT
-	bEnable : BOOL;
+	eMode : E_Mode;
+	eStatus : E_Status;
 	stParam : ST_Parameters;
 END_VAR
 VAR_OUTPUT
@@ -16,13 +17,13 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[fbJoystick(
-	bEnable := bEnable,
+	bEnable := (eMode = E_Mode.Manual),
 	stParam := stParam,
 	fNormalizedInput := Work.fJoystickY,
 );
 
 fbOpenLoopControl(
-	bEnable := bEnable,
+	bEnable := (eMode = E_Mode.Manual),
 	stParam := stParam,
 	fInput_ms := fbJoystick.fOuput,
 	fNormalizedOutput => fVelocityFeedForwardControlOutput

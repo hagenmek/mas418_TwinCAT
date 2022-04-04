@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="FB_AutomaticControl" Id="{b543be1d-46f1-4ea5-ae35-9d7ea7728984}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_AutomaticControl
 VAR_INPUT
-	bEnable : BOOL;
+	eMode : E_Mode;
+	eStatus : E_Status;
 	bEnableVelocityFeedForwardControl : BOOL;
 	bEnableClosedLoopPositionControl : BOOL;
 	bEnableIntegralController : BOOL;
 	bEnableActiveDamping : BOOL;
-	bActivateMotion : BOOL;
 	bStopMotion : BOOL;
 	stMotionReferenceGeneratorSettings : ST_MotionReferenceGeneratorSettings;
 	stParam : ST_Parameters; 
@@ -34,13 +34,19 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[fbClock(
-	bStart := bActivateMotion,
+	bStart := (eMode = E_Mode.Auto AND (eStatus = E_Status.Starting OR eStatus = E_Status.Running)),
 	bStop := bStopMotion,
 	fCycleTime := stParam.fCyclicTime
 );
 
+IF fbClock.fTime > 0 THEN
+	Work.bRunning := TRUE;
+ELSE
+	Work.bRunning := FALSE;
+END_IF
+
 fbMotionReferenceGenerator(
-	bEnable := bEnable,
+	bEnable := (eMode = E_Mode.Auto AND eStatus = E_Status.Running),
 	stMotionReferenceGeneratorSettings := stMotionReferenceGeneratorSettings,
 	fClock_s := fbClock.fTime
 );
@@ -74,7 +80,7 @@ fPressurePistonSide_Pa := 0.0,
 fPressureRodSide_Pa := 0.0
 );
 
-IF bEnable THEN
+IF (eMode = E_Mode.Auto AND eStatus = E_Status.Running) THEN
 	fControlOutputNormalized := LIMIT(-1.0, (fbVelocityFeedForwardControl.fNormalizedOutput + fbClosedLoopPositionControl.fNormalizedOutput - fbPressureFeedback.fPressureFeedbackNormalized), 1.0);
 ELSE
 	fControlOutputNormalized := 0.0;
@@ -93,6 +99,9 @@ fPositionControllerErrorTest := fbClosedLoopPositionControl.fPositionError;]]></
       <LineId Id="31" Count="0" />
       <LineId Id="26" Count="0" />
       <LineId Id="24" Count="0" />
+      <LineId Id="182" Count="0" />
+      <LineId Id="184" Count="3" />
+      <LineId Id="183" Count="0" />
       <LineId Id="22" Count="0" />
       <LineId Id="9" Count="0" />
       <LineId Id="14" Count="0" />

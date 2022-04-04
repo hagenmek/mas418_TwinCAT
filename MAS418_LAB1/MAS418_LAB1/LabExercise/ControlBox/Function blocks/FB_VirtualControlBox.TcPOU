@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FB_VirtualControlBox" Id="{b5dbd877-8357-49f5-a98a-ac539e1b1d21}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_VirtualControlBox IMPLEMENTS I_ControlBox
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Lamps" Id="{0dd9b505-9eff-424c-bfde-77014d6169c5}">
+      <Declaration><![CDATA[METHOD Lamps
+VAR_INPUT
+	bEnable : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF bEnable THEN 
+	VirtualControlBox.bGreenLight := Work.bRunning;
+	VirtualControlBox.bRedLight := Work.bFault;
+END_IF
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ModeSelector" Id="{e15f3617-ec38-4567-aa4b-7e33c463052d}">
+      <Declaration><![CDATA[METHOD ModeSelector 
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+	eMode : E_Mode;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE eMode OF 
+	E_Mode.Off:	
+		IF VirtualControlBox.bOnSelector AND NOT(VirtualControlBox.bAutoSelector) THEN	
+			eMode := E_Mode.Manual;
+		END_IF
+		
+		IF VirtualControlBox.bOnSelector AND VirtualControlBox.bAutoSelector THEN	
+			eMode := E_Mode.Auto;
+		END_IF
+
+	E_Mode.Manual: 
+		IF NOT(VirtualControlBox.bOnSelector) THEN	
+			eMode := E_Mode.Off;
+		END_IF
+		
+		IF VirtualControlBox.bOnSelector AND VirtualControlBox.bAutoSelector THEN	
+			eMode := E_Mode.Auto;
+		END_IF
+	
+	E_Mode.Auto:
+		IF NOT(VirtualControlBox.bOnSelector) THEN	
+			eMode := E_Mode.Off;
+		END_IF
+		
+		IF VirtualControlBox.bOnSelector AND NOT(VirtualControlBox.bAutoSelector) THEN	
+			eMode := E_Mode.Manual;
+		END_IF	
+ELSE 	
+	eMode := E_Mode.Off;
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_VirtualControlBox">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_VirtualControlBox.Lamps">
+      <LineId Id="10" Count="0" />
+      <LineId Id="17" Count="1" />
+      <LineId Id="12" Count="1" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="8" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_VirtualControlBox.ModeSelector">
+      <LineId Id="76" Count="28" />
+      <LineId Id="23" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

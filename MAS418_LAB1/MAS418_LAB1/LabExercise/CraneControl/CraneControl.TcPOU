@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="CraneControl" Id="{c8d14843-0c4e-4243-a583-0726f2828bd5}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM CraneControl
 VAR
-	fbControlBox : FB_ControlBox; 
  	fbStatus : FB_Status;
 	fbManualControl : FB_ManualControl; 
 	bEnableManualControl : BOOL;
@@ -19,42 +18,50 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbControlBox(bRealControlBox := FALSE);
+      <ST><![CDATA[fbStatus(
+bFault := Work.bFault,
+bRunning := Work.bRunning,
+eStatus => Work.eStatus
+);
 
-IF VirtualControlBox.stVirtualInputs.bOnSelector AND NOT(VirtualControlBox.stVirtualInputs.bAutoSelector) THEN
+IF VirtualControlBox.bOnSelector AND NOT(VirtualControlBox.bAutoSelector) THEN
 	bEnableManualControl := TRUE;	
 ELSE
 	bEnableManualControl := FALSE;
 END_IF
 
 fbManualControl(
-	bEnable := bEnableManualControl,
+	eMode := Work.eMode,
+	eStatus := Work.eStatus,
 	stParam := Parameters.stParam, 
 	fVelocityFeedForwardControlOutput => fOutManualTest
 );
 
-IF VirtualControlBox.stVirtualInputs.bOnSelector AND VirtualControlBox.stVirtualInputs.bAutoSelector THEN
+IF VirtualControlBox.bOnSelector AND VirtualControlBox.bAutoSelector THEN
 	bEnableAutomaticControl := TRUE;	
 ELSE
 	bEnableAutomaticControl := FALSE;
 END_IF
 
 fbAutomaticControl(
-bEnable := bEnableAutomaticControl,
-bEnableVelocityFeedForwardControl := bEnableVFF,
-bEnableClosedLoopPositionControl := bEnablePFC,
-bEnableIntegralController := bEneableIC,
-bEnableActiveDamping := bEnableAD,
-bActivateMotion := VirtualControlBox.stVirtualInputs.bStartButton,
-bStopMotion := VirtualControlBox.stVirtualInputs.bStopButton,
-stMotionReferenceGeneratorSettings := Parameters.stParam.stMotionReferenceGeneratorSettings,
-stParam := Parameters.stParam,
-fControlOutputNormalized => fOutAutomaticTest
-);]]></ST>
+	eMode := Work.eMode,
+	eStatus := Work.eStatus,
+	bEnableVelocityFeedForwardControl := bEnableVFF,
+	bEnableClosedLoopPositionControl := bEnablePFC,
+	bEnableIntegralController := bEneableIC,
+	bEnableActiveDamping := bEnableAD,
+	stMotionReferenceGeneratorSettings := Parameters.stParam.stMotionReferenceGeneratorSettings,
+	stParam := Parameters.stParam,
+	fControlOutputNormalized => fOutAutomaticTest
+);
+
+]]></ST>
     </Implementation>
     <LineIds Name="CraneControl">
-      <LineId Id="99" Count="0" />
-      <LineId Id="82" Count="0" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="126" Count="2" />
+      <LineId Id="125" Count="0" />
+      <LineId Id="124" Count="0" />
       <LineId Id="26" Count="0" />
       <LineId Id="28" Count="0" />
       <LineId Id="30" Count="1" />
@@ -62,6 +69,7 @@ fControlOutputNormalized => fOutAutomaticTest
       <LineId Id="23" Count="0" />
       <LineId Id="7" Count="0" />
       <LineId Id="21" Count="0" />
+      <LineId Id="129" Count="0" />
       <LineId Id="32" Count="1" />
       <LineId Id="20" Count="0" />
       <LineId Id="46" Count="0" />
@@ -70,13 +78,13 @@ fControlOutputNormalized => fOutAutomaticTest
       <LineId Id="47" Count="0" />
       <LineId Id="38" Count="0" />
       <LineId Id="19" Count="0" />
-      <LineId Id="40" Count="0" />
+      <LineId Id="130" Count="1" />
       <LineId Id="68" Count="3" />
-      <LineId Id="41" Count="0" />
-      <LineId Id="56" Count="0" />
       <LineId Id="42" Count="1" />
       <LineId Id="77" Count="0" />
       <LineId Id="39" Count="0" />
+      <LineId Id="122" Count="0" />
+      <LineId Id="121" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

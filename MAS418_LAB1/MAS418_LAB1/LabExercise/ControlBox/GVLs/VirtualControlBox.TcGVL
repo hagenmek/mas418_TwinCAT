@@ -1,16 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <DUT Name="ST_VirtualInputs" Id="{a5c51340-01ea-4684-8f4b-e6322f90d16b}">
-    <Declaration><![CDATA[TYPE ST_VirtualInputs :
-STRUCT
+  <GVL Name="VirtualControlBox" Id="{0ca5c0a4-0d20-4ce5-afdb-fe579593098c}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
 	bOnSelector : BOOL;
 	bAutoSelector : BOOL;
 	bStartButton : BOOL;
 	bStopButton : BOOL;
-	fJoystickX : LREAL;
 	fJoystickY : LREAL;
-END_STRUCT
-END_TYPE
-]]></Declaration>
-  </DUT>
+	bGreenLight : BOOL;
+	bRedLight : BOOL;
+END_VAR]]></Declaration>
+  </GVL>
 </TcPlcObject>

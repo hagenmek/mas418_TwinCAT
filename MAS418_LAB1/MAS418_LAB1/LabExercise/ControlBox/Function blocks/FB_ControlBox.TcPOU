@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FB_ControlBox" Id="{23a5fbb3-746f-49da-9ce4-8057d9ad01ee}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ControlBox
+VAR_INPUT
+	bRealControlBox : BOOL;
+END_VAR
+VAR_OUTPUT
+	eMode : E_Mode;
+END_VAR
+VAR
+	fbVirtualControlBox : FB_VirtualControlBox;
+	fbRealControlBox : FB_RealControlBox;
+	fbSelectedControlBox : I_ControlBox := fbVirtualControlBox;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bRealControlBox THEN
+	fbSelectedControlBox := fbRealControlBox;
+ELSE
+	fbSelectedControlBox := fbVirtualControlBox;
+END_IF	
+	
+fbSelectedControlBox.ModeSelector(
+	eMode => eMode
+);
+
+VirtualControlBox.bGreenLight := Work.bRunning;
+VirtualControlBox.bRedLight := Work.bFault;
+
+Work.fJoystickY := VirtualControlBox.fJoystickY;
+
+
+
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_ControlBox">
+      <LineId Id="9" Count="0" />
+      <LineId Id="90" Count="0" />
+      <LineId Id="199" Count="1" />
+      <LineId Id="198" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="173" Count="0" />
+      <LineId Id="178" Count="0" />
+      <LineId Id="171" Count="0" />
+      <LineId Id="274" Count="0" />
+      <LineId Id="278" Count="0" />
+      <LineId Id="270" Count="0" />
+      <LineId Id="279" Count="0" />
+      <LineId Id="111" Count="0" />
+      <LineId Id="203" Count="1" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="149" Count="0" />
+      <LineId Id="148" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

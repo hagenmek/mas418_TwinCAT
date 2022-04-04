@@ -84,7 +84,7 @@
                     </o>
                     <o>
                       <v n="Id">743958181L</v>
-                      <v n="Value">"VirtualControlBox.stVirtualOutputs.bStartLight"</v>
+                      <v n="Value">"VirtualControlBox.bGreenLight"</v>
                     </o>
                   </l>
                 </o>
@@ -178,7 +178,7 @@
                     </o>
                     <o>
                       <v n="Id">743958181L</v>
-                      <v n="Value">"VirtualControlBox.stVirtualOutputs.bStopLight"</v>
+                      <v n="Value">"VirtualControlBox.bRedLight"</v>
                     </o>
                   </l>
                 </o>
@@ -276,7 +276,7 @@
                     </o>
                     <o>
                       <v n="Id">743958181L</v>
-                      <v n="Value">"VirtualControlBox.stVirtualInputs.bStopButton"</v>
+                      <v n="Value">"VirtualControlBox.bStopButton"</v>
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
@@ -378,7 +378,7 @@
                     </o>
                     <o>
                       <v n="Id">743958181L</v>
-                      <v n="Value">"VirtualControlBox.stVirtualInputs.bStartButton"</v>
+                      <v n="Value">"VirtualControlBox.bStartButton"</v>
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
@@ -484,7 +484,7 @@
                     </o>
                     <o>
                       <v n="Id">743958181L</v>
-                      <v n="Value">"VirtualControlBox.stVirtualInputs.bOnSelector"</v>
+                      <v n="Value">"VirtualControlBox.bOnSelector"</v>
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
@@ -848,7 +848,7 @@
                     </o>
                     <o>
                       <v n="Id">743958181L</v>
-                      <v n="Value">"VirtualControlBox.stVirtualInputs.bAutoSelector"</v>
+                      <v n="Value">"VirtualControlBox.bAutoSelector"</v>
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
@@ -1244,7 +1244,7 @@
                     </o>
                     <o>
                       <v n="Id">397264524L</v>
-                      <v n="Value">"VirtualControlBox.stVirtualInputs.fJoystickY"</v>
+                      <v n="Value">"VirtualControlBox.fJoystickY"</v>
                     </o>
                     <o>
                       <v n="Id">681815230L</v>
@@ -2050,7 +2050,7 @@
                     </o>
                     <o>
                       <v n="Id">2477733581L</v>
-                      <v n="Value">"VirtualControlBox.stVirtualInputs.fJoystickY"</v>
+                      <v n="Value">"VirtualControlBox.fJoystickY"</v>
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
@@ -2488,7 +2488,7 @@
                     </o>
                     <o>
                       <v n="Id">2477733581L</v>
-                      <v n="Value">"VirtualControlBox.stVirtualOutputs.eMode"</v>
+                      <v n="Value">"Work.eMode"</v>
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
@@ -2649,7 +2649,7 @@
                     </o>
                     <o>
                       <v n="Id">2477733581L</v>
-                      <v n="Value">"VirtualControlBox.stVirtualOutputs.eStatus"</v>
+                      <v n="Value">"Work.eStatus"</v>
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
@@ -2781,10 +2781,10 @@
               <d n="FbMethods" t="CaseInsensitiveHashtable" ckt="String" cvt="Guid">
                 <v>FB_Init</v>
                 <v>495dd859-5cb5-41fd-87ba-5aa20492588d</v>
-                <v>FB_Exit</v>
-                <v>6ef9acfa-ca1a-4f33-bcdd-2bfae3ba143f</v>
                 <v>FB_Reinit</v>
                 <v>397b7f8d-b582-4861-bd80-24fe28797a9c</v>
+                <v>FB_Exit</v>
+                <v>6ef9acfa-ca1a-4f33-bcdd-2bfae3ba143f</v>
               </d>
               <v n="FbName">"NotImportant"</v>
               <v n="FbGuid">{11931bac-2df7-42a6-bac2-387d1ac27e7d}</v>

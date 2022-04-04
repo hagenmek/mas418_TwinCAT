@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="ControlBox" Id="{f099b577-7c17-4f98-8e29-157282967496}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM ControlBox
+VAR
+	fbControlBox : FB_ControlBox; 
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbControlBox(
+bRealControlBox := FALSE,
+eMode => Work.eMode,
+);
+]]></ST>
+    </Implementation>
+    <LineIds Name="ControlBox">
+      <LineId Id="48" Count="1" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
