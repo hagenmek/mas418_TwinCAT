@@ -3,7 +3,7 @@
   <POU Name="FB_Status" Id="{26df518e-7453-4e6d-ac16-889885b93dbd}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Status
 VAR_INPUT
-	bPowerOn : BOOL;
+	bOff : BOOL;
 	bFault : BOOL;
 	bStart : BOOL;
 	bStop : BOOL;
@@ -24,14 +24,14 @@ END_VAR
 			eStatus := E_Status.Fault;
 		END_IF
 		
-		IF bPowerOn THEN	
+		IF bOff THEN	
 			eStatus := E_Status.Ready;
 		ELSE
-			eStatus := E_Status.PowerOff;
+			eStatus := E_Status.Off;
 		END_IF
 		
-	E_Status.PowerOff:	
-		IF bPowerOn THEN	
+	E_Status.Off:	
+		IF bOff THEN	
 			eStatus := E_Status.Checking;
 		END_IF
 
@@ -41,11 +41,11 @@ END_VAR
 		END_IF
 	
 	E_Status.Ready:
-		IF bStart AND bPowerOn AND NOT(bFault) THEN
+		IF bStart AND bOff AND NOT(bFault) THEN
 			eStatus := E_Status.Starting;
 		END_IF	
 		
-		IF  NOT(bPowerOn) OR bFault THEN
+		IF  NOT(bOff) OR bFault THEN
 			eStatus := E_Status.Checking;
 		END_IF	
 
@@ -62,7 +62,7 @@ END_VAR
 			eStatus := E_Status.Stopping;
 		END_IF
 		
-		IF NOT(bRunning) OR NOT(bPowerOn) OR bFault THEN
+		IF NOT(bRunning) OR NOT(bOff) OR bFault THEN
 			eStatus := E_Status.Checking;
 		END_IF
 	
@@ -71,7 +71,7 @@ END_VAR
 			eStatus := E_Status.Checking;
 		END_IF
 	
-		IF bPowerOn OR bFault THEN
+		IF bOff OR bFault THEN
 		eStatus := E_Status.Checking;
 		END_IF	
 	

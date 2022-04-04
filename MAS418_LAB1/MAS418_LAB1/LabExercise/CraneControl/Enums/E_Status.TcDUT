@@ -5,7 +5,7 @@
 {attribute 'strict'}
 TYPE E_Status :
 (
-	PowerOff,
+	Off := 0,
 	Fault,
 	Ready,
 	Starting,

@@ -20,29 +20,69 @@
     <Compile Include="CraneControl\CraneControl.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CraneControl\Function blocks\FB_Clock.TcPOU">
+    <Compile Include="CraneControl\Enums\E_Mode.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CraneControl\Function blocks\FB_MotionReferenceGenerator_limit.TcPOU">
+    <Compile Include="CraneControl\Enums\E_Status.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CraneControl\Function blocks\FB_AutomaticControl.TcPOU">
+    <Compile Include="CraneControl\Function blocks\Main blocks\FB_AutomaticControl.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CraneControl\Function blocks\FB_Joystick.TcPOU">
+    <Compile Include="CraneControl\Function blocks\Main blocks\FB_ManualControl.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CraneControl\Function blocks\FB_ManualControl.TcPOU">
+    <Compile Include="CraneControl\Function blocks\Sub blocks\FB_ActiveDamping.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CraneControl\Function blocks\FB_OpenLoopControl.TcPOU">
+    <Compile Include="CraneControl\Function blocks\Sub blocks\FB_Clock.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Function blocks\Sub blocks\FB_ClosedLoopControl.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Function blocks\Sub blocks\FB_ControlBox.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Function blocks\Sub blocks\FB_Joystick.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Function blocks\Sub blocks\FB_MotionReferenceGenerator_limit.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Function blocks\Sub blocks\FB_OpenLoopControl.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Function blocks\Sub blocks\FB_RealControlBox.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Function blocks\Sub blocks\FB_ResetIntegralController.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Function blocks\Sub blocks\FB_Status.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Function blocks\Sub blocks\FB_VirtualControlBox.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CraneControl\GVLs\Parameters.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
+    <Compile Include="CraneControl\GVLs\Work.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="CraneControl\Struct\ST_ActiveDamping.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Struct\ST_ClosedLoopControl.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CraneControl\Struct\ST_MotionReferenceGeneratorSettings.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Struct\ST_OpenLoopControl.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CraneControl\Struct\ST_Parameters.TcDUT">
@@ -61,12 +101,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\ST_CraneKinematics.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\E_Mode.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\E_Status.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\ST_EndStops.TcDUT">
@@ -96,7 +130,7 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="Interfaces\I_Mode.TcIO">
+    <Compile Include="Interfaces\I_ControlBox.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PlcTask.TcTTO">
@@ -108,10 +142,10 @@
     <Compile Include="POUs\Function blocks\FB_ModeControlBox.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Function blocks\FB_ModeVisualization.TcPOU">
+    <Compile Include="POUs\Function blocks\FB_ModeSelector.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Function blocks\FB_ModeSelector.TcPOU">
+    <Compile Include="POUs\Function blocks\FB_ModeVirtualControlBox.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Function blocks\FB_PositionSimulator.TcPOU">
@@ -121,9 +155,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Function blocks\FB_Softstop.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Function blocks\FB_Status.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Functions\F_BarToEng.TcPOU">
@@ -171,12 +202,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CraneControl\Function blocks" />
+    <Folder Include="CraneControl\Function blocks\Main blocks" />
+    <Folder Include="CraneControl\Function blocks\Sub blocks" />
     <Folder Include="CraneControl\GVLs" />
+    <Folder Include="CraneControl\Enums" />
     <Folder Include="CraneControl\Struct" />
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
-    <Folder Include="Interfaces" />
     <Folder Include="CraneControl" />
+    <Folder Include="Interfaces" />
     <Folder Include="POUs\Functions" />
     <Folder Include="POUs\Function blocks" />
     <Folder Include="VirtualControlBox" />

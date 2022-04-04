@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
-  <POU Name="FB_ModeVisualization" Id="{aba72860-427f-470a-b1b3-598fcfedf8ac}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_ModeVisualization IMPLEMENTS I_Mode
+  <POU Name="FB_ModeVirtualControlBox" Id="{aba72860-427f-470a-b1b3-598fcfedf8ac}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_ModeVirtualControlBox IMPLEMENTS I_Mode
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
@@ -20,8 +20,8 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF bEnable THEN
-HMI.fCylinderPosition := CraneSimulation.fPositionAutoMode;
-HMI.eMode := E_Mode.Auto; 
+HMI.fCylinderPosition := VirtualControlBox.stVirtualInputs.fJoystickY;
+VirtualControlBox.VirtualControlBox.stVirtualOutputs.eMode := E_Mode.Auto; 
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -33,8 +33,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF bEnable THEN
-HMI.fCylinderPosition := HMI.fManualCylinderPositionReference;
-HMI.eMode := E_Mode.Manual; 
+VirtualControlBox.VirtualControlBox.stVirtualOutputs.eMode := E_Mode.Manual; 
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -46,27 +45,27 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF bEnable THEN
-HMI.fCylinderPosition := 0;
-HMI.eMode := E_Mode.Off; 
+VirtualControlBox.VirtualControlBox.stVirtualOutputs.eMode := E_Mode.Off; 
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="FB_ModeVisualization">
+    <LineIds Name="FB_ModeVirtualControlBox">
       <LineId Id="9" Count="0" />
     </LineIds>
-    <LineIds Name="FB_ModeVisualization.Auto">
+    <LineIds Name="FB_ModeVirtualControlBox.Auto">
       <LineId Id="9" Count="0" />
-      <LineId Id="7" Count="1" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="8" Count="0" />
       <LineId Id="10" Count="0" />
     </LineIds>
-    <LineIds Name="FB_ModeVisualization.Manual">
+    <LineIds Name="FB_ModeVirtualControlBox.Manual">
       <LineId Id="9" Count="0" />
-      <LineId Id="7" Count="1" />
+      <LineId Id="8" Count="0" />
       <LineId Id="10" Count="0" />
     </LineIds>
-    <LineIds Name="FB_ModeVisualization.Off">
+    <LineIds Name="FB_ModeVirtualControlBox.Off">
       <LineId Id="9" Count="0" />
-      <LineId Id="7" Count="1" />
+      <LineId Id="8" Count="0" />
       <LineId Id="10" Count="0" />
     </LineIds>
   </POU>

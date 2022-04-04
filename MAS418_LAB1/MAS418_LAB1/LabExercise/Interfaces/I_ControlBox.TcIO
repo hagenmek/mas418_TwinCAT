@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <Itf Name="I_ControlBox" Id="{5c741758-32b4-4a5c-b560-a63e85cb966e}">
+    <Declaration><![CDATA[INTERFACE I_ControlBox
+]]></Declaration>
+    <Method Name="ModeSelector" Id="{602723b8-14f8-4c4d-9a3a-6c04bf063cdf}">
+      <Declaration><![CDATA[METHOD ModeSelector : BOOL
+VAR_INPUT
+	bOff : BOOL;
+	bManual : BOOL;
+	bAuto : BOOL;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

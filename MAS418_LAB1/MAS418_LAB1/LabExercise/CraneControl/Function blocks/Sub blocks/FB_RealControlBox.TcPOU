@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="FB_RealControlBox" Id="{37de488e-61db-47f0-ae9a-a602c45471dd}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_RealControlBox IMPLEMENTS I_ControlBox
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="ModeSelector" Id="{c1118847-ecf0-4ef4-a589-62e6a17557ee}">
+      <Declaration><![CDATA[METHOD ModeSelector : BOOL
+VAR_INPUT
+	bOff	: BOOL;
+	bManual	: BOOL;
+	bAuto	: BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF bOff THEN
+	Work.eMode := E_Mode.Off;
+END_IF
+
+IF bManual THEN
+	Work.eMode := E_Mode.Manual;
+	Work.fJoystickY := Inputs.fJoyY;
+END_IF
+
+IF bAuto THEN
+	Work.eMode := E_Mode.Auto;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_RealControlBox">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RealControlBox.ModeSelector">
+      <LineId Id="16" Count="10" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

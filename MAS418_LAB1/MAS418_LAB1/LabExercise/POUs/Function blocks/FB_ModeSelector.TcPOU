@@ -8,7 +8,7 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	fbModeVisualization : FB_ModeVisualization;
+	fbModeVisualization : FB_ModeVirtualControlBox;
 	fbModeControlBox : FB_ModeControlBox;
 	fbMode : I_Mode := fbModeVisualization;
 END_VAR

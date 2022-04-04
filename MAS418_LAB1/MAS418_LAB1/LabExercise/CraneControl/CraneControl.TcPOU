@@ -1,20 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="CraneControl" Id="{c8d14843-0c4e-4243-a583-0726f2828bd5}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM CraneControl
 VAR
+	fbControlBox : FB_ControlBox; 
+ 	fbStatus : FB_Status;
 	fbManualControl : FB_ManualControl; 
-	fOutManualTest : LREAL; 
 	bEnableManualControl : BOOL;
-	
 	fbAutomaticControl : FB_AutomaticControl;
 	bEnableAutomaticControl : BOOL; 
-	fOutAutoTestPos : LREAL; 
-	fOutAutoTestVel : LREAL; 
+	bEnableVFF : BOOL;
+	bEnablePFC : BOOL;
+	bEneableIC : BOOL;
+	bEnableAD : BOOL;
+	
+	fOutManualTest : LREAL; 
+	fOutAutomaticTest : LREAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF VirtualControlBox.stVirtualInputs.bOnSelector AND NOT(VirtualControlBox.stVirtualInputs.bAutoSelector) THEN
+      <ST><![CDATA[fbControlBox(bRealControlBox := FALSE);
+
+IF VirtualControlBox.stVirtualInputs.bOnSelector AND NOT(VirtualControlBox.stVirtualInputs.bAutoSelector) THEN
 	bEnableManualControl := TRUE;	
 ELSE
 	bEnableManualControl := FALSE;
@@ -34,15 +41,20 @@ END_IF
 
 fbAutomaticControl(
 bEnable := bEnableAutomaticControl,
+bEnableVelocityFeedForwardControl := bEnableVFF,
+bEnableClosedLoopPositionControl := bEnablePFC,
+bEnableIntegralController := bEneableIC,
+bEnableActiveDamping := bEnableAD,
 bActivateMotion := VirtualControlBox.stVirtualInputs.bStartButton,
 bStopMotion := VirtualControlBox.stVirtualInputs.bStopButton,
 stMotionReferenceGeneratorSettings := Parameters.stParam.stMotionReferenceGeneratorSettings,
 stParam := Parameters.stParam,
-fOutAutoTestPos => fOutAutoTestPos,
-fOutAutoTestVel => fOutAutoTestVel
+fControlOutputNormalized => fOutAutomaticTest
 );]]></ST>
     </Implementation>
     <LineIds Name="CraneControl">
+      <LineId Id="99" Count="0" />
+      <LineId Id="82" Count="0" />
       <LineId Id="26" Count="0" />
       <LineId Id="28" Count="0" />
       <LineId Id="30" Count="1" />
@@ -58,9 +70,12 @@ fOutAutoTestVel => fOutAutoTestVel
       <LineId Id="47" Count="0" />
       <LineId Id="38" Count="0" />
       <LineId Id="19" Count="0" />
-      <LineId Id="40" Count="1" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="68" Count="3" />
+      <LineId Id="41" Count="0" />
       <LineId Id="56" Count="0" />
-      <LineId Id="42" Count="3" />
+      <LineId Id="42" Count="1" />
+      <LineId Id="77" Count="0" />
       <LineId Id="39" Count="0" />
     </LineIds>
   </POU>
