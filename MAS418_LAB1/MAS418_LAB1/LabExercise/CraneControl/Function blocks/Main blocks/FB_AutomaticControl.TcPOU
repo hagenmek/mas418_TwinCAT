@@ -11,6 +11,7 @@ VAR_INPUT
 	stParam 							: ST_Parameters; 
 END_VAR
 VAR_OUTPUT
+	fTime : LREAL;
 	fControlOutputNormalized : LREAL;
 END_VAR
 VAR
@@ -19,7 +20,6 @@ VAR
 	fbVelocityFeedForwardControl 	: FB_OpenLoopControl;
 	fbResetIntegralController 		: FB_ResetIntegralController; 
 	fbClosedLoopPositionControl 	: FB_ClosedLoopControl;
-	fbPressureFeedback 				: FB_ActiveDamping;
 	
 	fOutAutoTestPos 				: LREAL; 
 	fOutAutoTestVel 				: LREAL; 
@@ -35,12 +35,6 @@ END_VAR
 	bStop := bStopMotion,
 	fCycleTime := stParam.fCyclicTime
 );
-
-IF fbClock.fTime > 0 THEN
-	G_Work.bRunning := TRUE;
-ELSE
-	G_Work.bRunning := FALSE;
-END_IF
 
 fbMotionReferenceGenerator(
 	bEnable := (eMode = E_Mode.Auto AND eStatus = E_Status.Running),
@@ -68,17 +62,8 @@ fbClosedLoopPositionControl(
 	fInput_m := fbMotionReferenceGenerator.fPositionReference_m,
 );
 
-// To Do - Add pressure inputs from Simulator/RealInputs
-fbPressureFeedback(
-	bEnable := stAutomaticControlSettings.bEnableActiveDamping,
-	stParam := stParam,
-	fTime := fbClock.fTime,
-	fPressurePistonSide_Pa := 0.0,
-	fPressureRodSide_Pa := 0.0
-);
-
 IF (eMode = E_Mode.Auto AND eStatus = E_Status.Running) THEN
-	fControlOutputNormalized := LIMIT(-1.0, (fbVelocityFeedForwardControl.fNormalizedOutput + fbClosedLoopPositionControl.fNormalizedOutput - fbPressureFeedback.fPressureFeedbackNormalized), 1.0);
+	fControlOutputNormalized := LIMIT(-1.0, (fbVelocityFeedForwardControl.fNormalizedOutput + fbClosedLoopPositionControl.fNormalizedOutput), 1.0);
 ELSE
 	fControlOutputNormalized := 0.0;
 END_IF
@@ -96,7 +81,6 @@ fPositionControllerErrorTest := fbClosedLoopPositionControl.fPositionError;]]></
       <LineId Id="31" Count="0" />
       <LineId Id="26" Count="0" />
       <LineId Id="24" Count="0" />
-      <LineId Id="219" Count="5" />
       <LineId Id="22" Count="0" />
       <LineId Id="9" Count="0" />
       <LineId Id="14" Count="0" />
@@ -120,10 +104,6 @@ fPositionControllerErrorTest := fbClosedLoopPositionControl.fPositionError;]]></
       <LineId Id="94" Count="0" />
       <LineId Id="98" Count="0" />
       <LineId Id="71" Count="0" />
-      <LineId Id="121" Count="0" />
-      <LineId Id="106" Count="0" />
-      <LineId Id="115" Count="5" />
-      <LineId Id="108" Count="0" />
       <LineId Id="139" Count="0" />
       <LineId Id="138" Count="0" />
       <LineId Id="141" Count="0" />

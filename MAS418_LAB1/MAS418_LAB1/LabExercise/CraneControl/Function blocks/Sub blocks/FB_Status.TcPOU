@@ -3,17 +3,26 @@
   <POU Name="FB_Status" Id="{26df518e-7453-4e6d-ac16-889885b93dbd}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Status
 VAR_INPUT
-	bFault 		: BOOL;
-	bRunning 	: BOOL;
+	eMode 	: E_Mode;
+	fTime	: LREAL;
+	bFault 	: BOOL;
 END_VAR
 VAR_OUTPUT
 	eStatus : E_Status := E_Status.Checking;
 END_VAR
 VAR
-END_VAR
-]]></Declaration>
+	bRunning : BOOL;
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[CASE eStatus OF 
+      <ST><![CDATA[IF eMode = E_Mode.Manual AND (eStatus = E_Status.Starting OR eStatus = E_Status.Running)THEN
+	bRunning := TRUE;
+ELSIF eMode = E_Mode.Auto AND (fTime > 0) THEN
+ 	bRunning := TRUE;
+ELSE
+	bRunning := FALSE;
+END_IF
+
+CASE eStatus OF 
 	E_Status.Checking:
 		IF bFault THEN
 			eStatus := E_Status.Fault;
@@ -78,6 +87,10 @@ END_CASE
 ]]></ST>
     </Implementation>
     <LineIds Name="FB_Status">
+      <LineId Id="237" Count="1" />
+      <LineId Id="241" Count="3" />
+      <LineId Id="239" Count="0" />
+      <LineId Id="233" Count="0" />
       <LineId Id="149" Count="34" />
       <LineId Id="215" Count="1" />
       <LineId Id="213" Count="0" />

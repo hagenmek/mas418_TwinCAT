@@ -7,7 +7,6 @@ VAR_GLOBAL
 	eStatus : E_Status;
 	fJoystickY : LREAL;
 	bFault : BOOL;
-	bRunning : BOOL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

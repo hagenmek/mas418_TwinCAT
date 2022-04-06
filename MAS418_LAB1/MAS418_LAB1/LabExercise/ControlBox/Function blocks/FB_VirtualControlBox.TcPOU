@@ -20,8 +20,17 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF bEnable THEN 
-	G_VirtualControlBox.bGreenLight := G_Work.bRunning;
-	G_VirtualControlBox.bRedLight := G_Work.bFault;
+	IF G_Work.eStatus = E_Status.Running THEN
+		G_VirtualControlBox.bGreenLight :=  TRUE;
+	ELSE
+		G_VirtualControlBox.bGreenLight :=  FALSE;
+	END_IF
+	
+	IF G_Work.eStatus = E_Status.Fault THEN
+		G_VirtualControlBox.bRedLight :=  TRUE;
+	ELSE
+		G_VirtualControlBox.bRedLight :=  FALSE;
+	END_IF
 END_IF
 
 
@@ -74,7 +83,12 @@ END_CASE]]></ST>
     </LineIds>
     <LineIds Name="FB_VirtualControlBox.Lamps">
       <LineId Id="10" Count="0" />
-      <LineId Id="17" Count="1" />
+      <LineId Id="23" Count="1" />
+      <LineId Id="26" Count="1" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="31" Count="3" />
+      <LineId Id="29" Count="0" />
       <LineId Id="12" Count="1" />
       <LineId Id="5" Count="0" />
       <LineId Id="8" Count="0" />
