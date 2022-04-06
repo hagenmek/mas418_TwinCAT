@@ -3,9 +3,9 @@
   <POU Name="FB_Clock" Id="{f13c44f0-374f-4488-b500-abcfceb96f9b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Clock
 VAR_INPUT
-	bStart : BOOL;
-	bStop : BOOL;
-	fCycleTime : LREAL;
+	bStart 		: BOOL;
+	bStop 		: BOOL;
+	fCycleTime  : LREAL;
 END_VAR
 VAR_OUTPUT
 	fTime : LREAL;

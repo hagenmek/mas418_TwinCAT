@@ -1,35 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="FB_AutomaticControl" Id="{b543be1d-46f1-4ea5-ae35-9d7ea7728984}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_AutomaticControl
 VAR_INPUT
-	eMode : E_Mode;
-	eStatus : E_Status;
-	bEnableVelocityFeedForwardControl : BOOL;
-	bEnableClosedLoopPositionControl : BOOL;
-	bEnableIntegralController : BOOL;
-	bEnableActiveDamping : BOOL;
-	bStopMotion : BOOL;
-	stMotionReferenceGeneratorSettings : ST_MotionReferenceGeneratorSettings;
-	stParam : ST_Parameters; 
+	eMode 								: E_Mode;
+	eStatus 							: E_Status;
+	bStopMotion 						: BOOL;
+	stMotionReferenceGeneratorSettings  : ST_MotionReferenceGeneratorSettings;
+	stAutomaticControlSettings 			: ST_AutomaticControlSettings;
+	stParam 							: ST_Parameters; 
 END_VAR
 VAR_OUTPUT
 	fControlOutputNormalized : LREAL;
 END_VAR
 VAR
 	fbClock : FB_Clock;	
-	fbMotionReferenceGenerator : FB_MotionReferenceGenerator_limit;	
-	fbVelocityFeedForwardControl : FB_OpenLoopControl;
-	fbResetIntegralController : FB_ResetIntegralController; 
-	fbClosedLoopPositionControl : FB_ClosedLoopControl;
-	fbPressureFeedback : FB_ActiveDamping;
+	fbMotionReferenceGenerator 		: FB_MotionReferenceGenerator_limit;	
+	fbVelocityFeedForwardControl 	: FB_OpenLoopControl;
+	fbResetIntegralController 		: FB_ResetIntegralController; 
+	fbClosedLoopPositionControl 	: FB_ClosedLoopControl;
+	fbPressureFeedback 				: FB_ActiveDamping;
 	
-	fOutAutoTestPos : LREAL; 
-	fOutAutoTestVel : LREAL; 
-	fFeedForwardTest : LREAL; 
-	fIntegralResetTest : BOOL; 
-	fPositionControllerTest : LREAL; 
-	fPositionControllerErrorTest : LREAL; 
+	fOutAutoTestPos 				: LREAL; 
+	fOutAutoTestVel 				: LREAL; 
+	fFeedForwardTest 				: LREAL; 
+	fIntegralResetTest 				: BOOL; 
+	fPositionControllerTest 		: LREAL; 
+	fPositionControllerErrorTest 	: LREAL; 
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -40,9 +37,9 @@ END_VAR
 );
 
 IF fbClock.fTime > 0 THEN
-	Work.bRunning := TRUE;
+	G_Work.bRunning := TRUE;
 ELSE
-	Work.bRunning := FALSE;
+	G_Work.bRunning := FALSE;
 END_IF
 
 fbMotionReferenceGenerator(
@@ -52,32 +49,32 @@ fbMotionReferenceGenerator(
 );
 
 fbVelocityFeedForwardControl(
-bEnable := bEnableVelocityFeedForwardControl,
-stParam := stParam,
-fInput_ms := fbMotionReferenceGenerator.fVelocityReference_ms
+	bEnable := stAutomaticControlSettings.bEnableVelocityFeedForwardControl,
+	stParam := stParam,
+	fInput_ms := fbMotionReferenceGenerator.fVelocityReference_ms
 );
 
 fbResetIntegralController(
-stParam := stParam,
-fPositionError_m := fbClosedLoopPositionControl.fPositionError,
-fVelocityReference_ms := fbMotionReferenceGenerator.fVelocityReference_ms
+	stParam := stParam,
+	fPositionError_m := fbClosedLoopPositionControl.fPositionError,
+	fVelocityReference_ms := fbMotionReferenceGenerator.fVelocityReference_ms
 );
 
 fbClosedLoopPositionControl(
-bEnable := bEnableClosedLoopPositionControl,
-stParam := stParam,
-bActivateIntegralController := bEnableIntegralController,
-bIntegralControllReset := fbResetIntegralController.bReset,
-fInput_m := fbMotionReferenceGenerator.fPositionReference_m,
+	bEnable := stAutomaticControlSettings.bEnableClosedLoopPositionControl,
+	stParam := stParam,
+	bActivateIntegralController := stAutomaticControlSettings.bEnableIntegralController,
+	bIntegralControllReset := fbResetIntegralController.bReset,
+	fInput_m := fbMotionReferenceGenerator.fPositionReference_m,
 );
 
 // To Do - Add pressure inputs from Simulator/RealInputs
 fbPressureFeedback(
-bEnable := bEnableActiveDamping,
-stParam := stParam,
-fTime := fbClock.fTime,
-fPressurePistonSide_Pa := 0.0,
-fPressureRodSide_Pa := 0.0
+	bEnable := stAutomaticControlSettings.bEnableActiveDamping,
+	stParam := stParam,
+	fTime := fbClock.fTime,
+	fPressurePistonSide_Pa := 0.0,
+	fPressureRodSide_Pa := 0.0
 );
 
 IF (eMode = E_Mode.Auto AND eStatus = E_Status.Running) THEN
@@ -99,9 +96,7 @@ fPositionControllerErrorTest := fbClosedLoopPositionControl.fPositionError;]]></
       <LineId Id="31" Count="0" />
       <LineId Id="26" Count="0" />
       <LineId Id="24" Count="0" />
-      <LineId Id="182" Count="0" />
-      <LineId Id="184" Count="3" />
-      <LineId Id="183" Count="0" />
+      <LineId Id="219" Count="5" />
       <LineId Id="22" Count="0" />
       <LineId Id="9" Count="0" />
       <LineId Id="14" Count="0" />

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="FB_Status" Id="{26df518e-7453-4e6d-ac16-889885b93dbd}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Status
 VAR_INPUT
-	bFault : BOOL;
-	bRunning : BOOL;
+	bFault 		: BOOL;
+	bRunning 	: BOOL;
 END_VAR
 VAR_OUTPUT
 	eStatus : E_Status := E_Status.Checking;
@@ -19,16 +19,16 @@ END_VAR
 			eStatus := E_Status.Fault;
 		END_IF
 		
-		IF VirtualControlBox.bOnSelector AND NOT(bFault)THEN	
+		IF G_VirtualControlBox.bOnSelector AND NOT(bFault)THEN	
 			eStatus := E_Status.Ready;
 		END_IF
 		
-		IF NOT(VirtualControlBox.bOnSelector) THEN	
+		IF NOT(G_VirtualControlBox.bOnSelector) THEN	
 			eStatus := E_Status.Off;
 		END_IF
 		
 	E_Status.Off:	
-		IF VirtualControlBox.bOnSelector THEN	
+		IF G_VirtualControlBox.bOnSelector THEN	
 			eStatus := E_Status.Checking;
 		END_IF
 
@@ -38,11 +38,11 @@ END_VAR
 		END_IF
 	
 	E_Status.Ready:
-		IF VirtualControlBox.bStartButton AND VirtualControlBox.bOnSelector AND NOT(bFault) THEN
+		IF G_VirtualControlBox.bStartButton AND G_VirtualControlBox.bOnSelector AND NOT(bFault) THEN
 			eStatus := E_Status.Starting;
 		END_IF	
 		
-		IF  NOT(VirtualControlBox.bOnSelector) OR bFault THEN
+		IF  NOT(G_VirtualControlBox.bOnSelector) OR bFault THEN
 			eStatus := E_Status.Checking;
 		END_IF	
 
@@ -55,11 +55,11 @@ END_VAR
 	
 	E_Status.Running:
 	
-		IF VirtualControlBox.bStopButton THEN
+		IF G_VirtualControlBox.bStopButton THEN
 			eStatus := E_Status.Stopping;
 		END_IF
 		
-		IF NOT(bRunning) OR NOT(VirtualControlBox.bOnSelector) OR bFault THEN
+		IF NOT(bRunning) OR NOT(G_VirtualControlBox.bOnSelector) OR bFault THEN
 			eStatus := E_Status.Checking;
 		END_IF
 	
@@ -68,7 +68,7 @@ END_VAR
 			eStatus := E_Status.Checking;
 		END_IF
 	
-		IF NOT(VirtualControlBox.bOnSelector) OR bFault THEN
+		IF NOT(G_VirtualControlBox.bOnSelector) OR bFault THEN
 		eStatus := E_Status.Checking;
 		END_IF	
 	

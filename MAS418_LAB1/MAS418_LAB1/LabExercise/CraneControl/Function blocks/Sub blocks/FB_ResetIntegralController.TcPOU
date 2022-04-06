@@ -3,9 +3,9 @@
   <POU Name="FB_ResetIntegralController" Id="{0d649c07-5b1e-4f69-9d0d-d4c49aa2a0af}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_ResetIntegralController
 VAR_INPUT
-	stParam : ST_Parameters;
-	fVelocityReference_ms: LREAL;
-	fPositionError_m: LREAL;
+	stParam 				: ST_Parameters;
+	fVelocityReference_ms	: LREAL;
+	fPositionError_m		: LREAL;
 END_VAR
 VAR_OUTPUT
 	bReset: BOOL;
@@ -16,7 +16,7 @@ END_VAR
     <Implementation>
       <ST><![CDATA[IF ABS(fVelocityReference_ms) > 0.0 THEN 
     bReset := FALSE;
-ELSIF ABS(fPositionError_m) > stParam.stClosedLoopControl.fMaxPositionError THEN 
+ELSIF ABS(fPositionError_m) > stParam.stClosedLoopControlSettings.fMaxPositionError THEN 
     bReset := FALSE;
 ELSE 
     bReset := TRUE;

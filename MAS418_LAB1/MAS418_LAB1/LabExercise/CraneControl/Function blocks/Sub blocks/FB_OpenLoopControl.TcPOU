@@ -3,9 +3,9 @@
   <POU Name="FB_OpenLoopControl" Id="{f423ba7b-c166-485b-8b1a-777fcd38eb4f}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_OpenLoopControl
 VAR_INPUT
-	bEnable: BOOL;
-	fInput_ms: LREAL;
-	stParam : ST_Parameters;
+	bEnable		: BOOL;
+	fInput_ms	: LREAL;
+	stParam 	: ST_Parameters;
 END_VAR
 VAR_OUTPUT
 	fNormalizedOutput: LREAL;
@@ -17,13 +17,13 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF fInput_ms >= 0.0 THEN 
-    fFlowReference_m3s := stparam.stOpenLoopControl.fBoreArea * fInput_ms;
+    fFlowReference_m3s := stparam.stOpenLoopControlSettings.fBoreArea * fInput_ms;
 ELSE 
-    fFlowReference_m3s := fInput_ms * stparam.stOpenLoopControl.fAnnulusArea;
+    fFlowReference_m3s := fInput_ms * stparam.stOpenLoopControlSettings.fAnnulusArea;
 END_IF;
 
 IF bEnable THEN 
-    fNormalizedOutput := (fM3sToLmin * fFlowReference_m3s) / stParam.stOpenLoopControl.fMaxFlowCapacity;
+    fNormalizedOutput := (fM3sToLmin * fFlowReference_m3s) / stParam.stOpenLoopControlSettings.fMaxFlowCapacity;
 ELSE 
     fNormalizedOutput := 0.0;
 END_IF;

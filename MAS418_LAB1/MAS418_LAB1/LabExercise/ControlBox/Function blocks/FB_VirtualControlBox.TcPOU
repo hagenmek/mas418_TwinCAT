@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="FB_VirtualControlBox" Id="{b5dbd877-8357-49f5-a98a-ac539e1b1d21}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_VirtualControlBox IMPLEMENTS I_ControlBox
 VAR_INPUT
@@ -20,8 +20,8 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF bEnable THEN 
-	VirtualControlBox.bGreenLight := Work.bRunning;
-	VirtualControlBox.bRedLight := Work.bFault;
+	G_VirtualControlBox.bGreenLight := G_Work.bRunning;
+	G_VirtualControlBox.bRedLight := G_Work.bFault;
 END_IF
 
 
@@ -39,29 +39,29 @@ END_VAR
       <Implementation>
         <ST><![CDATA[CASE eMode OF 
 	E_Mode.Off:	
-		IF VirtualControlBox.bOnSelector AND NOT(VirtualControlBox.bAutoSelector) THEN	
+		IF G_VirtualControlBox.bOnSelector AND NOT(G_VirtualControlBox.bAutoSelector) THEN	
 			eMode := E_Mode.Manual;
 		END_IF
 		
-		IF VirtualControlBox.bOnSelector AND VirtualControlBox.bAutoSelector THEN	
+		IF G_VirtualControlBox.bOnSelector AND G_VirtualControlBox.bAutoSelector THEN	
 			eMode := E_Mode.Auto;
 		END_IF
 
 	E_Mode.Manual: 
-		IF NOT(VirtualControlBox.bOnSelector) THEN	
+		IF NOT(G_VirtualControlBox.bOnSelector) THEN	
 			eMode := E_Mode.Off;
 		END_IF
 		
-		IF VirtualControlBox.bOnSelector AND VirtualControlBox.bAutoSelector THEN	
+		IF G_VirtualControlBox.bOnSelector AND G_VirtualControlBox.bAutoSelector THEN	
 			eMode := E_Mode.Auto;
 		END_IF
 	
 	E_Mode.Auto:
-		IF NOT(VirtualControlBox.bOnSelector) THEN	
+		IF NOT(G_VirtualControlBox.bOnSelector) THEN	
 			eMode := E_Mode.Off;
 		END_IF
 		
-		IF VirtualControlBox.bOnSelector AND NOT(VirtualControlBox.bAutoSelector) THEN	
+		IF G_VirtualControlBox.bOnSelector AND NOT(G_VirtualControlBox.bAutoSelector) THEN	
 			eMode := E_Mode.Manual;
 		END_IF	
 ELSE 	

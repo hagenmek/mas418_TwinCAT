@@ -3,24 +3,24 @@
   <POU Name="FB_ActiveDamping" Id="{f29a5c40-a26f-4345-8b3f-287695c9d9e0}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_ActiveDamping
 VAR_INPUT
-	bEnable: BOOL;
-	stParam : ST_Parameters;
-	fTime: LREAL;
-	fPressurePistonSide_Pa: LREAL;
-	fPressureRodSide_Pa: LREAL;
+	bEnable					: BOOL;
+	stParam 				: ST_Parameters;
+	fTime					: LREAL;
+	fPressurePistonSide_Pa	: LREAL;
+	fPressureRodSide_Pa		: LREAL;
 END_VAR
 VAR_OUTPUT
 	fPressureFeedbackNormalized: LREAL;
 END_VAR
 VAR
 	rtb_Switch3: LREAL;
-	HighPassFilter_tmp: LREAL;
-	VectorConcatenate: ARRAY[0..1] OF LREAL;
-	VectorConcatenate1: ARRAY[0..1] OF LREAL;
-	VectorConcatenate2: ARRAY[0..2] OF LREAL;
-	VectorConcatenate3: ARRAY[0..2] OF LREAL;
-	HighPassFilter_states: LREAL;
-	ValveDynamicsInverse_states: ARRAY[0..1] OF LREAL;
+	HighPassFilter_tmp			: LREAL;
+	VectorConcatenate			: ARRAY[0..1] OF LREAL;
+	VectorConcatenate1			: ARRAY[0..1] OF LREAL;
+	VectorConcatenate2			: ARRAY[0..2] OF LREAL;
+	VectorConcatenate3			: ARRAY[0..2] OF LREAL;
+	HighPassFilter_states		: LREAL;
+	ValveDynamicsInverse_states	: ARRAY[0..1] OF LREAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -81,12 +81,7 @@ END_IF;
 HighPassFilter_states := HighPassFilter_tmp;
 
 ValveDynamicsInverse_states[1] := ValveDynamicsInverse_states[0];
-ValveDynamicsInverse_states[0] := rtb_Switch3;
-
-
-
-
-]]></ST>
+ValveDynamicsInverse_states[0] := rtb_Switch3;]]></ST>
     </Implementation>
     <LineIds Name="FB_ActiveDamping">
       <LineId Id="20" Count="4" />
@@ -113,8 +108,7 @@ ValveDynamicsInverse_states[0] := rtb_Switch3;
       <LineId Id="119" Count="1" />
       <LineId Id="125" Count="1" />
       <LineId Id="181" Count="0" />
-      <LineId Id="128" Count="5" />
-      <LineId Id="2" Count="0" />
+      <LineId Id="128" Count="1" />
     </LineIds>
   </POU>
 </TcPlcObject>

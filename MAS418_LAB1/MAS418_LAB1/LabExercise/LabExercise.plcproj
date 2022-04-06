@@ -17,7 +17,26 @@
     <LibraryReferences>{67e94ca3-5c16-4854-82e9-3284bacb8f35}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ControlBox\ControlBox.TcPOU">
+    <Compile Include="Comissioning\Function blocks\FB_ModifyAutomaticControlSettings.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Comissioning\GVLs\G_Commissioning.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="Comissioning\Struct\ST_AutomaticControlSettings.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Comissioning\Struct\ST_ClosedLoopControlSettings.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Comissioning\Struct\ST_MotionReferenceGeneratorSettings.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Comissioning\Struct\ST_OpenLoopControlSettings.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ControlBox\Interfaces\I_ControlBox.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ControlBox\Function blocks\FB_ControlBox.TcPOU">
@@ -29,7 +48,16 @@
     <Compile Include="ControlBox\Function blocks\FB_VirtualControlBox.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CraneControl\CraneControl.TcPOU">
+    <Compile Include="CraneControl\Functions\F_BarToEng.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Functions\F_LminToEng.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Functions\F_PistonDisplacementToBoomAngle.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Functions\F_RadToDeg.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CraneControl\Enums\E_Mode.TcDUT">
@@ -68,154 +96,79 @@
     <Compile Include="CraneControl\Function blocks\Sub blocks\FB_Status.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CraneControl\GVLs\Parameters.TcGVL">
+    <Compile Include="CraneControl\GVLs\G_Parameters.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="CraneControl\GVLs\Work.TcGVL">
+    <Compile Include="CraneControl\GVLs\G_Work.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
     <Compile Include="CraneControl\Struct\ST_ActiveDamping.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CraneControl\Struct\ST_ClosedLoopControl.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CraneControl\Struct\ST_MotionReferenceGeneratorSettings.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CraneControl\Struct\ST_OpenLoopControl.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="CraneControl\Struct\ST_Parameters.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\E_Buttons.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\E_Joystick.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\E_Light.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\ST_AnimationScaling.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\ST_CraneKinematics.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\ST_EndStops.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\ST_Parameters_1.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\ST_PistonRange.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\ST_RelativeMovement.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GlobalTextList.TcGTLO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GVLs\HMI.TcGVL">
+    <Compile Include="HMI\HMI.TcVIS">
       <SubType>Code</SubType>
-      <LinkAlways>true</LinkAlways>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
     </Compile>
-    <Compile Include="GVLs\Inputs.TcGVL">
+    <Compile Include="HMI\Sub\CommissioningHMI.TcVIS">
       <SubType>Code</SubType>
-      <LinkAlways>true</LinkAlways>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
     </Compile>
-    <Compile Include="GVLs\Outputs.TcGVL">
+    <Compile Include="HMI\Sub\VirtualControlBox.TcVIS">
       <SubType>Code</SubType>
-      <LinkAlways>true</LinkAlways>
-    </Compile>
-    <Compile Include="Interfaces\I_ControlBox.TcIO">
-      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
     </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\CraneSimulation.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Function blocks\FB_ModeControlBox.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Function blocks\FB_ModeSelector.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Function blocks\FB_ModeVirtualControlBox.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Function blocks\FB_PositionSimulator.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Function blocks\FB_SimulationTime.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Function blocks\FB_Softstop.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Functions\F_BarToEng.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Functions\F_BoomAnimation.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Functions\F_LminToEng.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Functions\F_PistonDisplacementToBoomAngle.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Functions\F_RadToDeg.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Functions\F_UpdateParametersByReference.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\MAIN.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ControlBox\GVLs\VirtualControlBox.TcGVL">
+    <Compile Include="ControlBox\GVLs\G_VirtualControlBox.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="ControlBox\VirtualControlBox.TcVIS">
+    <Compile Include="Programs\MAIN.TcPOU">
       <SubType>Code</SubType>
-      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="Programs\P_Commissioning.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Programs\P_ControlBox.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Programs\P_CraneControl.TcPOU">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Visualization Manager.TcVMO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="VISUs\CraneHMI.TcVIS">
-      <SubType>Code</SubType>
-      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Comissioning" />
+    <Folder Include="Comissioning\Function blocks" />
+    <Folder Include="Comissioning\GVLs" />
+    <Folder Include="Comissioning\Struct" />
     <Folder Include="ControlBox\Function blocks" />
+    <Folder Include="ControlBox\Interfaces" />
     <Folder Include="CraneControl\Function blocks" />
     <Folder Include="CraneControl\Function blocks\Main blocks" />
     <Folder Include="CraneControl\Function blocks\Sub blocks" />
     <Folder Include="CraneControl\GVLs" />
     <Folder Include="CraneControl\Enums" />
+    <Folder Include="CraneControl\Functions" />
     <Folder Include="CraneControl\Struct" />
-    <Folder Include="DUTs" />
-    <Folder Include="GVLs" />
     <Folder Include="CraneControl" />
-    <Folder Include="Interfaces" />
-    <Folder Include="POUs\Functions" />
-    <Folder Include="POUs\Function blocks" />
     <Folder Include="ControlBox" />
     <Folder Include="ControlBox\GVLs" />
     <Folder Include="ControlBox\Struct" />
-    <Folder Include="VISUs" />
-    <Folder Include="POUs" />
+    <Folder Include="HMI" />
+    <Folder Include="HMI\Sub" />
+    <Folder Include="Programs" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="System_VisuElemMeter">

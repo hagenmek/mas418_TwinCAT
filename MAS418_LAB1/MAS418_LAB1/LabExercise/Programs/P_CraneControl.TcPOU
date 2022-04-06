@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="P_CraneControl" Id="{c8d14843-0c4e-4243-a583-0726f2828bd5}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_CraneControl
+VAR
+ 	fbStatus 					: FB_Status;
+	fbManualControl 			: FB_ManualControl; 
+	bEnableManualControl 		: BOOL;
+	fbAutomaticControl 			: FB_AutomaticControl;
+	bEnableAutomaticControl 	: BOOL; 
+
+	fOutManualTest 		: LREAL; 
+	fOutAutomaticTest 	: LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbStatus(
+bFault := G_Work.bFault,
+bRunning := G_Work.bRunning,
+eStatus => G_Work.eStatus
+);
+
+
+IF G_VirtualControlBox.bOnSelector AND NOT(G_VirtualControlBox.bAutoSelector) THEN
+	bEnableManualControl := TRUE;	
+ELSE
+	bEnableManualControl := FALSE;
+END_IF
+
+fbManualControl(
+	eMode := G_Work.eMode,
+	eStatus := G_Work.eStatus,
+	stParam := G_Parameters.stParam, 
+	fControlOutputNormalized => fOutManualTest
+);
+
+IF G_VirtualControlBox.bOnSelector AND G_VirtualControlBox.bAutoSelector THEN
+	bEnableAutomaticControl := TRUE;	
+ELSE
+	bEnableAutomaticControl := FALSE;
+END_IF
+
+fbAutomaticControl(
+	eMode := G_Work.eMode,
+	eStatus := G_Work.eStatus,
+	stAutomaticControlSettings := G_Commissioning.stAutomaticControlSettings,
+	stMotionReferenceGeneratorSettings := G_Commissioning.stMotionReferenceGeneratorSettings,
+	stParam := G_Parameters.stParam,
+	fControlOutputNormalized => fOutAutomaticTest
+);
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="P_CraneControl">
+      <LineId Id="123" Count="0" />
+      <LineId Id="126" Count="2" />
+      <LineId Id="125" Count="0" />
+      <LineId Id="148" Count="0" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="30" Count="1" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="129" Count="0" />
+      <LineId Id="32" Count="1" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="49" Count="2" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="130" Count="1" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="42" Count="1" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="122" Count="0" />
+      <LineId Id="121" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
