@@ -26,15 +26,18 @@ fbManualControl(
 	stParam := G_Parameters.stParam, 
 );
 
+// To Do - Add Position feedback from Simulator/RealInputs
 fbAutomaticControl(
 	eMode := G_Work.eMode,
 	eStatus := G_Work.eStatus,
 	stAutomaticControlSettings := G_Commissioning.stAutomaticControlSettings,
 	stMotionReferenceGeneratorSettings := G_Commissioning.stMotionReferenceGeneratorSettings,
 	stParam := G_Parameters.stParam,
+	fPositionFeedback := 0.0
 );
 
 // To Do - Add pressure inputs from Simulator/RealInputs
+// To Do - Add timer as an alternativ to Clock Input (when ready count 2 seconds before enabling active damping) 
 fbActiveDamping(
 	bEnable := G_Commissioning.stAutomaticControlSettings.bEnableActiveDamping,
 	stParam := G_Parameters.stParam,
@@ -63,14 +66,17 @@ END_IF]]></ST>
       <LineId Id="129" Count="0" />
       <LineId Id="32" Count="0" />
       <LineId Id="20" Count="0" />
-      <LineId Id="38" Count="0" />
+      <LineId Id="194" Count="1" />
       <LineId Id="19" Count="0" />
       <LineId Id="130" Count="1" />
       <LineId Id="71" Count="0" />
       <LineId Id="42" Count="1" />
+      <LineId Id="193" Count="0" />
       <LineId Id="39" Count="0" />
       <LineId Id="122" Count="0" />
-      <LineId Id="160" Count="6" />
+      <LineId Id="160" Count="0" />
+      <LineId Id="196" Count="0" />
+      <LineId Id="161" Count="5" />
       <LineId Id="121" Count="0" />
       <LineId Id="170" Count="0" />
       <LineId Id="178" Count="1" />

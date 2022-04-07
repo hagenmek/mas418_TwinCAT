@@ -9,6 +9,7 @@ VAR_INPUT
 	stMotionReferenceGeneratorSettings  : ST_MotionReferenceGeneratorSettings;
 	stAutomaticControlSettings 			: ST_AutomaticControlSettings;
 	stParam 							: ST_Parameters; 
+	fPositionFeedback					: LREAL;
 END_VAR
 VAR_OUTPUT
 	fTime : LREAL;
@@ -53,6 +54,7 @@ fbClosedLoopPositionControl(
 	bActivateIntegralController := stAutomaticControlSettings.bEnableIntegralController,
 	bIntegralControllReset := fbResetIntegralController.bReset,
 	fInput_m := fbMotionReferenceGenerator.fPositionReference_m,
+	fFeedback_m := fPositionFeedback
 );
 
 IF (eMode = E_Mode.Auto AND eStatus = E_Status.Running) THEN
@@ -89,6 +91,7 @@ END_IF]]></ST>
       <LineId Id="96" Count="0" />
       <LineId Id="94" Count="0" />
       <LineId Id="98" Count="0" />
+      <LineId Id="165" Count="0" />
       <LineId Id="71" Count="0" />
       <LineId Id="139" Count="0" />
       <LineId Id="138" Count="0" />
