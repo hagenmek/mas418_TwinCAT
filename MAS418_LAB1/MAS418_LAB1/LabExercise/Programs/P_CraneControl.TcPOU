@@ -4,6 +4,7 @@
     <Declaration><![CDATA[PROGRAM P_CraneControl
 VAR
  	fbStatus 					: FB_Status;
+	fbRunningClock 				: FB_Clock;
 	fbManualControl 			: FB_ManualControl; 
 	bEnableManualControl 		: BOOL;
 	fbAutomaticControl 			: FB_AutomaticControl;
@@ -16,8 +17,14 @@ END_VAR
       <ST><![CDATA[fbStatus(
 bFault := G_Work.bFault,
 eMode := G_Work.eMode,
-fTime := fbAutomaticControl.fTime,
+fTime := fbRunningClock.fTime,
 eStatus => G_Work.eStatus
+);
+
+fbRunningClock(
+	bStart := (fbStatus.eStatus = E_Status.Starting) OR (fbStatus.eStatus = E_Status.Running),
+	bStop := (fbStatus.eStatus = E_Status.Stopping),
+	fCycleTime := G_Parameters.stParam.fCyclicTime
 );
 
 fbManualControl(
@@ -37,11 +44,10 @@ fbAutomaticControl(
 );
 
 // To Do - Add pressure inputs from Simulator/RealInputs
-// To Do - Add timer as an alternativ to Clock Input (when ready count 2 seconds before enabling active damping) 
 fbActiveDamping(
-	bEnable := G_Commissioning.stAutomaticControlSettings.bEnableActiveDamping,
+	ssMethodType := BOOL_TO_SINT(G_Commissioning.stAutomaticControlSettings.bEnableActiveDamping),	
+	bEnable := (fbStatus.eStatus = E_Status.Running),
 	stParam := G_Parameters.stParam,
-	fTime := fbAutomaticControl.fTime,
 	fPressurePistonSide_Pa := 0.0,
 	fPressureRodSide_Pa := 0.0
 );
@@ -60,6 +66,9 @@ END_IF]]></ST>
       <LineId Id="182" Count="0" />
       <LineId Id="127" Count="1" />
       <LineId Id="125" Count="0" />
+      <LineId Id="207" Count="0" />
+      <LineId Id="209" Count="3" />
+      <LineId Id="208" Count="0" />
       <LineId Id="23" Count="0" />
       <LineId Id="7" Count="0" />
       <LineId Id="21" Count="0" />
@@ -74,9 +83,10 @@ END_IF]]></ST>
       <LineId Id="193" Count="0" />
       <LineId Id="39" Count="0" />
       <LineId Id="122" Count="0" />
-      <LineId Id="160" Count="0" />
-      <LineId Id="196" Count="0" />
-      <LineId Id="161" Count="5" />
+      <LineId Id="160" Count="1" />
+      <LineId Id="214" Count="0" />
+      <LineId Id="162" Count="1" />
+      <LineId Id="165" Count="1" />
       <LineId Id="121" Count="0" />
       <LineId Id="170" Count="0" />
       <LineId Id="178" Count="1" />
