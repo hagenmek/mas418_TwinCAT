@@ -26,19 +26,37 @@ fbSelectedControlBox.ModeSelector(
 	eMode => eMode
 );
 
-IF G_Work.eStatus = E_Status.Running THEN
-	G_VirtualControlBox.bGreenLight :=  TRUE;
-ELSE
-	G_VirtualControlBox.bGreenLight :=  FALSE;
-END_IF
+fbSelectedControlBox.PushButtons(
+	eMode := eMode,
+	eStatus := eStatus,
+	bStart => G_Work.bStartButton,
+	bStop => G_Work.bStopButton 	
+);
 
-IF G_Work.eStatus = E_Status.Fault THEN
-	G_VirtualControlBox.bRedLight :=  TRUE;
-ELSE
-	G_VirtualControlBox.bRedLight :=  FALSE;
-END_IF
+fbSelectedControlBox.Lamps(
+	eMode := eMode,
+	eStatus := eStatus
+);
 
-G_Work.fJoystickY := G_VirtualControlBox.fJoystickY;
+fbSelectedControlBox.Joystick(
+	eMode := eMode,
+	eStatus := eStatus,
+	fJoystickY => G_Work.fJoystickY
+);
+
+//IF G_Work.eStatus = E_Status.Running THEN
+//	G_VirtualControlBox.bGreenLight :=  TRUE;
+//ELSE
+//	G_VirtualControlBox.bGreenLight :=  FALSE;
+//END_IF
+
+//IF G_Work.eStatus = E_Status.Fault THEN
+//	G_VirtualControlBox.bRedLight :=  TRUE;
+//ELSE
+//	G_VirtualControlBox.bRedLight :=  FALSE;
+//END_IF
+
+
 
 
 
@@ -48,6 +66,18 @@ G_Work.fJoystickY := G_VirtualControlBox.fJoystickY;
     </Implementation>
     <LineIds Name="FB_ControlBox">
       <LineId Id="311" Count="8" />
+      <LineId Id="394" Count="0" />
+      <LineId Id="410" Count="0" />
+      <LineId Id="416" Count="0" />
+      <LineId Id="415" Count="0" />
+      <LineId Id="418" Count="1" />
+      <LineId Id="414" Count="0" />
+      <LineId Id="375" Count="1" />
+      <LineId Id="392" Count="1" />
+      <LineId Id="391" Count="0" />
+      <LineId Id="406" Count="3" />
+      <LineId Id="413" Count="0" />
+      <LineId Id="377" Count="0" />
       <LineId Id="345" Count="0" />
       <LineId Id="352" Count="9" />
       <LineId Id="322" Count="7" />

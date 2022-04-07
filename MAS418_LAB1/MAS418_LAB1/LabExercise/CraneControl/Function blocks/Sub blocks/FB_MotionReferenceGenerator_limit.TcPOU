@@ -118,8 +118,6 @@ END_IF;
 
 fTotalMotionTime_s := ((((((fTimeBeforeStarting_s + fRampTime_s) + tHold) + fRampTime_s) + fHoldPositionTime_s) + fRampTime_s) + tHold) + fRampTime_s;
 
-
-
 ]]></ST>
     </Implementation>
     <LineIds Name="FB_MotionReferenceGenerator_limit">
@@ -164,7 +162,7 @@ fTotalMotionTime_s := ((((((fTimeBeforeStarting_s + fRampTime_s) + tHold) + fRam
       <LineId Id="136" Count="0" />
       <LineId Id="139" Count="3" />
       <LineId Id="146" Count="1" />
-      <LineId Id="150" Count="2" />
+      <LineId Id="152" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

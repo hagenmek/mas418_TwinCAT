@@ -20,13 +20,6 @@ VAR
 	fbVelocityFeedForwardControl 	: FB_OpenLoopControl;
 	fbResetIntegralController 		: FB_ResetIntegralController; 
 	fbClosedLoopPositionControl 	: FB_ClosedLoopControl;
-	
-	fOutAutoTestPos 				: LREAL; 
-	fOutAutoTestVel 				: LREAL; 
-	fFeedForwardTest 				: LREAL; 
-	fIntegralResetTest 				: BOOL; 
-	fPositionControllerTest 		: LREAL; 
-	fPositionControllerErrorTest 	: LREAL; 
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -66,14 +59,7 @@ IF (eMode = E_Mode.Auto AND eStatus = E_Status.Running) THEN
 	fControlOutputNormalized := LIMIT(-1.0, (fbVelocityFeedForwardControl.fNormalizedOutput + fbClosedLoopPositionControl.fNormalizedOutput), 1.0);
 ELSE
 	fControlOutputNormalized := 0.0;
-END_IF
-
-fOutAutoTestPos := fbMotionReferenceGenerator.fPositionReference_m;
-fOutAutoTestVel := fbMotionReferenceGenerator.fVelocityReference_ms;
-fFeedForwardTest := fbVelocityFeedForwardControl.fNormalizedOutput;
-fIntegralResetTest := fbResetIntegralController.bReset;
-fPositionControllerTest := fbClosedLoopPositionControl.fNormalizedOutput;
-fPositionControllerErrorTest := fbClosedLoopPositionControl.fPositionError;]]></ST>
+END_IF]]></ST>
     </Implementation>
     <LineIds Name="FB_AutomaticControl">
       <LineId Id="21" Count="0" />
@@ -109,13 +95,6 @@ fPositionControllerErrorTest := fbClosedLoopPositionControl.fPositionError;]]></
       <LineId Id="141" Count="0" />
       <LineId Id="143" Count="1" />
       <LineId Id="142" Count="0" />
-      <LineId Id="34" Count="0" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="35" Count="0" />
-      <LineId Id="91" Count="0" />
-      <LineId Id="93" Count="0" />
-      <LineId Id="101" Count="0" />
-      <LineId Id="104" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

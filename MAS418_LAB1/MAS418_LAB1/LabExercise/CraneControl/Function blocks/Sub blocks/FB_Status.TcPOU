@@ -14,9 +14,9 @@ VAR
 	bRunning : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF eMode = E_Mode.Manual AND (eStatus = E_Status.Starting OR eStatus = E_Status.Running)THEN
+      <ST><![CDATA[IF eMode = E_Mode.Manual  AND (eStatus = E_Status.Starting OR eStatus = E_Status.Running)THEN
 	bRunning := TRUE;
-ELSIF eMode = E_Mode.Auto AND (fTime > 0) THEN
+ELSIF eMode = E_Mode.Auto AND G_Work.bStartButton THEN
  	bRunning := TRUE;
 ELSE
 	bRunning := FALSE;
@@ -28,16 +28,16 @@ CASE eStatus OF
 			eStatus := E_Status.Fault;
 		END_IF
 		
-		IF G_VirtualControlBox.bOnSelector AND NOT(bFault)THEN	
+		IF NOT(eMode = E_Mode.Off) AND NOT(bFault)THEN	
 			eStatus := E_Status.Ready;
 		END_IF
 		
-		IF NOT(G_VirtualControlBox.bOnSelector) THEN	
+		IF eMode = E_Mode.Off THEN	
 			eStatus := E_Status.Off;
 		END_IF
 		
 	E_Status.Off:	
-		IF G_VirtualControlBox.bOnSelector THEN	
+		IF NOT(eMode = E_Mode.Off) THEN	
 			eStatus := E_Status.Checking;
 		END_IF
 
@@ -47,11 +47,11 @@ CASE eStatus OF
 		END_IF
 	
 	E_Status.Ready:
-		IF G_VirtualControlBox.bStartButton AND G_VirtualControlBox.bOnSelector AND NOT(bFault) THEN
+		IF G_Work.bStartButton AND NOT(eMode = E_Mode.Off) AND NOT(bFault) THEN
 			eStatus := E_Status.Starting;
 		END_IF	
 		
-		IF  NOT(G_VirtualControlBox.bOnSelector) OR bFault THEN
+		IF  eMode = E_Mode.Off OR bFault THEN
 			eStatus := E_Status.Checking;
 		END_IF	
 
@@ -64,11 +64,11 @@ CASE eStatus OF
 	
 	E_Status.Running:
 	
-		IF G_VirtualControlBox.bStopButton THEN
+		IF G_Work.bStopButton THEN
 			eStatus := E_Status.Stopping;
 		END_IF
 		
-		IF NOT(bRunning) OR NOT(G_VirtualControlBox.bOnSelector) OR bFault THEN
+		IF NOT(bRunning) OR eMode = E_Mode.Off OR bFault THEN
 			eStatus := E_Status.Checking;
 		END_IF
 	
@@ -77,7 +77,7 @@ CASE eStatus OF
 			eStatus := E_Status.Checking;
 		END_IF
 	
-		IF NOT(G_VirtualControlBox.bOnSelector) OR bFault THEN
+		IF eMode = E_Mode.Off OR bFault THEN
 		eStatus := E_Status.Checking;
 		END_IF	
 	
@@ -87,8 +87,10 @@ END_CASE
 ]]></ST>
     </Implementation>
     <LineIds Name="FB_Status">
-      <LineId Id="237" Count="1" />
-      <LineId Id="241" Count="3" />
+      <LineId Id="237" Count="0" />
+      <LineId Id="256" Count="1" />
+      <LineId Id="238" Count="0" />
+      <LineId Id="243" Count="1" />
       <LineId Id="239" Count="0" />
       <LineId Id="233" Count="0" />
       <LineId Id="149" Count="34" />
