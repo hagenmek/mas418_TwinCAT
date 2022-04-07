@@ -48,6 +48,9 @@
     <Compile Include="ControlBox\Function blocks\FB_VirtualControlBox.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CraneControl\Function blocks\Sub blocks\FB_ActiveDamping.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CraneControl\Functions\F_BarToEng.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -70,9 +73,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CraneControl\Function blocks\Main blocks\FB_ManualControl.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CraneControl\Function blocks\Sub blocks\FB_ActiveDamping.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CraneControl\Function blocks\Sub blocks\FB_Clock.TcPOU">

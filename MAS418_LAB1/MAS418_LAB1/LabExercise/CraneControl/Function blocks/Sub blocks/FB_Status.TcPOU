@@ -14,13 +14,12 @@ VAR
 	bRunning : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF eMode = E_Mode.Manual  AND (eStatus = E_Status.Starting OR eStatus = E_Status.Running)THEN
+      <ST><![CDATA[IF fTime > 2.0 THEN
 	bRunning := TRUE;
-ELSIF eMode = E_Mode.Auto AND G_Work.bStartButton THEN
- 	bRunning := TRUE;
 ELSE
-	bRunning := FALSE;
+	bRunning := FALSE;	
 END_IF
+
 
 CASE eStatus OF 
 	E_Status.Checking:
@@ -58,9 +57,12 @@ CASE eStatus OF
 	E_Status.Starting:
 		IF bRunning THEN
 			eStatus := E_Status.Running;
-		ELSE 
+		END_IF 
+		
+		IF bFault OR eMode = E_Mode.Off  THEN
 			eStatus := E_Status.Checking;
 		END_IF
+		
 	
 	E_Status.Running:
 	
@@ -87,16 +89,17 @@ END_CASE
 ]]></ST>
     </Implementation>
     <LineIds Name="FB_Status">
-      <LineId Id="237" Count="0" />
-      <LineId Id="256" Count="1" />
-      <LineId Id="238" Count="0" />
-      <LineId Id="243" Count="1" />
-      <LineId Id="239" Count="0" />
+      <LineId Id="274" Count="0" />
+      <LineId Id="277" Count="0" />
+      <LineId Id="280" Count="1" />
+      <LineId Id="278" Count="0" />
+      <LineId Id="275" Count="0" />
       <LineId Id="233" Count="0" />
       <LineId Id="149" Count="34" />
       <LineId Id="215" Count="1" />
-      <LineId Id="213" Count="0" />
-      <LineId Id="187" Count="23" />
+      <LineId Id="284" Count="0" />
+      <LineId Id="287" Count="3" />
+      <LineId Id="188" Count="22" />
       <LineId Id="23" Count="0" />
     </LineIds>
   </POU>
