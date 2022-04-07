@@ -9,6 +9,7 @@ VAR_GLOBAL
 	bFault 			: BOOL;
 	bStartButton 	: BOOL;
 	bStopButton 	: BOOL;
+	fControlOutputNormalized : LREAL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

@@ -2,10 +2,16 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.25">
 	<Project ProjectGUID="{F5EA4D54-25E4-451F-9EDD-AB0E02AC024C}" Target64Bit="true" ShowHideConfigurations="#x3c7">
 		<System>
-			<Settings MaxCpus="16"/>
+			<Settings MaxCpus="16">
+				<Cpu BaseTime="1000"/>
+				<Cpu CpuId="1"/>
+			</Settings>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
+				</Task>
+				<Task Id="4" Priority="1" CycleTime="1000" AmsPort="351" Affinity="#x00000001" AdtTasks="true">
+					<Name>Simulator</Name>
 				</Task>
 			</Tasks>
 		</System>
@@ -17,6 +23,15 @@
 					<Contexts>
 						<Context>
 							<Id NeedCalleeCall="true">0</Id>
+							<Name>Simulator</Name>
+							<ManualConfig>
+								<OTCID>#x02010040</OTCID>
+							</ManualConfig>
+							<Priority>1</Priority>
+							<CycleTime>100000</CycleTime>
+						</Context>
+						<Context>
+							<Id NeedCalleeCall="true">1</Id>
 							<Name>PlcTask</Name>
 							<ManualConfig>
 								<OTCID>#x02010030</OTCID>
@@ -26,6 +41,7 @@
 						</Context>
 					</Contexts>
 					<TaskPouOids>
+						<TaskPouOid Prio="1" OTCID="#x08502002"/>
 						<TaskPouOid Prio="20" OTCID="#x08502001"/>
 					</TaskPouOids>
 				</Instance>

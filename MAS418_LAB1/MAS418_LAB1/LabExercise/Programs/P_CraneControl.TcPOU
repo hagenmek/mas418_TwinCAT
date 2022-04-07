@@ -32,15 +32,16 @@ fbAutomaticControl(
 	stAutomaticControlSettings := G_Commissioning.stAutomaticControlSettings,
 	stMotionReferenceGeneratorSettings := G_Commissioning.stMotionReferenceGeneratorSettings,
 	stParam := G_Parameters.stParam,
+	fPositionFeedback := G_Simulator.fPistonPosition
 );
 
-// To Do - Add pressure inputs from Simulator/RealInputs
+// To Do - Add timer as an alternativ to Clock Input (when ready count 2 seconds before enablint active damping) 
 fbActiveDamping(
 	bEnable := G_Commissioning.stAutomaticControlSettings.bEnableActiveDamping,
 	stParam := G_Parameters.stParam,
 	fTime := fbAutomaticControl.fTime,
-	fPressurePistonSide_Pa := 0.0,
-	fPressureRodSide_Pa := 0.0
+	fPressurePistonSide_Pa := G_Simulator.fPistonSidePressure,
+	fPressureRodSide_Pa := G_Simulator.fRodSidePressure
 );
  
 IF (G_Work.eMode = E_Mode.Manual AND G_Work.eStatus = E_Status.Running) THEN
@@ -49,7 +50,9 @@ ELSIF (G_Work.eMode = E_Mode.Auto AND G_Work.eStatus = E_Status.Running) THEN
 	fControlOutputNormalized := LIMIT(-1.0, (fbAutomaticControl.fControlOutputNormalized - fbActiveDamping.fPressureFeedbackNormalized), 1.0);
 ELSE
 	fControlOutputNormalized := 0.0;
-END_IF]]></ST>
+END_IF
+
+G_Work.fControlOutputNormalized := fControlOutputNormalized;]]></ST>
     </Implementation>
     <LineIds Name="P_CraneControl">
       <LineId Id="123" Count="0" />
@@ -68,8 +71,9 @@ END_IF]]></ST>
       <LineId Id="130" Count="1" />
       <LineId Id="71" Count="0" />
       <LineId Id="42" Count="1" />
+      <LineId Id="195" Count="0" />
       <LineId Id="39" Count="0" />
-      <LineId Id="122" Count="0" />
+      <LineId Id="199" Count="0" />
       <LineId Id="160" Count="6" />
       <LineId Id="121" Count="0" />
       <LineId Id="170" Count="0" />
@@ -78,6 +82,8 @@ END_IF]]></ST>
       <LineId Id="180" Count="0" />
       <LineId Id="172" Count="1" />
       <LineId Id="167" Count="0" />
+      <LineId Id="194" Count="0" />
+      <LineId Id="193" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

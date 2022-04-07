@@ -144,6 +144,19 @@
     <Compile Include="Programs\P_CraneControl.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Programs\P_Simulator.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Simulator.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Simulator\FB_CraneSimulator.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Simulator\G_Simulator.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
     <Compile Include="Visualization Manager.TcVMO">
       <SubType>Code</SubType>
     </Compile>
@@ -168,6 +181,7 @@
     <Folder Include="ControlBox\Struct" />
     <Folder Include="HMI" />
     <Folder Include="HMI\Sub" />
+    <Folder Include="Simulator" />
     <Folder Include="Programs" />
   </ItemGroup>
   <ItemGroup>
