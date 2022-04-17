@@ -51,18 +51,6 @@
     <Compile Include="CraneControl\Function blocks\Sub blocks\FB_ActiveDamping.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CraneControl\Functions\F_BarToEng.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CraneControl\Functions\F_LminToEng.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CraneControl\Functions\F_PistonDisplacementToBoomAngle.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CraneControl\Functions\F_RadToDeg.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="CraneControl\Enums\E_Mode.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -96,6 +84,18 @@
     <Compile Include="CraneControl\Function blocks\Sub blocks\FB_Status.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CraneControl\Functions\F_BarToEng.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Functions\F_LminToEng.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Functions\F_PistonDisplacementToBoomAngle.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Functions\F_RadToDeg.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CraneControl\GVLs\G_Parameters.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
@@ -125,6 +125,33 @@
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
     </Compile>
+    <Compile Include="Inputs\G_Inputs.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="Inputs\G_Sensors.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="Inputs\Struct\ST_AnalogInput.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Inputs\Struct\ST_AnalogInputStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Outputs\FB_ValveOutput.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Outputs\G_Outputs.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="Outputs\Struct\ST_pValveDeadBand.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Outputs\Struct\ST_ValveOutput.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -142,6 +169,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Programs\P_CraneControl.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Programs\P_Outputs.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Programs\P_Simulator.TcPOU">
@@ -171,9 +201,9 @@
     <Folder Include="CraneControl\Function blocks" />
     <Folder Include="CraneControl\Function blocks\Main blocks" />
     <Folder Include="CraneControl\Function blocks\Sub blocks" />
+    <Folder Include="CraneControl\Functions" />
     <Folder Include="CraneControl\GVLs" />
     <Folder Include="CraneControl\Enums" />
-    <Folder Include="CraneControl\Functions" />
     <Folder Include="CraneControl\Struct" />
     <Folder Include="CraneControl" />
     <Folder Include="ControlBox" />
@@ -181,6 +211,10 @@
     <Folder Include="ControlBox\Struct" />
     <Folder Include="HMI" />
     <Folder Include="HMI\Sub" />
+    <Folder Include="Inputs" />
+    <Folder Include="Inputs\Struct" />
+    <Folder Include="Outputs" />
+    <Folder Include="Outputs\Struct" />
     <Folder Include="Simulator" />
     <Folder Include="Programs" />
   </ItemGroup>

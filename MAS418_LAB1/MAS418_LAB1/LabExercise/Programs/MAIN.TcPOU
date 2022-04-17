@@ -8,10 +8,12 @@ END_VAR
     <Implementation>
       <ST><![CDATA[P_Commissioning();
 P_ControlBox();
-P_CraneControl();]]></ST>
+P_CraneControl();
+P_Outputs();]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="5" Count="2" />
+      <LineId Id="11" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

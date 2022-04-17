@@ -201,6 +201,16 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"556"</v>
+              <v n="TextDefault">"Down"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"501"</v>
+              <v n="TextDefault">"DOWN"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"353"</v>
               <v n="TextDefault">"Enable"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -523,6 +533,11 @@
             <o>
               <v n="TextID">"725"</v>
               <v n="TextDefault">"Time: %s [s]"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"932"</v>
+              <v n="TextDefault">"UP"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>

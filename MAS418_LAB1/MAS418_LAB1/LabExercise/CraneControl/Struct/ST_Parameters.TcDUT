@@ -8,6 +8,7 @@ STRUCT
 	stOpenLoopControlSettings 			: ST_OpenLoopControlSettings;
 	stClosedLoopControlSettings 		: ST_ClosedLoopControlSettings;
 	stPressureFeedback 					: ST_ActiveDamping;
+	stValveDeadBand 					: ST_pValveDeadBand;
 END_STRUCT
 END_TYPE
 ]]></Declaration>
