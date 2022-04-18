@@ -22,7 +22,11 @@ VAR_OUTPUT
 	fJoystickY : LREAL;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[IF eMode = E_Mode.Manual AND eStatus = E_Status.Running THEN
+	fJoystickY := G_Sensors.fJoystickY;
+ELSE
+	fJoystickY := 0.0;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="Lamps" Id="{4fdeda89-2fc2-4bda-9219-00e0aed099ce}">
@@ -34,7 +38,18 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// To Do LAB #12]]></ST>
+        <ST><![CDATA[IF eStatus = E_Status.Running AND NOT(eMode = E_Mode.Off) THEN
+	G_Outputs.bGreenLight :=  TRUE;
+ELSE
+	G_Outputs.bGreenLight :=  FALSE;
+END_IF
+
+IF eStatus = E_Status.Fault  AND NOT(eMode = E_Mode.Off) THEN
+	G_Outputs.bRedLight :=  TRUE;
+ELSE
+	G_Outputs.bRedLight :=  FALSE;
+END_IF
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="ModeSelector" Id="{c1118847-ecf0-4ef4-a589-62e6a17557ee}">
@@ -46,8 +61,36 @@ VAR_OUTPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// To Do LAB #12
-]]></ST>
+        <ST><![CDATA[CASE eMode OF 
+	E_Mode.Off:	
+		IF G_Inputs.bManualModeSelector AND NOT(G_Inputs.bAutoModeSelector) THEN	
+			eMode := E_Mode.Manual;
+		END_IF
+		
+		IF G_Inputs.bAutoModeSelector AND NOT(G_Inputs.bManualModeSelector) THEN	
+			eMode := E_Mode.Auto;
+		END_IF
+
+	E_Mode.Manual: 
+		IF NOT(G_Inputs.bManualModeSelector) AND NOT(G_Inputs.bManualModeSelector) THEN	
+			eMode := E_Mode.Off;
+		END_IF
+		
+		IF G_Inputs.bAutoModeSelector AND NOT(G_Inputs.bManualModeSelector) THEN	
+			eMode := E_Mode.Auto;
+		END_IF
+	
+	E_Mode.Auto:
+		IF NOT(G_Inputs.bManualModeSelector) AND NOT(G_Inputs.bManualModeSelector) THEN	
+			eMode := E_Mode.Off;
+		END_IF
+		
+		IF G_Inputs.bManualModeSelector AND NOT(G_Inputs.bAutoModeSelector) THEN	
+			eMode := E_Mode.Manual;
+		END_IF	
+ELSE 	
+	eMode := E_Mode.Off;
+END_CASE]]></ST>
       </Implementation>
     </Method>
     <Method Name="PushButtons" Id="{d7dda8b1-708c-4ae4-b6f1-5856535cda99}">
@@ -61,23 +104,32 @@ VAR_OUTPUT
 	bStop : BOOL;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[IF NOT(eMode = E_Mode.Off) AND (NOT(eStatus = E_Status.Fault) OR (eStatus = E_Status.Off)) THEN 
+	bStart := G_Inputs.bStartButton;
+	bStop := G_Inputs.bStopButton;
+ELSE
+	bStart := FALSE;
+	bStop := FALSE;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_RealControlBox">
       <LineId Id="9" Count="0" />
     </LineIds>
     <LineIds Name="FB_RealControlBox.Joystick">
+      <LineId Id="15" Count="3" />
       <LineId Id="7" Count="0" />
     </LineIds>
     <LineIds Name="FB_RealControlBox.Lamps">
+      <LineId Id="14" Count="10" />
       <LineId Id="7" Count="0" />
     </LineIds>
     <LineIds Name="FB_RealControlBox.ModeSelector">
-      <LineId Id="39" Count="0" />
+      <LineId Id="46" Count="28" />
       <LineId Id="9" Count="0" />
     </LineIds>
     <LineIds Name="FB_RealControlBox.PushButtons">
+      <LineId Id="15" Count="5" />
       <LineId Id="6" Count="0" />
     </LineIds>
   </POU>

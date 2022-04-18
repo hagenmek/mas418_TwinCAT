@@ -3,9 +3,9 @@
   <DUT Name="ST_ActiveDamping" Id="{db87ef8a-0ef2-4874-9a52-bc95a4674534}">
     <Declaration><![CDATA[TYPE ST_ActiveDamping :
 STRUCT
-	fFlowGainInverse : LREAL := 1.7153E03;	
-	fHPF_Num1 : LREAL := 9.016E-12;
-	fHPF_Num2 : LREAL := -9.016E-12;
+	fFlowGainInverse : LREAL := -1.7153E03;	
+	fHPF_Num1 : LREAL := 9.019E-12;
+	fHPF_Num2 : LREAL := -9.019E-12;
 	fHPF_Den1 : LREAL := 1.0;
 	fHPF_Den2 : LREAL := -0.9905;
 	fVDI_Num1 : LREAL := 25;

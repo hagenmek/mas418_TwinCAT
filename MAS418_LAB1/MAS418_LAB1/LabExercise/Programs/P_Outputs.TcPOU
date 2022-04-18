@@ -10,7 +10,7 @@ END_VAR
       <ST><![CDATA[stValveOutput(
 	bEnable := (G_Work.eStatus = E_Status.Running),
 	stParam := G_Parameters.stParam,
-	fNormalizedInput := G_VirtualControlBox.fJoystickY,
+	fNormalizedInput := G_Work.fControlOutputNormalized,
 	bEnableValveOutput => G_Outputs.stValveOutput.bEnable,
 	nOutput => G_Outputs.stValveOutput.nValveOutput
 );]]></ST>

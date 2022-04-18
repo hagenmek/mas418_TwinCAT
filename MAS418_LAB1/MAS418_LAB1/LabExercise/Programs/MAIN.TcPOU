@@ -9,11 +9,13 @@ END_VAR
       <ST><![CDATA[P_Commissioning();
 P_ControlBox();
 P_CraneControl();
-P_Outputs();]]></ST>
+P_Outputs();
+P_Inputs();]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="5" Count="2" />
       <LineId Id="11" Count="0" />
+      <LineId Id="15" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

@@ -84,6 +84,9 @@
     <Compile Include="CraneControl\Function blocks\Sub blocks\FB_Status.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CraneControl\Function blocks\Sub blocks\PF2.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CraneControl\Functions\F_BarToEng.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -124,6 +127,15 @@
     <Compile Include="HMI\Sub\VirtualControlBox.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="Inputs\FB_JoystickInputScaling.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Inputs\FB_PositionInputScaling.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Inputs\FB_PressureInputScaling.TcPOU">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Inputs\G_Inputs.TcGVL">
       <SubType>Code</SubType>
@@ -169,6 +181,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Programs\P_CraneControl.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Programs\P_Inputs.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Programs\P_Outputs.TcPOU">

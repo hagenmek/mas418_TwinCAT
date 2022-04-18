@@ -52,7 +52,7 @@ END_VAR
             HighPassFilter_states := 0.0;
         END_IF;
 
-        HighPassFilter_tmp := (fPressurePistonSide_Pa - (0.7101 * fPressureRodSide_Pa)) - (VectorConcatenate1[1] * HighPassFilter_states);
+        HighPassFilter_tmp := (fPressurePistonSide_Pa*1.4083 - (fPressureRodSide_Pa)) - (VectorConcatenate1[1] * HighPassFilter_states);
 		
         fPressureFeedbackNormalized := ((VectorConcatenate[0] * HighPassFilter_tmp) + (VectorConcatenate[1] * HighPassFilter_states)) * stParam.stPressureFeedback.fFlowGainInverse;
 

@@ -11,6 +11,13 @@ VAR
 	bEnableAutomaticControl 	: BOOL; 
 	fbActiveDamping 			: FB_ActiveDamping;
 	fControlOutputNormalized 	: LREAL; 
+	
+	fbActiveDamping2 : PF2;
+	
+	ADtest0 : LREAL;
+	ADtest1 : LREAL;
+	ADtest2 : LREAL;
+	ADtest : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -46,14 +53,14 @@ fbActiveDamping(
 	ssMethodType := BOOL_TO_SINT(G_Commissioning.stAutomaticControlSettings.bEnableActiveDamping),
 	bEnable := (fbStatus.eStatus = E_Status.Running),
 	stParam := G_Parameters.stParam,
-	fPressurePistonSide_Pa := G_Simulator.fPistonSidePressure,
-	fPressureRodSide_Pa := G_Simulator.fRodSidePressure
+	fPressurePistonSide_Pa := F_BarToEng(G_Sensors.fPressurePistonSide),
+	fPressureRodSide_Pa := F_BarToEng(G_Sensors.fPressureRodSide)
 );
- 
+
 IF (G_Work.eMode = E_Mode.Manual AND G_Work.eStatus = E_Status.Running) THEN
 	fControlOutputNormalized := LIMIT(-1.0, (fbManualControl.fControlOutputNormalized - fbActiveDamping.fPressureFeedbackNormalized), 1.0);
 ELSIF (G_Work.eMode = E_Mode.Auto AND G_Work.eStatus = E_Status.Running) THEN
-	fControlOutputNormalized := LIMIT(-1.0, (fbAutomaticControl.fControlOutputNormalized - fbActiveDamping.fPressureFeedbackNormalized), 1.0);
+	fControlOutputNormalized := LIMIT(-1.0, (-fbAutomaticControl.fControlOutputNormalized - fbActiveDamping.fPressureFeedbackNormalized), 1.0);
 ELSE
 	fControlOutputNormalized := 0.0;
 END_IF
