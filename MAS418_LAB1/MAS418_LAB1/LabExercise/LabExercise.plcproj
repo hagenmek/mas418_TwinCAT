@@ -84,16 +84,10 @@
     <Compile Include="CraneControl\Function blocks\Sub blocks\FB_Status.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CraneControl\Function blocks\Sub blocks\PF2.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="CraneControl\Functions\F_BarToEng.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CraneControl\Functions\F_LminToEng.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CraneControl\Functions\F_PistonDisplacementToBoomAngle.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CraneControl\Functions\F_RadToDeg.TcPOU">
