@@ -46,7 +46,7 @@ fbAutomaticControl(
 	stAutomaticControlSettings := G_Commissioning.stAutomaticControlSettings,
 	stMotionReferenceGeneratorSettings := G_Commissioning.stMotionReferenceGeneratorSettings,
 	stParam := G_Parameters.stParam,
-	fPositionFeedback := G_Simulator.fPistonPosition
+	fPositionFeedback := G_Sensors.fPistonPosition
 );
 
 fbActiveDamping(
