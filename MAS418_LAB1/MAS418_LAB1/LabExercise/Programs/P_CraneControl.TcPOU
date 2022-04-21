@@ -12,8 +12,6 @@ VAR
 	fbActiveDamping 			: FB_ActiveDamping;
 	fControlOutputNormalized 	: LREAL; 
 	
-	fbActiveDamping2 : PF2;
-	
 	ADtest0 : LREAL;
 	ADtest1 : LREAL;
 	ADtest2 : LREAL;

@@ -42,27 +42,7 @@ fbSelectedControlBox.Joystick(
 	eMode := eMode,
 	eStatus := eStatus,
 	fJoystickY => G_Work.fJoystickY
-);
-
-//IF G_Work.eStatus = E_Status.Running THEN
-//	G_VirtualControlBox.bGreenLight :=  TRUE;
-//ELSE
-//	G_VirtualControlBox.bGreenLight :=  FALSE;
-//END_IF
-
-//IF G_Work.eStatus = E_Status.Fault THEN
-//	G_VirtualControlBox.bRedLight :=  TRUE;
-//ELSE
-//	G_VirtualControlBox.bRedLight :=  FALSE;
-//END_IF
-
-
-
-
-
-
-
-]]></ST>
+);]]></ST>
     </Implementation>
     <LineIds Name="FB_ControlBox">
       <LineId Id="311" Count="8" />
@@ -78,10 +58,6 @@ fbSelectedControlBox.Joystick(
       <LineId Id="406" Count="3" />
       <LineId Id="413" Count="0" />
       <LineId Id="377" Count="0" />
-      <LineId Id="345" Count="0" />
-      <LineId Id="352" Count="9" />
-      <LineId Id="322" Count="7" />
-      <LineId Id="148" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
