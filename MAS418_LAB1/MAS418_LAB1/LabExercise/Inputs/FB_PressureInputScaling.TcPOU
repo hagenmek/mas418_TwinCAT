@@ -20,15 +20,13 @@ END_VAR
     <Implementation>
       <ST><![CDATA[fRawInput := INT_TO_LREAL(nRawInput);
 
-fRawInput := INT_TO_LREAL(nRawInput);
-
 fNormalizedInput := (fRawInput - fMinInputValue) / (fMaxInputValue - fMinInputValue);
 
 fOutput := LIMIT(fMinOutputValue, fMinOutputValue + fNormalizedInput*(fMaxOutputValue - fMinOutputValue), fMaxOutputValue);]]></ST>
     </Implementation>
     <LineIds Name="FB_PressureInputScaling">
       <LineId Id="9" Count="0" />
-      <LineId Id="23" Count="4" />
+      <LineId Id="25" Count="2" />
       <LineId Id="22" Count="0" />
     </LineIds>
   </POU>
