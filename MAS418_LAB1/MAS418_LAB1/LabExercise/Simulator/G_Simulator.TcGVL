@@ -7,6 +7,11 @@ VAR_GLOBAL
 	fPistonSidePressure : LREAL;
 	fRodSidePressure 	: LREAL;
 	fPistonPosition 	: LREAL;
+	stPistonAnimation 	: ST_RelativeMovement;
+	fBoomAngle 			: LREAL;
+	stBoomAnimation 	: ST_RelativeMovement;
+	fBoomAnimation 		: LREAL;
+	fBoomAngleDeg 		: LREAL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

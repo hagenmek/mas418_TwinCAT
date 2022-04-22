@@ -13,7 +13,20 @@ END_VAR
 	ppbar => G_Simulator.fPistonSidePressure,
 	prbar => G_Simulator.fRodSidePressure,
 	xm => G_Simulator.fPistonPosition
-);]]></ST>
+);
+
+// Piston Animation
+G_Simulator.stPistonAnimation.pt1_y := LREAL_TO_INT(fbCraneSimulator.xm * G_Parameters.stParam.stAnimationScaling.fPistonScale);
+// Boom Animation
+G_Simulator.fBoomAngle := F_PistonDisplacementToBoomAngle(xCyl := fbCraneSimulator.xm);
+G_Simulator.fBoomAnimation := F_BoomAnimation(
+	fScale := G_Parameters.stParam.stAnimationScaling.fBoomScale,
+	fBoomAngle := G_Simulator.fBoomAngle,
+	fBoomLength := G_Parameters.stParam.stCraneKinematics.fBoomLength,
+	fBoomTipX => G_Simulator.stBoomAnimation.pt1_x,
+	fBoomTipY => G_Simulator.stBoomAnimation.pt1_y
+);
+G_Simulator.fBoomAngleDeg := F_RadToDeg(fRad := G_Simulator.fBoomAngle);]]></ST>
     </Implementation>
     <LineIds Name="P_Simulator">
       <LineId Id="5" Count="0" />
@@ -22,6 +35,8 @@ END_VAR
       <LineId Id="9" Count="0" />
       <LineId Id="11" Count="1" />
       <LineId Id="7" Count="0" />
+      <LineId Id="22" Count="11" />
+      <LineId Id="20" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

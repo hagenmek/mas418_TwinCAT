@@ -3,11 +3,13 @@
   <DUT Name="ST_Parameters" Id="{0acdc32a-38d7-42ed-a023-5b5f43624fa6}">
     <Declaration><![CDATA[TYPE ST_Parameters :
 STRUCT
-	fCyclicTime 						: LREAL := 0.01; //[s]
+	fCyclicTime 						: LREAL := 0.001; //[s]
 	fMaxVelocityLimit 					: LREAL := 0.05; //[m/s]
 	stOpenLoopControlSettings 			: ST_OpenLoopControlSettings;
 	stClosedLoopControlSettings 		: ST_ClosedLoopControlSettings;
 	stPressureFeedback 					: ST_ActiveDamping;
+	stCraneKinematics 					: ST_CraneKinematics;
+	stAnimationScaling 					: ST_AnimationScaling;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

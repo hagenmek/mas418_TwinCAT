@@ -54,6 +54,9 @@
     <Compile Include="CraneControl\Functions\F_BarToEng.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CraneControl\Functions\F_BoomAnimation.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CraneControl\Functions\F_LminToEng.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -107,7 +110,16 @@
     <Compile Include="CraneControl\Struct\ST_ActiveDamping.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CraneControl\Struct\ST_AnimationScaling.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Struct\ST_CraneKinematics.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CraneControl\Struct\ST_Parameters.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CraneControl\Struct\ST_RelativeMovement.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GlobalTextList.TcGTLO">
@@ -118,6 +130,10 @@
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
     </Compile>
     <Compile Include="HMI\Sub\CommissioningHMI.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="HMI\Sub\Animation.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
     </Compile>
